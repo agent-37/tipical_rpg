@@ -8,11 +8,10 @@ using namespace std;
 
 class Hero
 {
-
 private:
+	// координаты поля
 	int x, y;
 	int direction_gaze;
-	int health;
 	multiset <string> inventory;
 
 public:
@@ -20,25 +19,32 @@ public:
 	void healing_poison(int health);
 	void town_portal() { /*пока такие*/ x = 0; y = 0; }
 
+	// шаг вперёд
 	void step_forward() { y += 1; }
 	void (Hero::* step_f)() { &step_forward };
 
-	void step_right() {	x += 1;	}
+	// шаг вправо
+	void step_right() { x += 1; }
 	void (Hero::* step_r)() { &step_right };
 
+	// шаг назад
 	void step_back() { y -= 1; }
 	void (Hero::* step_b)() { &step_back };
 
+	// шаг влево
 	void step_left() { x -= 1; }
 	void (Hero::* step_l)() { &step_left };
-	         
-	void turn_right();	
+
+	// поворот вправо
+	void turn_right();
+
+	// поворот влево
 	void turn_left();
 };
 
 
 int main()
-{	
+{
 
 }
 
@@ -51,11 +57,12 @@ multiset <string> ::iterator Hero::it(string thing)
 	return it_thing;
 }
 
-// + к здоровью
-void Hero::healing_poison(int health)
-{
-	this->health += health;
-}
+// вообще не понял чё тут надо
+/// + к здоровью
+///void Hero::healing_poison(int health)
+///{
+///	this->health += health;
+///}
 
 // поворот вправо
 void Hero::turn_right()
