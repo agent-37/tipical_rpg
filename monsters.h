@@ -1,66 +1,61 @@
 #ifndef _MONSTERS_H_
 #define _MONSTERS_H_
-#include "characteristic.h" 
-
-// Все числа в характеристиках поставлены наугад. Точные значения будут обсуждаться позднее.
-// В основном здесь заготовки функций. Произошли проблемы с подключением класса героя, поэтому 
-// взаимодейтсвие монстров и героя описаны примерно
-
-// Класс всех монстров
-class monster : public characteristic {
-public:
-	monster() {}
-	void deal_damage(int damage) { /* Нанесение урона по герою */ }
-	void take_damage(int hero_damage, int armor) { /* Получение урона от героя */ }
-	void death() { /* Смерть монстра */ }  // Мб надо убрать, не знаю пока
-	~monster() {}
-};
+#include "person.h"
+#include "Hero.h"
 
 // Класс огра
-class ogre : public monster {
-private:
-	ogre() { set_characteristic(1000, 300, 200, 1000, 150, 0.5); }
-	~ogre() {}
+class ogre : public person {
 public:
-	void regeneration() {
-		int num_of_regeneration = 10;
-		if (health + num_of_regeneration <= max_health)
-			health += num_of_regeneration;
-		else
-			health = max_health;
-	}
+	ogre() { set_person(1000, 300, 200, 1000, 150, 50); }
+	// Регенереция огра
+	void regeneration();
+	// Ослабление брони героя
+	void heavy_blow(Hero&);
+	~ogre() {}
 };
 
 // Класс скелета
-class skeleton : public monster {
-private:
-	skeleton() { set_characteristic(500, 200, 50, 500, 150, 0.3); }
-	~skeleton() {}
+class skeleton : public person {
 public:
-	// Пока не придумала особенностей
+	skeleton() { set_person(500, 200, 50, 500, 150, 30); }
+	// Проклятые стрелы понижают обычное и максимальное здоровье героя
+	void cursed_arrows(Hero&);
+	~skeleton() {}
 };
 
-// Класс слайма
-class slime : public monster {
-private:
-	slime() { set_characteristic(500, 200, 0, 500, 150, 0.3); }
-	~slime() {}
+// Класс паука
+class spider : public person {
 public:
-	void duplication(slime big_slime) {
-		big_slime.death();
-		slime small_slime1, small_slime2;
-		small_slime1.set_characteristic(big_slime.health / 2, 200, 0, big_slime.max_health / 2, big_slime.gold / 2, 0.3);
-		small_slime2.set_characteristic(big_slime.health / 2, 200, 0, big_slime.max_health / 2, big_slime.gold / 2, 0.3);
-	}
+	spider() { set_person(500, 100, 50, 500, 150, 30); }
+	// Эффект разложения - каждые 1.5 секунды герой получает урон от яда (всего 4 удара)
+	void decomposition(Hero&);
+	~spider() {}
+};
+
+// Класс призрака
+class ghost : public person {
+public:
+	ghost() { set_person(500, 200, 50, 500, 150, 30); }
+	// Возможность призрака пропустить удар
+	bool invisibility();
+	// Кража золота героя
+	void steal_gold(Hero&);
+	~ghost() {}
 };
 
 // Класс дракона (босса)
-class dragon : public monster {
-private:
-	dragon() { set_characteristic(2000, 500, 500, 2000, 3000, 0.6); }
-	~dragon() {}
+class dragon : public person {
 public:
-	void spit_fire() { /* Заполняет одну ячейку(или несколько) огнем.Персонаж получит урон, если наступит на эту область */ }
+	dragon() { set_person(2000, 500, 500, 2000, 3000, 60); }
+	// Ослабление брони героя
+	friend void ogre:: heavy_blow(Hero&);
+	// Эффект возгорания - каждые 1.5 секунды герой получает урон от огня (всего 4 удара)
+	friend void spider:: decomposition(Hero&);
+	// Повышение урона дракона
+	void rage(Hero& _hero) { if (_hero.gold >= gold) damage += 200; }
+	// Дракон взлетает - затруднение попадания в него
+	void flight() { hit_chance = 30; }
+	~dragon() {}
 };
 
 #endif // _MONSTERS_H_
