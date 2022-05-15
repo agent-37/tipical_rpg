@@ -7,7 +7,7 @@ public:
 	//текущее здоровье, максимальное здоровье, урон, броня, золото, шанс попадания по противнику
 	int health, max_health, damage, armor, gold;
 	int hit_chance;
-	 person() {
+	person() {
 		health = 0;
 		damage = 0;
 		armor = 0;
@@ -18,13 +18,13 @@ public:
 	~person() {}
 protected:
 	//процедура задает характеристики кому-то
-	void set_person(int, int, int, int, int, int); 
+	void set_person(int, int, int, int, int, int);
 
 	//функция получения урона
-	void take_damage(int ); 
+	void take_damage(int);
 
 	//проверка, что персонаж умер
-	int check_died(); 
+	int check_died();
 
 	//функция нанесения урона(с учетом промоха), НУЖНО ПРОВЕРИТЬ ЧТО РАБОТАЕТ rand()
 	int deal_damage();

@@ -193,3 +193,9 @@ void Hero::turn_left()
 	step_b = step_r;
 	step_r = tmp_ptr;
 }
+
+//вспомогательная структура для отмотки ходов
+struct hero_and_mark {
+	hero user;
+	int mark;
+};
