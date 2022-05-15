@@ -1,7 +1,8 @@
 #ifndef _STACK_H_
 #define _STACK_H_
-#define  MAX_SIZE_STACK 10
 
+#define  MAX_SIZE_STACK 10
+    
 template <class new_type>
 class stack {
 public:

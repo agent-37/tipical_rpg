@@ -1,4 +1,5 @@
 #include "stack.h"
+
 #define  MAX_SIZE_STACK 10
 //процедура задает характеристики кому-то
 template <class new_type>

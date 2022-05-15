@@ -195,7 +195,7 @@ void Hero::turn_left()
 }
 
 //вспомогательная структура для отмотки ходов
-struct hero_and_mark {
+struct hero_and_mark { 
 	hero user;
 	int mark;
 };

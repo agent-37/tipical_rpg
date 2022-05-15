@@ -1,5 +1,6 @@
 #include "person.h"
 #include <random>
+
 //процедура задает характеристики кому-то
 void person::set_person(int _health, int _damage, int _armor, int _max_health, int _gold, int _hit_chance) {
 	health = _health;
