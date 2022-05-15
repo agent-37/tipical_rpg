@@ -48,9 +48,9 @@ class dragon : public person {
 public:
 	dragon() { set_person(2000, 500, 500, 2000, 3000, 60); }
 	// Ослабление брони героя
-	friend void ogre:: heavy_blow(Hero&);
+	friend void ogre::heavy_blow(Hero&);
 	// Эффект возгорания - каждые 1.5 секунды герой получает урон от огня (всего 4 удара)
-	friend void spider:: decomposition(Hero&);
+	friend void spider::decomposition(Hero&);
 	// Повышение урона дракона
 	void rage(Hero& _hero) { if (_hero.gold >= gold) damage += 200; }
 	// Дракон взлетает - затруднение попадания в него

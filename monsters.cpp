@@ -5,7 +5,7 @@
 #include <time.h>
 
 // Регенереция огра
-void ogre:: regeneration() {
+void ogre::regeneration() {
 	int num_of_regeneration = 10;
 	if (health + num_of_regeneration <= max_health)
 		health += num_of_regeneration;
@@ -20,14 +20,14 @@ void ogre::heavy_blow(Hero& _hero) {
 }
 
 // Проклятые стрелы понижают обычное и максимальное здоровье героя
-void skeleton:: cursed_arrows(Hero &_hero) {
+void skeleton::cursed_arrows(Hero &_hero) {
 	_hero.take_damage(deal_damage());
 	if (!_hero.check_died())
 		_hero.max_health -= damage;
 }
 
 // Эффект разложения - каждые 1.5 секунды герой получает урон от яда (всего 4 удара)
-void spider:: decomposition(Hero& _hero) {
+void spider::decomposition(Hero& _hero) {
 	_hero.take_damage(damage);
 	for (int count = 0; count < 3; count++) {
 		Sleep(1500);    //задержка в 1500 миллисекунд (1.5 секунды)
@@ -36,7 +36,7 @@ void spider:: decomposition(Hero& _hero) {
 }
 
 // Возможность призрака пропустить удар
-bool ghost:: invisibility() {
+bool ghost::invisibility() {
 	// Рандомно выбираем 0 или 1 - шанс того, что призрак пропустит удар
 	srand(time(NULL));
 	int chance = rand() % 2;
@@ -46,7 +46,7 @@ bool ghost:: invisibility() {
 }
 
 // Кража золота героя
-void ghost:: steal_gold(Hero &_hero) { 
+void ghost::steal_gold(Hero &_hero) { 
 	int num_of_stealing = 50;
 	if (_hero.gold - num_of_stealing >= 0)
 		_hero.gold += num_of_stealing;
