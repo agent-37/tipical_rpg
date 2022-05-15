@@ -13,6 +13,9 @@ private:
 	// координаты поля
 	int x, y;
 	int direction_gaze;
+
+	multiset <string> weapons;
+
 	multiset <string> weared_inventory;
 	/*
 	* 
@@ -26,6 +29,9 @@ private:
 	int count_healing_poison;
 	int num_recovery_units_poison; // позже решим, кол-во хп на сколько регенит зелье
 
+	/*
+	* вопрос: будет ли видно героя во время игры? если нет, то реализация брони будет просто += 1;
+	*/
 
 	person user;
 
@@ -46,7 +52,11 @@ public:
 	void показать, то снято
 	
 	*/
-	
+	// использование оружия
+	void use_weapon();
+
+	void show_armor();
+
 	// шаг вперёд
 	void step_forward() { y += 1; }
 	void (Hero::* step_f)() { &step_forward };
@@ -71,6 +81,66 @@ public:
 
 };
 
+class Weapon
+{
+public:
+	virtual void use() = 0;
+
+};
+
+class Knife :public Weapon
+{
+public:
+	void use() override
+	{
+
+	}
+};
+
+class Gun :public Weapon
+{
+public:
+	void use() override
+	{
+
+	}
+};
+
+class Armor
+{
+public:
+	virtual void wear() = 0;
+	virtual void take_off() = 0;
+};
+
+class Helmet :public Armor
+{
+public:
+	void wear() override
+	{
+		armor += 1; // св дальше реализация будет сложнее
+	}
+
+	void take_off() override
+	{
+		armor -= 1;
+	}
+};
+
+class Bulletproof_vest :public Armor
+{
+public:
+	void wear() override
+	{
+		armor += 1; 
+	}
+
+	void take_off() override
+	{
+		armor -= 1; 
+	}
+};
+
 // добавление элемента и проверка на его наличие
 multiset <string> ::iterator Hero::it(string thing)
 {
@@ -78,6 +148,16 @@ multiset <string> ::iterator Hero::it(string thing)
 	it_thing = inventory.find(thing);
 	inventory.insert(thing);
 	return it_thing;
+}
+
+void Hero::show_armor()
+{
+	// cout << armor << endl;
+}
+
+void Hero::use_weapon(Weapon &weap)
+{
+	weap->use();
 }
 
 // регенерация
