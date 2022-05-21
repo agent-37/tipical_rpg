@@ -9,7 +9,11 @@
 using namespace std;
 
 // указатель на функцию  
-//typedef func_ptr(void (Hero::* tmp_ptr)() {}) 
+//typedef void (Hero::* func_ptr)();
+
+class Weapon;
+class Hero;
+class Inventory;
 
 class Inventory
 {
@@ -27,9 +31,9 @@ private:
 	multiset <string> weared_inventory;
 	multiset <string> not_weared_inventory;
 
-	multiset <string> ::iterator weapons(string thing);
-	multiset <string> ::iterator it_weared(string thing);
-	multiset <string> ::iterator it_not_weared(string thing);
+	multiset <string> ::iterator it_weapons;
+	multiset <string> ::iterator it_weared;
+	multiset <string> ::iterator it_not_weared;
 
 };
 
@@ -64,25 +68,24 @@ public:
 	*/
 
 	// использование оружия 
-	void using_weapon(Weapon& weap);
+	void using_weapon(Weapon* weap);
 	void show_armor();
-	void take_off_armor();
 
 	// шаг вперёд 
 	void step_forward() { y += 1; }
-	void (Hero::* step_f)() { &step_forward };
+	void (Hero::* step_f)() { &Hero::step_forward };
 
 	// шаг вправо 
 	void step_right() { x += 1; }
-	void (Hero::* step_r)() { &step_right };
+	void (Hero::* step_r)() { &Hero::step_right };
 
 	// шаг назад 
 	void step_back() { y -= 1; }
-	void (Hero::* step_b)() { &step_back };
+	void (Hero::* step_b)() { &Hero::step_back };
 
 	// шаг влево 
 	void step_left() { x -= 1; }
-	void (Hero::* step_l)() { &step_left };
+	void (Hero::* step_l)() { &Hero::step_left };
 
 	// поворот вправо 
 	void turn_right();
@@ -135,20 +138,6 @@ public:
 	}
 };
 
-// добавление элемента и проверка на его наличие 
-multiset <string> ::iterator Hero::it(string thing)
-{
-	multiset <string> ::iterator it_thing;
-	it_thing = weared_inventory.find(thing);
-	weared_inventory.insert(thing);
-	return it_thing;
-}
-
-inline void Hero::using_weapon(Weapon& weap)
-{
-	weap.use_weapon();
-}
-
 inline void Inventory::show_weared_artifacts()
 {
 	for (multiset <string> ::iterator it_weared = weared_inventory.begin(); it_weared != weared_inventory.end(); ++it_weared)
@@ -183,19 +172,10 @@ inline void Inventory::put_on_artifact()
 		cout << "Все артифакты сняты" << endl;
 }
 
-inline multiset<string>::iterator Inventory::weapons(string thing)
-{
-	return multiset<string>::iterator();
-}
 
-inline multiset<string>::iterator Inventory::it_weared(string thing)
+void Hero::using_weapon(Weapon* weap)
 {
-	return multiset<string>::iterator();
-}
-
-inline multiset<string>::iterator Inventory::it_not_weared(string thing)
-{
-	return multiset<string>::iterator();
+	weap->use_weapon();
 }
 
 void Hero::show_armor()
