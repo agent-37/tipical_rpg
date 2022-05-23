@@ -1,4 +1,4 @@
-#include <iostream> 
+п»ї#include <iostream> 
 #include <algorithm> 
 #include <set> 
 #include <string> 
@@ -9,7 +9,7 @@
 
 using namespace std;
 
-// регенерация 
+// СЂРµРіРµРЅРµСЂР°С†РёСЏ 
 inline void Hero::healing_poison()
 {
 	if (count_healing_poison > 0)
@@ -20,26 +20,26 @@ inline void Hero::healing_poison()
 	num_recovery_units_poison);
 }
 
-// показ характеристик героя
+// РїРѕРєР°Р· С…Р°СЂР°РєС‚РµСЂРёСЃС‚РёРє РіРµСЂРѕСЏ
 void Hero::show_characteristics()
 {
 	SetlocaleCP(1251);
-	cout << "Координаты героя: " << "x = " << x << ", y = " << y << ";" << endl;
-	cout << "Количество зелья: " << count_healing_poison << endl;
-	cout << "Количество восполянемого HP: " << num_recovery_units_poison << endl;
-	cout << "Надетые атифакты: " << endl;
-	object.show_weared_artifacts(); // объект инвенторя, показ надетых артифактов
-	cout << "Направление взгляда: " << direction_gaze;
-	cout << "Здоровье: " << health << endl;
-	cout << "Урон: " << damage << endl;
-	cout << "Уровень брони героя: " << armor << endl;
-	cout << "Максимальное здоровье: " << max_health << endl;
-	cout << "Золото: " << gold << endl;
-	cout << "Шанс попадания: " << hit_chance << endl;
+	cout << "РљРѕРѕСЂРґРёРЅР°С‚С‹ РіРµСЂРѕСЏ: " << "x = " << x << ", y = " << y << ";" << endl;
+	cout << "РљРѕР»РёС‡РµСЃС‚РІРѕ Р·РµР»СЊСЏ: " << count_healing_poison << endl;
+	cout << "РљРѕР»РёС‡РµСЃС‚РІРѕ РІРѕСЃРїРѕР»СЏРЅРµРјРѕРіРѕ HP: " << num_recovery_units_poison << endl;
+	cout << "РќР°РґРµС‚С‹Рµ Р°С‚РёС„Р°РєС‚С‹: " << endl;
+	object.show_weared_artifacts(); // РѕР±СЉРµРєС‚ РёРЅРІРµРЅС‚РѕСЂСЏ, РїРѕРєР°Р· РЅР°РґРµС‚С‹С… Р°СЂС‚РёС„Р°РєС‚РѕРІ
+	cout << "РќР°РїСЂР°РІР»РµРЅРёРµ РІР·РіР»СЏРґР°: " << direction_gaze;
+	cout << "Р—РґРѕСЂРѕРІСЊРµ: " << health << endl;
+	cout << "РЈСЂРѕРЅ: " << damage << endl;
+	cout << "РЈСЂРѕРІРµРЅСЊ Р±СЂРѕРЅРё РіРµСЂРѕСЏ: " << armor << endl;
+	cout << "РњР°РєСЃРёРјР°Р»СЊРЅРѕРµ Р·РґРѕСЂРѕРІСЊРµ: " << max_health << endl;
+	cout << "Р—РѕР»РѕС‚Рѕ: " << gold << endl;
+	cout << "РЁР°РЅСЃ РїРѕРїР°РґР°РЅРёСЏ: " << hit_chance << endl;
 	SetlocaleCP(866);
 }
 
-// поворот вправо 
+// РїРѕРІРѕСЂРѕС‚ РІРїСЂР°РІРѕ 
 void Hero::turn_right()
 {
 	void (Hero:: * tmp_ptr)() {};
@@ -51,7 +51,7 @@ void Hero::turn_right()
 	step_l = tmp_ptr;
 }
 
-// поворот влево 
+// РїРѕРІРѕСЂРѕС‚ РІР»РµРІРѕ 
 void Hero::turn_left()
 {
 	void (Hero:: * tmp_ptr)() {};
@@ -63,7 +63,7 @@ void Hero::turn_left()
 	step_r = tmp_ptr;
 }
 
-//вспомогательная структура для отмотки ходов 
+//РІСЃРїРѕРјРѕРіР°С‚РµР»СЊРЅР°СЏ СЃС‚СЂСѓРєС‚СѓСЂР° РґР»СЏ РѕС‚РјРѕС‚РєРё С…РѕРґРѕРІ 
 struct hero_and_mark
 {
 	Hero user;

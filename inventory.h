@@ -1,4 +1,4 @@
-#include <iostream> 
+п»ї#include <iostream> 
 #include <algorithm> 
 #include <set> 
 #include <string> 
@@ -8,35 +8,35 @@
 
 using namespace std;
 
-// инвентарь
+// РёРЅРІРµРЅС‚Р°СЂСЊ
 class Inventory
 {
 public:
 
-	// показ надтых артефактов
+	// РїРѕРєР°Р· РЅР°РґС‚С‹С… Р°СЂС‚РµС„Р°РєС‚РѕРІ
 	void show_weared_artifacts();
-	// показ снятых артифактов
+	// РїРѕРєР°Р· СЃРЅСЏС‚С‹С… Р°СЂС‚РёС„Р°РєС‚РѕРІ
 	void show_not_weared_artifacts();
-	// снять артифакты
+	// СЃРЅСЏС‚СЊ Р°СЂС‚РёС„Р°РєС‚С‹
 	void take_off_artifact();
-	// надеть артифакты
+	// РЅР°РґРµС‚СЊ Р°СЂС‚РёС„Р°РєС‚С‹
 	void put_on_artifact();
 
 
 private:
 
-	// оружие
+	// РѕСЂСѓР¶РёРµ
 	multiset <string> weapons;
-	// надетые артифакты
+	// РЅР°РґРµС‚С‹Рµ Р°СЂС‚РёС„Р°РєС‚С‹
 	multiset <string> weared_inventory;
-	// снятые артифакты
+	// СЃРЅСЏС‚С‹Рµ Р°СЂС‚РёС„Р°РєС‚С‹
 	multiset <string> not_weared_inventory;
 
-	// оружие : итератор
+	// РѕСЂСѓР¶РёРµ : РёС‚РµСЂР°С‚РѕСЂ
 	multiset <string> ::iterator it_weapons;
-	// надетые артифакты : итератор
+	// РЅР°РґРµС‚С‹Рµ Р°СЂС‚РёС„Р°РєС‚С‹ : РёС‚РµСЂР°С‚РѕСЂ
 	multiset <string> ::iterator it_weared;
-	// снятые артифакты : итератор
+	// СЃРЅСЏС‚С‹Рµ Р°СЂС‚РёС„Р°РєС‚С‹ : РёС‚РµСЂР°С‚РѕСЂ
 	multiset <string> ::iterator it_not_weared;
 
 };
