@@ -41,5 +41,19 @@ private:
 	// комменты
 	// тест
 	// конструкторы 
+	// реализ поворот (недоделан)
+
+	//Hero herot;
+	//herot.show_characteristics();
+	//herot.step_right();
+	//cout << to_string(1) << endl;
+	//herot.show_characteristics();
+	//cout << to_string(1) << endl;
+	//herot.turn_left();
+	//cout << to_string(1) << endl;
+	//herot.step_r();
+	//cout << to_string(1) << endl;
+	//herot.show_characteristics();
+	//cout << to_string(1) << endl;
 	
 };
