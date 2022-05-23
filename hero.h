@@ -16,7 +16,6 @@ class Hero
 private:
 	int x, y;	// координаты героя на поле
 	int direction_gaze; // направление взгляда
-	int armor; // броня"
 	int count_healing_poison; // количество зелья 
 	int num_recovery_units_poison; // количество восполняемого HP
 	person user;	
