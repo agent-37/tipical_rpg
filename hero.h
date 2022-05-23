@@ -1,10 +1,10 @@
-#include <iostream> 
+﻿#include <iostream> 
 #include <algorithm> 
 #include <set> 
 #include <string> 
 #include <iterator> 
 #include "inventory.h"
-//#include "person.h" 
+#include "person.h" 
 using namespace std;
 
 // указатель на функцию  
