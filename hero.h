@@ -3,13 +3,12 @@
 #include <set> 
 #include <string> 
 #include <iterator> 
-#include "person.h" 
-
+//#include "person.h" 
 
 using namespace std;
 
 // указатель на функцию  
-//typedef void (Hero::* func_ptr)();
+typedef void (Hero::* func_ptr)();
 
 class Weapon;
 class Hero;
@@ -37,6 +36,7 @@ private:
 
 };
 
+// герой
 class Hero
 {
 private:
@@ -48,7 +48,7 @@ private:
 	int count_healing_poison;
 	int num_recovery_units_poison; // позже решим, кол-во хп на сколько регенит зелье 
 
-	person user;
+	//person user;
 
 public:
 
@@ -95,13 +95,14 @@ public:
 
 };
 
+// оружие
 class Weapon
 {
 public:
 	virtual void use_weapon() = 0;
-
 };
 
+// нож
 class Knife :public Weapon
 {
 public:
@@ -111,6 +112,7 @@ public:
 	}
 };
 
+// пистолет
 class Gun :public Weapon
 {
 public:
@@ -120,7 +122,8 @@ public:
 	}
 };
 
-class Machine_gun :public Weapon
+// пистолет - пулемёт
+class Machine_Gun :public Weapon
 {
 public:
 	void use_weapon() override
@@ -129,6 +132,7 @@ public:
 	}
 };
 
+// дубинка
 class Club : public Weapon
 {
 public:
@@ -158,7 +162,7 @@ inline void Inventory::take_off_artifact()
 		weared_inventory.erase(--weared_inventory.end());
 	}
 	else
-		cout << "Все артифакты надеты" << endl;
+		cout << "Все артифакты сняты" << endl;
 }
 
 inline void Inventory::put_on_artifact()
@@ -169,7 +173,7 @@ inline void Inventory::put_on_artifact()
 		not_weared_inventory.erase(--not_weared_inventory.end());
 	}
 	else
-		cout << "Все артифакты сняты" << endl;
+		cout << "Все артифакты надеты" << endl;
 }
 
 
@@ -178,6 +182,7 @@ void Hero::using_weapon(Weapon* weap)
 	weap->use_weapon();
 }
 
+// броня показыается целочисленной переменной 
 void Hero::show_armor()
 {
 	cout << armor << endl;
@@ -190,8 +195,8 @@ inline void Hero::healing_poison()
 	{
 		count_healing_poison--;
 	}
-	user.health = max(user.max_health, user.health +
-		num_recovery_units_poison);
+	/*user.health = max(user.max_health, user.health +
+		num_recovery_units_poison);*/
 }
 
 // поворот вправо 
