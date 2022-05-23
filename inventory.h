@@ -25,18 +25,21 @@ public:
 
 private:
 
-	// оружие
-	multiset <string> weapons;
 	// надетые артифакты
 	multiset <string> weared_inventory;
 	// снятые артифакты
 	multiset <string> not_weared_inventory;
 
-	// оружие : итератор
-	multiset <string> ::iterator it_weapons;
+
 	// надетые артифакты : итератор
 	multiset <string> ::iterator it_weared;
 	// снятые артифакты : итератор
 	multiset <string> ::iterator it_not_weared;
 
+	// !!!!!!!!!!!!!!!!
+	// возможность выбора снимаемого и надеваемого артифакта
+	// комменты
+	// тест
+	// конструкторы 
+	
 };
