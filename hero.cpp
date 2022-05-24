@@ -6,7 +6,18 @@
 #include <Windows.h>
 #include "inventory.h"
 #include "person.h" 
+#include "hero.h" 
+
 using namespace std;
+
+Hero::Hero()
+{
+	x = 0;
+	y = 0;
+	direction_gaze = 0;
+	count_healing_poison = 0;
+	num_recovery_units_poison = 0;
+}
 
 // восполнение здоровья
 inline void Hero::healing_poison()
@@ -22,20 +33,21 @@ inline void Hero::healing_poison()
 // показ характеристик героя
 void Hero::show_characteristics()
 {
-	SetConsoleCP(1251);
+	//SetConsoleCP(1251);
+	setlocale(LC_ALL, "rus");
 	cout << "Координаты героя: " << "x = " << x << ", y = " << y << ";" << endl;
 	cout << "Количество зелья: " << count_healing_poison << endl;
 	cout << "Количество восполянемого HP: " << num_recovery_units_poison << endl;
 	cout << "Надетые атифакты: " << endl;
 	// object.show_weared_artifacts(); // объект инвенторя, показ надетых артифактов
-	cout << "Направление взгляда: " << direction_gaze;
+	cout << "Направление взгляда: " << direction_gaze << endl;
 	cout << "Здоровье: " << user.health << endl;
 	cout << "Урон: " << user.damage << endl;
 	cout << "Уровень брони героя: " << user.armor << endl;
 	cout << "Максимальное здоровье: " << user.max_health << endl;
 	cout << "Золото: " << user.gold << endl;
 	cout << "Шанс попадания: " << user.hit_chance << endl;
-	SetConsoleCP(866);
+	//SetConsoleCP(866);
 }
 
 // поворот вправо 
@@ -68,6 +80,7 @@ struct hero_and_mark
 	Hero user;
 	int mark;
 };
+
 
 int main()
 {

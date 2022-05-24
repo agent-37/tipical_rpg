@@ -17,11 +17,12 @@ private:
 	int count_healing_poison; // количество зелья 
 	int num_recovery_units_poison; // количество восполняемого HP
 	person user;
-
+	Inventory inventory_user;
 	//указатель на функцию
 	typedef void (Hero::* func_ptr)(void);
 
 public:
+	Hero();
 
 	// использование зелья 
 	void healing_poison();
