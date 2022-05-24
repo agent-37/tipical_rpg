@@ -4,7 +4,7 @@
 #include <string> 
 #include <iterator> 
 #include "inventory.h"
-//#include "person.h" 
+#include "person.h" 
 
 using namespace std;
 
@@ -22,26 +22,26 @@ inline void Inventory::show_not_weared_artifacts()
 		cout << *it_not_weared << endl;
 }
 
-// снять артифакты
-inline void Inventory::take_off_artifact()
+// снять артифакт
+inline string Inventory::take_off_artifact(string str)
 {
-	if (weared_inventory.size() > 0)
+	if (weared_inventory.size() > 0 && weared_inventory.find(str) != weared_inventory.end())
 	{
-		not_weared_inventory.insert(*(weared_inventory.rbegin()));
-		weared_inventory.erase(--weared_inventory.end());
+		not_weared_inventory.insert(str);
+		weared_inventory.erase(str);
+		return "Готово!\n";
 	}
-	else
-		cout << "Все артифакты сняты" << endl;
+	return "Этот артифакт снят.\n";
 }
 
-// надеть артифакты
-inline void Inventory::put_on_artifact()
+// надеть артифакт
+inline string Inventory::put_on_artifact(string str)
 {
-	if (not_weared_inventory.size() > 0)
+	if (not_weared_inventory.size() > 0 && not_weared_inventory.find(str) != not_weared_inventory.end())
 	{
-		weared_inventory.insert(*(not_weared_inventory.rbegin()));
-		not_weared_inventory.erase(--not_weared_inventory.end());
+		weared_inventory.insert(str);
+		not_weared_inventory.erase(str);
+		return "Готово!\n";
 	}
-	else
-		cout << "Все артифакты надеты" << endl;
+	return "Этот артифакт уже надет.\n";
 }
