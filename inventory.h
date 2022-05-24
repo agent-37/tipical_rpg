@@ -18,9 +18,9 @@ public:
 	// показ снятых артифактов
 	void show_not_weared_artifacts();
 	// снять артифакт
-	string take_off_artifact();
+	string take_off_artifact(string str);
 	// надеть артифакт
-	string put_on_artifact();
+	string put_on_artifact(string str);
 
 
 private:
@@ -37,7 +37,7 @@ private:
 	multiset <string> ::iterator it_not_weared;
 
 	// !!!!!!!!!!!!!!!!
-	// возможность выбора снимаемого и надеваемого артифакта || 
+	// возможность выбора снимаемого и надеваемого артифакта || готово!
 	// комменты || 
 	// тест ||
 	// конструкторы ||
