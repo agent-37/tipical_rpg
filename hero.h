@@ -44,10 +44,10 @@ public:
 	void step_left() { x -= 1; }
 	void (Hero::* step_l)() { &Hero::step_left };
 
-	// поворот вправо 
+	// поворот вправо (переопределение клавиш)
 	void turn_right();
 
-	// поворот влево 
+	// поворот влево (переопределение клавиш)
 	void turn_left();
 
 };
