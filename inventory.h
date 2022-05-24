@@ -3,6 +3,7 @@
 #include <set> 
 #include <string> 
 #include <iterator> 
+#include <Windows.h>
 #include "hero.h" 
 //#include "person.h" 
 
@@ -34,10 +35,11 @@ private:
 
 	// !!!!!!!!!!!!!!!!
 	// возможность выбора снимаемого и надеваемого артифакта || готово!
-	// комменты || 
+	// комменты || готово!
 	// тест ||
-	// конструкторы ||
+	// конструкторы, вывод на экран ||
 	// реализ поворот (недоделан) ||
+
 
 	//Hero herot;
 	//herot.show_characteristics();

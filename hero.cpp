@@ -8,9 +8,6 @@
 #include "person.h" 
 using namespace std;
 
-// указатель на функцию  
-// typedef void (Hero::* func_ptr)();
-
 // восполнение здоровья
 inline void Hero::healing_poison()
 {
@@ -25,7 +22,7 @@ inline void Hero::healing_poison()
 // показ характеристик героя
 void Hero::show_characteristics()
 {
-	// SetlocaleCP(1251);
+	SetConsoleCP(1251);
 	cout << "Координаты героя: " << "x = " << x << ", y = " << y << ";" << endl;
 	cout << "Количество зелья: " << count_healing_poison << endl;
 	cout << "Количество восполянемого HP: " << num_recovery_units_poison << endl;
@@ -38,13 +35,13 @@ void Hero::show_characteristics()
 	cout << "Максимальное здоровье: " << user.max_health << endl;
 	cout << "Золото: " << user.gold << endl;
 	cout << "Шанс попадания: " << user.hit_chance << endl;
-	// SetlocaleCP(866);
+	SetConsoleCP(866);
 }
 
 // поворот вправо 
 void Hero::turn_right()
 {
-	void (Hero:: * tmp_ptr)() {};
+	func_ptr tmp_ptr;
 	tmp_ptr = step_f;
 
 	step_f = step_r;
@@ -56,7 +53,7 @@ void Hero::turn_right()
 // поворот влево 
 void Hero::turn_left()
 {
-	void (Hero:: * tmp_ptr)() {};
+	func_ptr tmp_ptr;
 	tmp_ptr = step_f;
 
 	step_f = step_l;
@@ -71,3 +68,26 @@ struct hero_and_mark
 	Hero user;
 	int mark;
 };
+
+int main()
+{
+	// тест
+	Hero herot;
+	cout << to_string(1) << " Созданный объект" << endl;
+	herot.show_characteristics();
+
+	herot.call_step_r();
+	cout << to_string(2) << " Сделал шаг вправо" << endl;
+	herot.show_characteristics();
+
+	herot.turn_left();
+	cout << to_string(3) << " Поворот влево, но ничего не должно измениться" << endl;
+	herot.show_characteristics();
+
+	herot.call_step_r();
+	cout << to_string(4) << "Шаг вправо должен изменить другие координаты" << endl;
+	herot.show_characteristics();
+
+	system("pause");
+	return 0;
+}
