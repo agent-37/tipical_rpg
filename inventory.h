@@ -17,10 +17,10 @@ public:
 	void show_weared_artifacts();
 	// показ снятых артифактов
 	void show_not_weared_artifacts();
-	// снять артифакты
-	void take_off_artifact();
-	// надеть артифакты
-	void put_on_artifact();
+	// снять артифакт
+	string take_off_artifact();
+	// надеть артифакт
+	string put_on_artifact();
 
 
 private:
@@ -31,17 +31,17 @@ private:
 	multiset <string> not_weared_inventory;
 
 
-	// надетые артифакты : итератор
+	// итератор на мультисет надетых артифактов 
 	multiset <string> ::iterator it_weared;
-	// снятые артифакты : итератор
+	// итератор на мультисет ненадетых артифактов
 	multiset <string> ::iterator it_not_weared;
 
 	// !!!!!!!!!!!!!!!!
-	// возможность выбора снимаемого и надеваемого артифакта
-	// комменты
-	// тест
-	// конструкторы 
-	// реализ поворот (недоделан)
+	// возможность выбора снимаемого и надеваемого артифакта || 
+	// комменты || 
+	// тест ||
+	// конструкторы ||
+	// реализ поворот (недоделан) ||
 
 	//Hero herot;
 	//herot.show_characteristics();
