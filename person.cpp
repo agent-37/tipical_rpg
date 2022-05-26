@@ -1,14 +1,16 @@
 #include "person.h"
+#include <string>
 #include <random>
-
+using namespace std;
 //процедура задает характеристики кому-то
-void person::set_person(int _health, int _damage, int _armor, int _max_health, int _gold, int _hit_chance) {
+void person::set_person(int _health, int _damage, int _armor, int _max_health, int _gold, int _hit_chance, string _file_name) {
 	health = _health;
 	damage = _damage;
 	armor = _armor;
 	max_health = _max_health;
 	gold = _gold;
 	hit_chance = _hit_chance;
+	file_name = _file_name;
 }
 
 //функция получения урона

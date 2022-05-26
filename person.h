@@ -1,12 +1,14 @@
 #ifndef _PERSON_H_
 #define _PERSON_H_
-
+#include <string>
+using namespace std;
 //класс характеристик. Необходим для создания классов монстров и класса героя
 class person {
 public:
 	//текущее здоровье, максимальное здоровье, урон, броня, золото, шанс попадания по противнику
 	int health, max_health, damage, armor, gold;
 	int hit_chance;
+	string file_name;
 	person() {
 		health = 0;
 		damage = 0;
@@ -18,7 +20,7 @@ public:
 	~person() {}
 protected:
 	//процедура задает характеристики кому-то
-	void set_person(int, int, int, int, int, int);
+	void set_person(int, int, int, int, int, int,string);
 
 	//функция получения урона
 	void take_damage(int);
