@@ -1,4 +1,7 @@
-п»ї#include <iostream> 
+#ifndef _HERO_H_
+#define _HERO_H_
+
+#include <iostream> 
 #include <algorithm> 
 #include <set> 
 #include <string> 
@@ -8,53 +11,71 @@
 #include "person.h" 
 using namespace std;
 
-// РіРµСЂРѕР№
+// герой
 class Hero
 {
 private:
-	int x, y;	// РєРѕРѕСЂРґРёРЅР°С‚С‹ РіРµСЂРѕСЏ РЅР° РїРѕР»Рµ
-	int direction_gaze; // РЅР°РїСЂР°РІР»РµРЅРёРµ РІР·РіР»СЏРґР°
-	int count_healing_poison; // РєРѕР»РёС‡РµСЃС‚РІРѕ Р·РµР»СЊСЏ 
-	int num_recovery_units_poison; // РєРѕР»РёС‡РµСЃС‚РІРѕ РІРѕСЃРїРѕР»РЅСЏРµРјРѕРіРѕ HP
+	int x, y;	// координаты героя на поле
+	int direction_gaze; // направление взгляда
+	int count_healing_poison; // количество зелья 
+	int num_recovery_units_poison; // количество восполняемого HP
 	person user;
 	Inventory inventory_user;
-	//СѓРєР°Р·Р°С‚РµР»СЊ РЅР° С„СѓРЅРєС†РёСЋ
-	typedef void (Hero::* func_ptr)(void);
+	//указатель на функцию
+	typedef bool (Hero::* func_ptr)(void);
 
 public:
 	Hero();
 
-	// РёСЃРїРѕР»СЊР·РѕРІР°РЅРёРµ Р·РµР»СЊСЏ 
+	// использование зелья 
 	void healing_poison();
 
-	// РїРѕРєР°Р· С…Р°СЂР°РєС‚РµСЂРёСЃС‚РёРє РіРµСЂРѕСЏ
+	// показ характеристик героя
 	void show_characteristics();
 
-	// С€Р°Рі РІРїРµСЂС‘Рґ 
-	void step_forward() { y += 1; }
-	void (Hero::* step_f)() { &Hero::step_forward };
+	// шаг вперёд 
+	bool step_forward() 
+	{
+
+		y += 1; 
+		return 1;
+	}
+	bool (Hero::* step_f)() { &Hero::step_forward };
 	void call_step_f() { (this->*step_f)(); }
 
-	// С€Р°Рі РІРїСЂР°РІРѕ 
-	void step_right() { x += 1; }
-	void (Hero::* step_r)() { &Hero::step_right };
+	// шаг вправо 
+	bool step_right() 
+	{ 
+		x += 1;
+		return 1;
+	}
+	bool (Hero::* step_r)() { &Hero::step_right };
 	void call_step_r() { (this->*step_r)(); }
 
-	// С€Р°Рі РЅР°Р·Р°Рґ 
-	void step_back() { y -= 1; }
-	void (Hero::* step_b)() { &Hero::step_back };
+	// шаг назад 
+	bool step_back() 
+	{ 
+		y -= 1;
+		return 1;
+	}
+	bool (Hero::* step_b)() { &Hero::step_back };
 	void call_step_b() { (this->*step_b)(); }
 
-	// С€Р°Рі РІР»РµРІРѕ 
-	void step_left() { x -= 1; }
-	void (Hero::* step_l)() { &Hero::step_left };
+	// шаг влево 
+	bool step_left() 
+	{ 
+		x -= 1;
+		return 1;
+	}
+	bool (Hero::* step_l)() { &Hero::step_left };
 	void call_step_l() { (this->*step_l)(); }
 
-	// РїРѕРІРѕСЂРѕС‚ РІРїСЂР°РІРѕ (РїРµСЂРµРѕРїСЂРµРґРµР»РµРЅРёРµ РєР»Р°РІРёС€)
+	// поворот вправо (переопределение клавиш)
 	void turn_right();
 
-	// РїРѕРІРѕСЂРѕС‚ РІР»РµРІРѕ (РїРµСЂРµРѕРїСЂРµРґРµР»РµРЅРёРµ РєР»Р°РІРёС€)
+	// поворот влево (переопределение клавиш)
 	void turn_left();
 
 };
 
+#endif // _HERO_H_

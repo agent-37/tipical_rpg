@@ -1,4 +1,4 @@
-п»ї#ifndef _INVENTORY_H_
+#ifndef _INVENTORY_H_
 #define _INVENTORY_H_
 
 #include <iostream> 
@@ -8,32 +8,43 @@
 #include <iterator> 
 #include <Windows.h>
 #include "person.h" 
+// не стоит подключать сюдя #include "hero.h", так как возникает ошибка
 
 using namespace std;
 
-// РёРЅРІРµРЅС‚Р°СЂСЊ
+// инвентарь
 class Inventory
 {
 public:
-	// РїРѕРєР°Р·Р°С‚СЊ РЅР°РґС‚С‹Рµ Р°СЂС‚РµС„Р°РєС‚С‹
+	// показатьартефакты торговца
+	void show_trader_artifacts();
+	// показать надтые артефакты
 	void show_weared_artifacts();
-	// РїРѕРєР°Р·Р°С‚СЊ СЃРЅСЏС‚С‹Рµ Р°СЂС‚РµС„Р°РєС‚С‹
+	// показать снятые артефакты
 	void show_not_weared_artifacts();
-	// СЃРЅСЏС‚СЊ Р°СЂС‚РёС„Р°РєС‚
-	string take_off_artifact(string str);
-	// РЅР°РґРµС‚СЊ Р°СЂС‚РёС„Р°РєС‚
-	string put_on_artifact(string str);
+
+	// приобрести артефакт у торговца
+	bool take_artifact_trader(string str);
+	// снять артифакт
+	bool take_off_artifact(string str);
+	// надеть артифакт
+	bool put_on_artifact(string str);
+
+	//торговец trader;
 
 private:
-	// РјСѓР»СЊС‚РёСЃРµС‚ РЅР°РґРµС‚С‹С… Р°СЂС‚РёС„Р°РєС‚РѕРІ
+	// мультисет артифактов торговца
+	multiset <string> trader_inventory;
+	// мультисет надетых артифактов
 	multiset <string> weared_inventory;
-	// РјСѓР»СЊС‚РёСЃРµС‚ СЃРЅСЏС‚С‹С… Р°СЂС‚РёС„Р°РєС‚РѕРІ
+	// мультисет снятых артифактов
 	multiset <string> not_weared_inventory;
 
-
-	// РёС‚РµСЂР°С‚РѕСЂ РЅР° РјСѓР»СЊС‚РёСЃРµС‚ РЅР°РґРµС‚С‹С… Р°СЂС‚РёС„Р°РєС‚РѕРІ (РґР»СЏ РґРѕР±Р°РІР»РµРЅРёСЏ Рё СѓРґР°Р»РµРЅРёСЏ РІ С…РѕРґРµ РёРіСЂС‹)
+	// итератор на мультисет артифактов торговца (для добавления и удаления в ходе игры)
+	multiset <string> ::iterator it_trader_inventory;
+	// итератор на мультисет надетых артифактов (для добавления и удаления в ходе игры)
 	multiset <string> ::iterator it_weared;
-	// РёС‚РµСЂР°С‚РѕСЂ РЅР° РјСѓР»СЊС‚РёСЃРµС‚ СЃРЅСЏС‚С‹С… Р°СЂС‚РёС„Р°РєС‚РѕРІ (РґР»СЏ РґРѕР±Р°РІР»РµРЅРёСЏ Рё СѓРґР°Р»РµРЅРёСЏ РІ С…РѕРґРµ РёРіСЂС‹)
+	// итератор на мультисет снятых артифактов (для добавления и удаления в ходе игры)
 	multiset <string> ::iterator it_not_weared;
 
 };

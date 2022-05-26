@@ -1,4 +1,4 @@
-п»ї#include <iostream> 
+#include <iostream> 
 #include <algorithm> 
 #include <set> 
 #include <string> 
@@ -19,7 +19,7 @@ Hero::Hero()
 	num_recovery_units_poison = 0;
 }
 
-// РІРѕСЃРїРѕР»РЅРµРЅРёРµ Р·РґРѕСЂРѕРІСЊСЏ
+// восполнение здоровья
 inline void Hero::healing_poison()
 {
 	if (count_healing_poison > 0)
@@ -30,27 +30,27 @@ inline void Hero::healing_poison()
 		num_recovery_units_poison);
 }
 
-// РїРѕРєР°Р· С…Р°СЂР°РєС‚РµСЂРёСЃС‚РёРє РіРµСЂРѕСЏ
+// показ характеристик героя
 void Hero::show_characteristics()
 {
 	//SetConsoleCP(1251);
 	setlocale(LC_ALL, "rus");
-	cout << "РљРѕРѕСЂРґРёРЅР°С‚С‹ РіРµСЂРѕСЏ: " << "x = " << x << ", y = " << y << ";" << endl;
-	cout << "РљРѕР»РёС‡РµСЃС‚РІРѕ Р·РµР»СЊСЏ: " << count_healing_poison << endl;
-	cout << "РљРѕР»РёС‡РµСЃС‚РІРѕ РІРѕСЃРїРѕР»СЏРЅРµРјРѕРіРѕ HP: " << num_recovery_units_poison << endl;
-	cout << "РќР°РґРµС‚С‹Рµ Р°С‚РёС„Р°РєС‚С‹: " << endl;
-	// object.show_weared_artifacts(); // РѕР±СЉРµРєС‚ РёРЅРІРµРЅС‚РѕСЂСЏ, РїРѕРєР°Р· РЅР°РґРµС‚С‹С… Р°СЂС‚РёС„Р°РєС‚РѕРІ
-	cout << "РќР°РїСЂР°РІР»РµРЅРёРµ РІР·РіР»СЏРґР°: " << direction_gaze << endl;
-	cout << "Р—РґРѕСЂРѕРІСЊРµ: " << user.health << endl;
-	cout << "РЈСЂРѕРЅ: " << user.damage << endl;
-	cout << "РЈСЂРѕРІРµРЅСЊ Р±СЂРѕРЅРё РіРµСЂРѕСЏ: " << user.armor << endl;
-	cout << "РњР°РєСЃРёРјР°Р»СЊРЅРѕРµ Р·РґРѕСЂРѕРІСЊРµ: " << user.max_health << endl;
-	cout << "Р—РѕР»РѕС‚Рѕ: " << user.gold << endl;
-	cout << "РЁР°РЅСЃ РїРѕРїР°РґР°РЅРёСЏ: " << user.hit_chance << endl;
+	cout << "Координаты героя: " << "x = " << x << ", y = " << y << ";" << endl;
+	cout << "Количество зелья: " << count_healing_poison << endl;
+	cout << "Количество восполянемого HP: " << num_recovery_units_poison << endl;
+	cout << "Надетые атифакты: " << endl;
+	// object.show_weared_artifacts(); // объект инвенторя, показ надетых артифактов
+	cout << "Направление взгляда: " << direction_gaze << endl;
+	cout << "Здоровье: " << user.health << endl;
+	cout << "Урон: " << user.damage << endl;
+	cout << "Уровень брони героя: " << user.armor << endl;
+	cout << "Максимальное здоровье: " << user.max_health << endl;
+	cout << "Золото: " << user.gold << endl;
+	cout << "Шанс попадания: " << user.hit_chance << endl;
 	//SetConsoleCP(866);
 }
 
-// РїРѕРІРѕСЂРѕС‚ РІРїСЂР°РІРѕ 
+// поворот вправо 
 void Hero::turn_right()
 {
 	func_ptr tmp_ptr;
@@ -62,7 +62,7 @@ void Hero::turn_right()
 	step_l = tmp_ptr;
 }
 
-// РїРѕРІРѕСЂРѕС‚ РІР»РµРІРѕ 
+// поворот влево 
 void Hero::turn_left()
 {
 	func_ptr tmp_ptr;
@@ -74,7 +74,7 @@ void Hero::turn_left()
 	step_r = tmp_ptr;
 }
 
-// РІСЃРїРѕРјРѕРіР°С‚РµР»СЊРЅР°СЏ СЃС‚СЂСѓРєС‚СѓСЂР° РґР»СЏ РѕС‚РјРѕС‚РєРё С…РѕРґРѕРІ 
+// вспомогательная структура для отмотки ходов 
 struct hero_and_mark
 {
 	Hero user;
@@ -84,21 +84,21 @@ struct hero_and_mark
 
 int main()
 {
-	// С‚РµСЃС‚
+	// тест
 	Hero herot;
-	cout << to_string(1) << " РЎРѕР·РґР°РЅРЅС‹Р№ РѕР±СЉРµРєС‚" << endl;
+	cout << to_string(1) << " Созданный объект" << endl;
 	herot.show_characteristics();
 
 	herot.call_step_r();
-	cout << to_string(2) << " РЎРґРµР»Р°Р» С€Р°Рі РІРїСЂР°РІРѕ" << endl;
+	cout << to_string(2) << " Сделал шаг вправо" << endl;
 	herot.show_characteristics();
 
 	herot.turn_left();
-	cout << to_string(3) << " РџРѕРІРѕСЂРѕС‚ РІР»РµРІРѕ, РЅРѕ РЅРёС‡РµРіРѕ РЅРµ РґРѕР»Р¶РЅРѕ РёР·РјРµРЅРёС‚СЊСЃСЏ" << endl;
+	cout << to_string(3) << " Поворот влево, но ничего не должно измениться" << endl;
 	herot.show_characteristics();
 
 	herot.call_step_r();
-	cout << to_string(4) << "РЁР°Рі РІРїСЂР°РІРѕ РґРѕР»Р¶РµРЅ РёР·РјРµРЅРёС‚СЊ РґСЂСѓРіРёРµ РєРѕРѕСЂРґРёРЅР°С‚С‹" << endl;
+	cout << to_string(4) << "Шаг вправо должен изменить другие координаты" << endl;
 	herot.show_characteristics();
 
 	system("pause");

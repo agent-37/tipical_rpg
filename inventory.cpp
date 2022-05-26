@@ -1,4 +1,4 @@
-п»ї#include <iostream> 
+#include <iostream> 
 #include <algorithm> 
 #include <set> 
 #include <string> 
@@ -6,50 +6,67 @@
 #include <Windows.h>
 #include "inventory.h"
 #include "person.h" 
+#include "hero.h" 
 using namespace std;
 
-// РїРѕРєР°Р· РЅР°РґС‚С‹С… Р°СЂС‚РµС„Р°РєС‚РѕРІ
+inline void Inventory::show_trader_artifacts()
+{
+	for (multiset <string> ::iterator it_trader_inventory = trader_inventory.begin(); it_trader_inventory != trader_inventory.end(); ++it_trader_inventory)
+		cout << *it_trader_inventory << endl;
+}
+
+// показ надтых артефактов
 inline void Inventory::show_weared_artifacts()
 {
 	for (multiset <string> ::iterator it_weared = weared_inventory.begin(); it_weared != weared_inventory.end(); ++it_weared)
 		cout << *it_weared << endl;
 }
 
-// РїРѕРєР°Р· СЃРЅСЏС‚С‹С… Р°СЂС‚РёС„Р°РєС‚РѕРІ
+// показ снятых артифактов
 inline void Inventory::show_not_weared_artifacts()
 {
 	for (multiset <string> ::iterator it_not_weared = weared_inventory.begin(); it_not_weared != weared_inventory.end(); ++it_not_weared)
 		cout << *it_not_weared << endl;
 }
 
-// СЃРЅСЏС‚СЊ Р°СЂС‚РёС„Р°РєС‚
-inline string Inventory::take_off_artifact(string str)
+inline bool Inventory::take_artifact_trader(string str)
+{
+	if (trader_inventory.size() > 0 && trader_inventory.find(str) != trader_inventory.end())
+	{
+		not_weared_inventory.insert(str);
+		trader_inventory.erase(str);
+		return 1;
+	}
+	return 0;
+}
+
+// снять артифакт
+inline bool Inventory::take_off_artifact(string str)
 {
 	if (weared_inventory.size() > 0 && weared_inventory.find(str) != weared_inventory.end())
 	{
 		not_weared_inventory.insert(str);
 		weared_inventory.erase(str);
-		return "Р“РѕС‚РѕРІРѕ!\n";
+		return 1;
 	}
-	return "Р­С‚РѕС‚ Р°СЂС‚РёС„Р°РєС‚ СЃРЅСЏС‚.\n";
+	return 0;
 }
 
-// РЅР°РґРµС‚СЊ Р°СЂС‚РёС„Р°РєС‚
-inline string Inventory::put_on_artifact(string str)
+// надеть артифакт
+inline bool Inventory::put_on_artifact(string str)
 {
 	if (not_weared_inventory.size() > 0 && not_weared_inventory.find(str) != not_weared_inventory.end())
 	{
 		weared_inventory.insert(str);
 		not_weared_inventory.erase(str);
-		return "Р“РѕС‚РѕРІРѕ!\n";
+		return 1;
 	}
-	return "Р­С‚РѕС‚ Р°СЂС‚РёС„Р°РєС‚ СѓР¶Рµ РЅР°РґРµС‚.\n";
+	return 0;
 }
 
-// РїСЂРёС‘Рј С‚РѕРІР°СЂР° РѕС‚ С‚РѕСЂРіРѕРІС†Р°, С„-СЏ РІС‹РєРёРґС‹РІР°РЅРёСЏ РµРіРѕ РѕС‚ С‚РѕСЂРіРѕРІС†Р°
-// СЃРґРµР»Р°С‚СЊ С‚Р°Рє, С‡С‚РѕР±С‹ РіРµСЂРѕР№ РјРѕРі РёСЃРїРѕР»СЊР·РѕРІР°С‚СЊ РёРЅРІРµРЅС‚Р°СЂСЊ, СЃРѕРІРјРµСЃС‚РёРјРѕСЃС‚СЊ .cpp Рё .h
+// приём товара от торговца, ф-я выкидывания его от торговца || готово
+// сделать так, чтобы герой мог использовать инвентарь, совместимость .cpp и .h || готово
 
-/* С…РѕР¶РґРµРЅРёРµ РїРѕ РїРѕР»СЋ (СЃРѕР±РёСЂР°С‚СЊ РјРѕРЅРµС‚С‹, Р°СЂС‚РёС„Р°РєС‚С‹; РІСЃС‚СЂРµС‡Р° СЃ РјРѕРЅСЃС‚СЂР°РјРёР± СЃ С‚РѕСЂРіРѕРІС†Р°РјРё,
-РёС… РЅРµСЃРєРѕР»СЊРєРѕ; СѓР±СЂР°С‚СЊ РїСЂРµРїСЏС‚СЃС‚РІРёРµ, СЃР°Рј РїРѕРґСѓРјР°СЋ: РµСЃС‚СЊ РЅРµСѓР±РёСЂР°РјС‹Рµ, РµСЃС‚СЊ СѓР±РёСЂР°РµРјС‹РµР°) */
-
+/* хождение по полю (собирать монеты, артифакты; встреча с монстрами, с торговцами,
+их несколько; убрать препятствие, сам подумаю: есть неубирамые, есть убираемые) */
 
