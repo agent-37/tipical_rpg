@@ -15,7 +15,7 @@ using namespace std;
 class Hero
 {
 private:
-	int x, y;	// координаты героя на поле
+	int _x, _y;	// координаты героя на поле
 	int direction_gaze; // направление взгляда
 	int count_healing_poison; // количество зелья 
 	int num_recovery_units_poison; // количество восполняемого HP
@@ -32,12 +32,12 @@ public:
 
 	// показ характеристик героя
 	void show_characteristics();
-
+	int x() { return _x; }
+	int y() { return _y; }
 	// шаг вперёд 
 	bool step_forward() 
 	{
-
-		y += 1; 
+		_y += 1; 
 		return 1;
 	}
 	bool (Hero::* step_f)() { &Hero::step_forward };
@@ -46,7 +46,7 @@ public:
 	// шаг вправо 
 	bool step_right() 
 	{ 
-		x += 1;
+		_x += 1;
 		return 1;
 	}
 	bool (Hero::* step_r)() { &Hero::step_right };
@@ -55,7 +55,7 @@ public:
 	// шаг назад 
 	bool step_back() 
 	{ 
-		y -= 1;
+		_y -= 1;
 		return 1;
 	}
 	bool (Hero::* step_b)() { &Hero::step_back };
@@ -64,7 +64,7 @@ public:
 	// шаг влево 
 	bool step_left() 
 	{ 
-		x -= 1;
+		_x -= 1;
 		return 1;
 	}
 	bool (Hero::* step_l)() { &Hero::step_left };

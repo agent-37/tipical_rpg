@@ -18,7 +18,7 @@ void draw_picture(int y, int x, char* file_name) {
 		for (int j = 0; j < h; j++) {
 			bmp_rgb pixel = picture.get(j,i);
 			glColor3ub((int)pixel.red(), (int)pixel.green(), (int)pixel.blue());
-			glBegin(GL_QUADS);//почему то ругается?? (не подключал opengl в конфигах)
+			glBegin(GL_QUADS);
 			glVertex2f((i) * 2, (h - j) * 2);
 			glVertex2f((i + 1) * 2, (h - j) * 2);
 			glVertex2f((i + 1) * 2, (h - j + 1) * 2);
@@ -26,4 +26,12 @@ void draw_picture(int y, int x, char* file_name) {
 			glEnd();
 		}
 	
+}
+
+void draw_walk(game_map map, Hero user, int y, int x) {
+
+}
+
+void draw_mini_map(game_map map, int y, int x) {
+
 }

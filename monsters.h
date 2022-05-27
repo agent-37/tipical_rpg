@@ -6,7 +6,7 @@
 // Класс огра
 class ogre : public person {
 public:
-	ogre() { set_person(1000, 300, 200, 1000, 150, 50); }
+	ogre() { set_person(1000, 300, 200, 1000, 150, 50, "ogre.bmp"); }
 	// Регенереция огра
 	void regeneration();
 	// Ослабление брони героя
@@ -17,7 +17,7 @@ public:
 // Класс скелета
 class skeleton : public person {
 public:
-	skeleton() { set_person(500, 200, 50, 500, 150, 30); }
+	skeleton() { set_person(500, 200, 50, 500, 150, 30, "skeleton.bmp"); }
 	// Проклятые стрелы понижают обычное и максимальное здоровье героя
 	void cursed_arrows(Hero&);
 	~skeleton() {}
@@ -26,7 +26,7 @@ public:
 // Класс паука
 class spider : public person {
 public:
-	spider() { set_person(500, 100, 50, 500, 150, 30); }
+	spider() { set_person(500, 100, 50, 500, 150, 30, "spider.bmp"); }
 	// Эффект разложения - каждые 1.5 секунды герой получает урон от яда (всего 4 удара)
 	void decomposition(Hero&);
 	~spider() {}
@@ -35,7 +35,7 @@ public:
 // Класс призрака
 class ghost : public person {
 public:
-	ghost() { set_person(500, 200, 50, 500, 150, 30); }
+	ghost() { set_person(500, 200, 50, 500, 150, 30, "ghost.bmp"); }
 	// Возможность призрака пропустить удар
 	bool invisibility();
 	// Кража золота героя
@@ -46,7 +46,7 @@ public:
 // Класс дракона (босса)
 class dragon : public person {
 public:
-	dragon() { set_person(2000, 500, 500, 2000, 3000, 60); }
+	dragon() { set_person(2000, 500, 500, 2000, 3000, 60, "dragon.bmp"); }
 	// Ослабление брони героя
 	friend void ogre::heavy_blow(Hero&);
 	// Эффект возгорания - каждые 1.5 секунды герой получает урон от огня (всего 4 удара)

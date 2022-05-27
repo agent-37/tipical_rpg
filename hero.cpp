@@ -12,8 +12,8 @@ using namespace std;
 
 Hero::Hero()
 {
-	x = 0;
-	y = 0;
+	_x = 0;
+	_y = 0;
 	direction_gaze = 0;
 	count_healing_poison = 0;
 	num_recovery_units_poison = 0;
@@ -35,7 +35,7 @@ void Hero::show_characteristics()
 {
 	//SetConsoleCP(1251);
 	setlocale(LC_ALL, "rus");
-	cout << "Координаты героя: " << "x = " << x << ", y = " << y << ";" << endl;
+	cout << "Координаты героя: " << "x = " << _x << ", y = " << _y << ";" << endl;
 	cout << "Количество зелья: " << count_healing_poison << endl;
 	cout << "Количество восполянемого HP: " << num_recovery_units_poison << endl;
 	cout << "Надетые атифакты: " << endl;
