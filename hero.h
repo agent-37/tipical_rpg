@@ -42,6 +42,10 @@ public:
 	{
 		if (y + 1 >= size_field && field_array[x][y + 1] != 1)
 			return 0;
+		else if (field_array[x][y + 1] != 2)
+		{
+
+		}
 		else
 		{
 			y += 1;
@@ -56,6 +60,10 @@ public:
 	{
 		if (x + 1 >= size_field && field_array[x + 1][y] != 1)
 			return 0;
+		else if (field_array[x + 1][y] != 2)
+		{
+
+		}
 		else
 		{
 			x += 1;
@@ -70,6 +78,10 @@ public:
 	{
 		if (y - 1 < 0 && field_array[x][y - 1] != 1)
 			return 0;
+		else if (field_array[x][y - 1] != 2)
+		{
+
+		}
 		else
 		{
 			y -= 1;
@@ -84,6 +96,9 @@ public:
 	{
 		if (x - 1 < 0 && field_array[x - 1][y] != 1)
 			return 0;
+		else if (field_array[x - 1][y] != 2)
+		{
+
 		else
 		{
 			x -= 1;
