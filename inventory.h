@@ -6,6 +6,7 @@
 #include <set> 
 #include <string> 
 #include <iterator> 
+#include <fstream>
 #include <Windows.h>
 #include "person.h" 
 // не стоит подключать сюдя #include "hero.h", так как возникает ошибка

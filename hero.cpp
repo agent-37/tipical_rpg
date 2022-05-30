@@ -4,6 +4,7 @@
 #include <string> 
 #include <iterator> 
 #include <Windows.h>
+#include <fstream>
 #include "inventory.h"
 #include "person.h" 
 #include "hero.h" 
@@ -12,11 +13,30 @@ using namespace std;
 
 Hero::Hero()
 {
+	// 1 - камень (неубираемое препядствие)
+	// 2 - дерево (убираемое препядствие)
+	// 3 - золото (собирать)
+
 	x = 0;
 	y = 0;
 	direction_gaze = 0;
 	count_healing_poison = 0;
 	num_recovery_units_poison = 0;
+
+	fstream fin("input.txt", fstream::in | fstream::out | fstream::app);
+
+	fin >> size_field;
+
+	// создание поля
+	field_array = new int* [size_field];
+	for (int i = 0; i < size_field; i++)
+		field_array[i] = new int[size_field]{};
+
+	// чтение поля из файла
+	for (int i = 0; i < size_field; i++)
+		for (int j = 0; j < size_field; j++)
+			fin >> field_array[i][j];
+	
 }
 
 // восполнение здоровья
@@ -33,13 +53,13 @@ inline void Hero::healing_poison()
 // показ характеристик героя
 void Hero::show_characteristics()
 {
-	// SetConsoleCP(1251);
+	SetConsoleCP(1251);
 	setlocale(LC_ALL, "rus");
 	cout << "Координаты героя: " << "x = " << x << ", y = " << y << ";" << endl;
 	cout << "Количество зелья: " << count_healing_poison << endl;
 	cout << "Количество восполянемого HP: " << num_recovery_units_poison << endl;
 	cout << "Надетые атифакты: " << endl;
-	// object.show_weared_artifacts(); // объект инвенторя, показ надетых артифактов
+	//object.show_weared_artifacts(); // объект инвенторя, показ надетых артифактов
 	cout << "Направление взгляда: " << direction_gaze << endl;
 	cout << "Здоровье: " << user.health << endl;
 	cout << "Урон: " << user.damage << endl;
@@ -47,7 +67,7 @@ void Hero::show_characteristics()
 	cout << "Максимальное здоровье: " << user.max_health << endl;
 	cout << "Золото: " << user.gold << endl;
 	cout << "Шанс попадания: " << user.hit_chance << endl;
-	// SetConsoleCP(866);
+	SetConsoleCP(866);
 }
 
 // поворот вправо 
@@ -72,6 +92,11 @@ void Hero::turn_left()
 	step_l = step_b;
 	step_b = step_r;
 	step_r = tmp_ptr;
+}
+
+int Hero::get_size_field()
+{
+	return size_field;
 }
 
 // вспомогательная структура для отмотки ходов 

@@ -4,6 +4,7 @@
 #include <string> 
 #include <iterator> 
 #include <Windows.h>
+#include <fstream>
 #include "inventory.h"
 #include "person.h" 
 #include "hero.h" 

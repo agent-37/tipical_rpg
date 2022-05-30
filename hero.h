@@ -6,6 +6,7 @@
 #include <set> 
 #include <string> 
 #include <iterator> 
+#include <fstream>
 #include <Windows.h>
 #include "inventory.h"
 #include "person.h" 
@@ -19,6 +20,8 @@ private:
 	int direction_gaze; // направление взгляда
 	int count_healing_poison; // количество зелья
 	int num_recovery_units_poison; // количество восполняемого HP
+	int** field_array; // поле
+	int size_field;
 	person user;
 	Inventory inventory_user;
 	// указатель на функцию класса
@@ -36,9 +39,7 @@ public:
 	// шаг вперёд
 	bool step_forward()
 	{
-		if (  ((x == 40) && ((y) >= 50)) || // вертикальная каменная стена
-			  ((y == 30) && (x < 11)) || ((y == 32) && (x < 11)) ||  // горизонтальный туннель
-			  ((y == 11) && (x > 45))  ) // горизонтальная стена
+		if (y + 1 >= size_field)
 			return 0;
 		else
 		{
@@ -52,8 +53,7 @@ public:
 	// шаг вправо 
 	bool step_right()
 	{
-		if (  ((y == 12) && (x >= 45)) ||
-			(x == 39) && (y > 50)  )
+		if (x + 1 >= size_field)
 			return 0;
 		else
 		{
@@ -67,8 +67,7 @@ public:
 	// шаг назад
 	bool step_back()
 	{
-		if (  ((y == 13) && (x > 45)) ||
-			((y == 32) && (x < 11)) || ((y == 34) && (x < 11))  )
+		if (y - 1 < 0)
 			return 0;
 		else
 		{
@@ -82,8 +81,7 @@ public:
 	// шаг влево
 	bool step_left()
 	{
-		if (  ((x == 41) && (y > 50)) ||
-			  ((y == 33) && (x <= 11)) || ((y == 31) && (x <= 11))) )
+		if (x - 1 < 0)
 			return 0;
 		else
 		{
@@ -99,6 +97,8 @@ public:
 
 	// поворот влево 
 	void turn_left();
+
+	int get_size_field();
 
 };
 
