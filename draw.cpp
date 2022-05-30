@@ -149,3 +149,61 @@ void draw_mini_map(Hero user, game_map map, int y, int x) {
 			glEnd();
 		}
 }
+
+void draw_fight(Hero user, person monster, int mark) {
+	draw_picture(0, 0, "back_fight.bmp");
+	//высвечиваются полоски хп с макимумом на заднем фоне
+	glColor3ub(255, 255, 255);
+	glBegin(GL_QUADS);
+	glVertex2f(50, 50);
+	glVertex2f(100, 50);
+	glVertex2f(100, 850);
+	glVertex2f(50, 850);
+	glEnd();
+	glBegin(GL_QUADS);
+	glVertex2f(1250, 50);
+	glVertex2f(1200, 50);
+	glVertex2f(1200, 850);
+	glVertex2f(1250, 850);
+	glEnd();
+	int hero_hp = user.user.health, monster_hp = monster.health;
+	int max_hero_hp = user.user.health, max_monster_hp = monster.health;
+	glColor3ub(255, 0, 0);
+	glBegin(GL_QUADS);
+	glVertex2f(50, 50);
+	glVertex2f(100, 50);
+	glVertex2f(100, 50 + 800 * hero_hp / max_hero_hp);
+	glVertex2f(50, 50 + 800 * hero_hp / max_hero_hp);
+	glEnd();
+	glBegin(GL_QUADS);
+	glVertex2f(1250, 50);
+	glVertex2f(1200, 50);
+	glVertex2f(1200, 50 + 800 * monster_hp / max_monster_hp);
+	glVertex2f(1250, 50 + 800 * monster_hp / max_monster_hp);
+	glEnd();
+	draw_picture(100, 50, "hero.bmp");
+
+	switch (mark) {
+	case(1): {
+		draw_picture(750, 50, "dragon.bmp");
+		break;
+	}
+	case(2): {
+		draw_picture(750, 50, "skeleton.bmp");
+		break;
+	}
+	case(3): {
+		draw_picture(750, 50, "spider.bmp");
+		break;
+	}
+	case(4): {
+		draw_picture(750, 50, "ghost.bmp");
+		break;
+	}
+	case(5): {
+		draw_picture(750, 50, "ogre.bmp");
+		break;
+	}
+	}
+
+}
