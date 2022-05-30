@@ -12,7 +12,7 @@ void draw_fight(Hero user, person monster);
 //рисование закупки(сделать потом)
 void draw_buy(int y, int x);
 //рисование хождения по карте
-void draw_walk(game_map map,Hero user,int y, int x);
+void draw_walk(Hero user, game_map map);
 
 #endif // _DRAW_H_
 
