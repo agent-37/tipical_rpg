@@ -82,6 +82,50 @@ void Hero::show_characteristics()
 	SetConsoleCP(866);
 }
 
+bool Hero::step_forward()
+{
+	if (y + 1 >= size_field && field_array[x][y + 1] == 1 && field_array[x][y + 1] == 2)
+		return 0;
+	else
+	{
+		y += 1;
+		return 1;
+	}
+}
+
+bool Hero::step_right()
+{
+	if (x + 1 >= size_field && field_array[x + 1][y] == 1 && field_array[x + 1][y] == 2)
+		return 0;
+	else
+	{
+		x += 1;
+		return 1;
+	}
+}
+
+bool Hero::step_back()
+{
+	if (y - 1 < 0 && field_array[x][y - 1] == 1 && field_array[x][y - 1] == 2)
+		return 0;
+	else
+	{
+		y -= 1;
+		return 1;
+	}
+}
+
+bool Hero::step_left()
+{
+	if (x - 1 < 0 && field_array[x - 1][y] == 1 && field_array[x - 1][y] == 2)
+		return 0;
+	else
+	{
+		x -= 1;
+		return 1;
+	}
+}
+
 // поворот вправо 
 void Hero::turn_right()
 {

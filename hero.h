@@ -38,58 +38,22 @@ public:
 	void show_characteristics();
 
 	// шаг вперёд
-	bool step_forward()
-	{
-		if (y + 1 >= size_field && field_array[x][y + 1] == 1 && field_array[x][y + 1] == 2)
-			return 0;
-		else
-		{
-			y += 1;
-			return 1;
-		}
-	}
+	bool step_forward();
 	bool (Hero::* step_f)() { &Hero::step_forward };
 	void call_step_f() { (this->*step_f)(); }
 
 	// шаг вправо 
-	bool step_right()
-	{
-		if (x + 1 >= size_field && field_array[x + 1][y] == 1 && field_array[x + 1][y] == 2)
-			return 0;
-		else
-		{
-			x += 1;
-			return 1;
-		}
-	}
+	bool step_right();
 	bool (Hero::* step_r)() { &Hero::step_right };
 	void call_step_r() { (this->*step_r)(); }
 
 	// шаг назад
-	bool step_back()
-	{
-		if (y - 1 < 0 && field_array[x][y - 1] == 1 && field_array[x][y - 1] == 2)
-			return 0;
-		else
-		{
-			y -= 1;
-			return 1;
-		}
-	}
+	bool step_back();
 	bool (Hero::* step_b)() { &Hero::step_back };
 	void call_step_b() { (this->*step_b)(); }
 
 	// шаг влево
-	bool step_left()
-	{
-		if (x - 1 < 0 && field_array[x - 1][y] == 1 && field_array[x - 1][y] == 2)
-			return 0;
-		else
-		{
-			x -= 1;
-			return 1;
-		}
-	}
+	bool step_left();
 	bool (Hero::* step_l)() { &Hero::step_left };
 	void call_step_l() { (this->*step_l)(); }
 
