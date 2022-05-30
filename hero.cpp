@@ -145,13 +145,26 @@ void Hero::turn_right()
 // поворот влево 
 void Hero::turn_left()
 {
-	func_ptr tmp_ptr;
+	func_ptr tmp_ptr();
 	tmp_ptr = step_f;
 
 	step_f = step_l;
 	step_l = step_b;
 	step_b = step_r;
 	step_r = tmp_ptr;
+}
+
+// срубить дерево, стоящее на пути
+void Hero::cut_tree()
+{
+	if (step_f == &step_forward && field_array[y + 1][x] == 2)
+		field_array[y + 1][x] = 0;
+	else if (step_f == &step_left && field_array[y][x - 1] == 2)
+		field_array[y][x - 1] = 0;
+	else if (step_f == &step_right && field_array[y][x + 1] == 2)
+		field_array[y][x + 1] = 0;
+	else if (step_f == &step_back && field_array[y - 1][x] == 2)
+		field_array[y - 1][x] = 0;
 }
 
 // получить размер поля

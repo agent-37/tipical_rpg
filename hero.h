@@ -63,6 +63,9 @@ public:
 	// поворот влево 
 	void turn_left();
 
+	// срубить дерево, стоящее на пути
+	void cut_tree();
+
 	// получить размер поля
 	int get_size_field();
 
