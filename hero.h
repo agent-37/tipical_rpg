@@ -40,9 +40,9 @@ public:
 	// шаг вперёд
 	bool step_forward()
 	{
-		if (y + 1 >= size_field && field_array[x][y + 1] != 1)
+		if (y + 1 >= size_field && field_array[x][y + 1] == 1)
 			return 0;
-		else if (field_array[x][y + 1] != 2)
+		else if (field_array[x][y + 1] == 2)
 		{
 
 		}
@@ -58,9 +58,9 @@ public:
 	// шаг вправо 
 	bool step_right()
 	{
-		if (x + 1 >= size_field && field_array[x + 1][y] != 1)
+		if (x + 1 >= size_field && field_array[x + 1][y] == 1)
 			return 0;
-		else if (field_array[x + 1][y] != 2)
+		else if (field_array[x + 1][y] == 2)
 		{
 
 		}
@@ -76,9 +76,9 @@ public:
 	// шаг назад
 	bool step_back()
 	{
-		if (y - 1 < 0 && field_array[x][y - 1] != 1)
+		if (y - 1 < 0 && field_array[x][y - 1] == 1)
 			return 0;
-		else if (field_array[x][y - 1] != 2)
+		else if (field_array[x][y - 1] == 2)
 		{
 
 		}
@@ -94,9 +94,9 @@ public:
 	// шаг влево
 	bool step_left()
 	{
-		if (x - 1 < 0 && field_array[x - 1][y] != 1)
+		if (x - 1 < 0 && field_array[x - 1][y] == 1)
 			return 0;
-		else if (field_array[x - 1][y] != 2)
+		else if (field_array[x - 1][y] == 2)
 		{
 
 		else
