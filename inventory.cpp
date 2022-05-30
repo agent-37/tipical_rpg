@@ -1,4 +1,4 @@
-#include <iostream> 
+п»ї#include <iostream> 
 #include <algorithm> 
 #include <set> 
 #include <string> 
@@ -16,14 +16,14 @@ inline void Inventory::show_trader_artifacts()
 		cout << *it_trader_inventory << endl;
 }
 
-// показ надтых артефактов
+// РїРѕРєР°Р· РЅР°РґС‚С‹С… Р°СЂС‚РµС„Р°РєС‚РѕРІ
 inline void Inventory::show_weared_artifacts()
 {
 	for (multiset <string> ::iterator it_weared = weared_inventory.begin(); it_weared != weared_inventory.end(); ++it_weared)
 		cout << *it_weared << endl;
 }
 
-// показ снятых артифактов
+// РїРѕРєР°Р· СЃРЅСЏС‚С‹С… Р°СЂС‚РёС„Р°РєС‚РѕРІ
 inline void Inventory::show_not_weared_artifacts()
 {
 	for (multiset <string> ::iterator it_not_weared = weared_inventory.begin(); it_not_weared != weared_inventory.end(); ++it_not_weared)
@@ -41,7 +41,7 @@ inline bool Inventory::take_artifact_trader(string str)
 	return 0;
 }
 
-// снять артифакт
+// СЃРЅСЏС‚СЊ Р°СЂС‚РёС„Р°РєС‚
 inline bool Inventory::take_off_artifact(string str)
 {
 	if (weared_inventory.size() > 0 && weared_inventory.find(str) != weared_inventory.end())
@@ -53,7 +53,7 @@ inline bool Inventory::take_off_artifact(string str)
 	return 0;
 }
 
-// надеть артифакт
+// РЅР°РґРµС‚СЊ Р°СЂС‚РёС„Р°РєС‚
 inline bool Inventory::put_on_artifact(string str)
 {
 	if (not_weared_inventory.size() > 0 && not_weared_inventory.find(str) != not_weared_inventory.end())
@@ -65,9 +65,9 @@ inline bool Inventory::put_on_artifact(string str)
 	return 0;
 }
 
-// приём товара от торговца, ф-я выкидывания его от торговца || готово
-// сделать так, чтобы герой мог использовать инвентарь, совместимость .cpp и .h || готово
+// РїСЂРёС‘Рј С‚РѕРІР°СЂР° РѕС‚ С‚РѕСЂРіРѕРІС†Р°, С„-СЏ РІС‹РєРёРґС‹РІР°РЅРёСЏ РµРіРѕ РѕС‚ С‚РѕСЂРіРѕРІС†Р° || РіРѕС‚РѕРІРѕ
+// СЃРґРµР»Р°С‚СЊ С‚Р°Рє, С‡С‚РѕР±С‹ РіРµСЂРѕР№ РјРѕРі РёСЃРїРѕР»СЊР·РѕРІР°С‚СЊ РёРЅРІРµРЅС‚Р°СЂСЊ, СЃРѕРІРјРµСЃС‚РёРјРѕСЃС‚СЊ .cpp Рё .h || РіРѕС‚РѕРІРѕ
 
-/* хождение по полю (собирать монеты, артифакты; встреча с монстрами, с торговцами,
-их несколько; убрать препятствие, сам подумаю: есть неубирамые, есть убираемые) */
+/* С…РѕР¶РґРµРЅРёРµ РїРѕ РїРѕР»СЋ (СЃРѕР±РёСЂР°С‚СЊ РјРѕРЅРµС‚С‹, Р°СЂС‚РёС„Р°РєС‚С‹; РІСЃС‚СЂРµС‡Р° СЃ РјРѕРЅСЃС‚СЂР°РјРё, СЃ С‚РѕСЂРіРѕРІС†Р°РјРё,
+РёС… РЅРµСЃРєРѕР»СЊРєРѕ; СѓР±СЂР°С‚СЊ РїСЂРµРїСЏС‚СЃС‚РІРёРµ, СЃР°Рј РїРѕРґСѓРјР°СЋ: РµСЃС‚СЊ РЅРµСѓР±РёСЂР°РјС‹Рµ, РµСЃС‚СЊ СѓР±РёСЂР°РµРјС‹Рµ) */
 
