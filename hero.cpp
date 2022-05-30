@@ -82,6 +82,7 @@ void Hero::show_characteristics()
 	SetConsoleCP(866);
 }
 
+// шаг вперёд
 bool Hero::step_forward()
 {
 	if (y + 1 >= size_field && field_array[x][y + 1] == 1 && field_array[x][y + 1] == 2)
@@ -93,6 +94,7 @@ bool Hero::step_forward()
 	}
 }
 
+// шаг вправо 
 bool Hero::step_right()
 {
 	if (x + 1 >= size_field && field_array[x + 1][y] == 1 && field_array[x + 1][y] == 2)
@@ -104,6 +106,7 @@ bool Hero::step_right()
 	}
 }
 
+// шаг назад
 bool Hero::step_back()
 {
 	if (y - 1 < 0 && field_array[x][y - 1] == 1 && field_array[x][y - 1] == 2)
@@ -115,6 +118,7 @@ bool Hero::step_back()
 	}
 }
 
+// шаг влево
 bool Hero::step_left()
 {
 	if (x - 1 < 0 && field_array[x - 1][y] == 1 && field_array[x - 1][y] == 2)
@@ -150,6 +154,7 @@ void Hero::turn_left()
 	step_r = tmp_ptr;
 }
 
+// получить размер поля
 int Hero::get_size_field()
 {
 	return size_field;

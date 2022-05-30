@@ -63,6 +63,7 @@ public:
 	// поворот влево 
 	void turn_left();
 
+	// получить размер поля
 	int get_size_field();
 
 };
