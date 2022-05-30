@@ -29,6 +29,7 @@ Hero::Hero()
 
 	// создание поля
 	field_array = new int* [size_field];
+
 	for (int i = 0; i < size_field; i++)
 		field_array[i] = new int[size_field]{};
 
@@ -36,7 +37,18 @@ Hero::Hero()
 	for (int i = 0; i < size_field; i++)
 		for (int j = 0; j < size_field; j++)
 			fin >> field_array[i][j];
+
+	fin.close();
 	
+}
+
+Hero::~Hero()
+{
+	for (int i = 0; i < size_field; i++)
+	{
+		delete[] field_array[i];
+		field_array[i] = nullptr;
+	}
 }
 
 // восполнение здоровья

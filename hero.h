@@ -28,7 +28,8 @@ private:
 	typedef bool (Hero::* func_ptr)(void);
 
 public:
-	Hero();
+	Hero();	
+	~Hero();
 
 	// восполнение здоровья 
 	void healing_poison();
