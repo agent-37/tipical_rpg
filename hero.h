@@ -18,6 +18,10 @@ class Hero
 private:
 	int x, y;	// координаты положения героя
 	int direction_gaze; // направление взгляда
+	// 1 - вперёд
+	// 2 - вправо
+	// 3 - назад
+	// 2 - влево
 	int count_healing_poison; // количество зелья
 	int num_recovery_units_poison; // количество восполняемого HP
 	int** field_array; // поле
@@ -69,8 +73,20 @@ public:
 	// взять золото
 	void take_gold();
 
+	// получить координату х героя
+	int get_x();
+
+	// получить координату y героя
+	int get_y();
+
 	// получить размер поля
 	int get_size_field();
+
+	// получить направление взгляда
+	int get_direction_gaze();
+
+	// содержимое клетки
+	int contents_cell(int i, int j);
 
 };
 
