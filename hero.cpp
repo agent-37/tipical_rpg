@@ -157,6 +157,31 @@ void Hero::turn_left()
 // срубить дерево, стоящее на пути
 void Hero::cut_tree()
 {
+	if (step_f == &step_forward && field_array[y + 1][x] == 3)
+	{
+		field_array[y + 1][x] = 0;
+		user.gold++;
+	}
+	else if (step_f == &step_left && field_array[y][x - 1] == 3)
+	{
+		field_array[y][x - 1] = 0;
+		user.gold++;
+	}
+	else if (step_f == &step_right && field_array[y][x + 1] == 3)
+	{
+		field_array[y][x + 1] = 0;
+		user.gold++;
+	}
+	else if (step_f == &step_back && field_array[y - 1][x] == 3)
+	{
+		field_array[y - 1][x] = 0;
+		user.gold++;
+	}
+}
+
+void Hero::take_gold()
+{
+
 	if (step_f == &step_forward && field_array[y + 1][x] == 2)
 		field_array[y + 1][x] = 0;
 	else if (step_f == &step_left && field_array[y][x - 1] == 2)

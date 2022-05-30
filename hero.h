@@ -66,6 +66,9 @@ public:
 	// срубить дерево, стоящее на пути
 	void cut_tree();
 
+	// взять золото
+	void take_gold();
+
 	// получить размер поля
 	int get_size_field();
 
