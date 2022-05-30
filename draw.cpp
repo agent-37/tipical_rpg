@@ -123,3 +123,29 @@ void draw_walk(Hero user, game_map map) {
 		else
 			draw_picture(100, 76, "first_block_unbreak.bmp");
 }
+
+void draw_mini_map(Hero user, game_map map, int y, int x) {
+	int map_x = user.get_x(), map_y = user.get_y();
+	for (int i = 0; i < 7; i++)
+		for (int j = 0; j < 7; j++) {
+			if (!map.visited(map_x, map_y))
+				glColor3ub(51, 51, 51);
+			else
+				switch (map.contents_cell(map_x, map_y)) {
+				case empty_cell: {
+					glColor3ub(255, 255, 0);
+					break;
+				}
+				case traeder: {
+					glColor3ub(51, 204, 51);
+					break;
+				}
+				}
+			glBegin(GL_QUADS);
+			glVertex2f(x + 7 * i, y + 7 * j);
+			glVertex2f(x + 7 * (i + 1), y + 7 * j);
+			glVertex2f(x + 7 * (i + 1), y + 7 * (j + 1));
+			glVertex2f(x + 7 * i, y + 7 * (j + 1));
+			glEnd();
+		}
+}
