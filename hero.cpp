@@ -8,6 +8,7 @@
 #include "inventory.h"
 #include "person.h" 
 #include "hero.h" 
+#include "game_map.h" 
 
 using namespace std;
 
@@ -26,34 +27,13 @@ Hero::Hero()
 	y = 0;
 	direction_gaze = 0;
 	count_healing_poison = 0;
-	num_recovery_units_poison = 0;
+	num_recovery_units_poison = 0;	
 
-	fstream fin("input.txt", fstream::in | fstream::out | fstream::app);
-
-	fin >> size_field;
-
-	// создание поля
-	field_array = new int* [size_field];
-
-	for (int i = 0; i < size_field; i++)
-		field_array[i] = new int[size_field]{};
-
-	// чтение поля из файла
-	for (int i = 0; i < size_field; i++)
-		for (int j = 0; j < size_field; j++)
-			fin >> field_array[i][j];
-
-	fin.close();
-	
 }
 
 Hero::~Hero()
 {
-	for (int i = 0; i < size_field; i++)
-	{
-		delete[] field_array[i];
-		field_array[i] = nullptr;
-	}
+
 }
 
 // восполнение здоровья
@@ -90,7 +70,7 @@ void Hero::show_characteristics()
 // шаг вперёд
 bool Hero::step_forward()
 {
-	if (y + 1 >= size_field && field_array[x][y + 1] == 1 && field_array[x][y + 1] == 2)
+	if (y + 1 >= field.get_size_map() && field.get_cell(x, y + 1) == 1 && field.get_cell(x, y + 1) == 2)
 		return 0;
 	else
 	{
@@ -102,7 +82,7 @@ bool Hero::step_forward()
 // шаг вправо 
 bool Hero::step_right()
 {
-	if (x + 1 >= size_field && field_array[x + 1][y] == 1 && field_array[x + 1][y] == 2)
+	if (x + 1 >= field.get_size_map() && field.get_cell(x + 1, y) == 1 && field.get_cell(x + 1, y) == 2)
 		return 0;
 	else
 	{
@@ -114,7 +94,7 @@ bool Hero::step_right()
 // шаг назад
 bool Hero::step_back()
 {
-	if (y - 1 < 0 && field_array[x][y - 1] == 1 && field_array[x][y - 1] == 2)
+	if (y - 1 < 0 && field.get_cell(x, y - 1) == 1 && field.get_cell(x, y - 1) == 2)
 		return 0;
 	else
 	{
@@ -126,13 +106,18 @@ bool Hero::step_back()
 // шаг влево
 bool Hero::step_left()
 {
-	if (x - 1 < 0 && field_array[x - 1][y] == 1 && field_array[x - 1][y] == 2)
+	if (x - 1 < 0 && field.get_cell(x - 1, y) == 1 && field.get_cell(x - 1, y) == 2)
 		return 0;
 	else
 	{
 		x -= 1;
 		return 1;
 	}
+}
+
+int Hero::get_direction_gaze()
+{
+	return direction_gaze;
 }
 
 // поворот вправо 
@@ -157,6 +142,18 @@ void Hero::turn_left()
 	step_l = step_b;
 	step_b = step_r;
 	step_r = tmp_ptr;
+}
+
+// получить координату х героя
+int Hero::get_x()
+{
+	return x;
+}
+
+// получить координату y героя
+int Hero::get_y()
+{
+	return y;
 }
 
 // вспомогательная структура для отмотки ходов 

@@ -24,10 +24,9 @@ private:
 	// 2 - влево
 	int count_healing_poison; // количество зелья
 	int num_recovery_units_poison; // количество восполняемого HP
-	int** field_array; // поле
-	int size_field;
 	person user;
 	Inventory inventory_user;
+	game_map field;
 	// указатель на функцию класса
 	typedef bool (Hero::* func_ptr)(void);
 
@@ -61,17 +60,8 @@ public:
 	bool (Hero::* step_l)() { &Hero::step_left };
 	void call_step_l() { (this->*step_l)(); }
 
-	// поворот вправо 
-	void turn_right();
-
-	// поворот влево 
-	void turn_left();
-
-	// срубить дерево, стоящее на пути
-	void cut_tree();
-
-	// взять золото
-	void take_gold();
+	// получить направление взгляда
+	int get_direction_gaze();
 
 	// получить координату х героя
 	int get_x();
@@ -79,14 +69,11 @@ public:
 	// получить координату y героя
 	int get_y();
 
-	// получить размер поля
-	int get_size_field();
+	// поворот вправо 
+	void turn_right();
 
-	// получить направление взгляда
-	int get_direction_gaze();
-
-	// содержимое клетки
-	int contents_cell(int i, int j);
+	// поворот влево 
+	void turn_left();
 
 };
 
