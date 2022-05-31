@@ -17,6 +17,10 @@ Hero::Hero()
 	// 2 - дерево (убираемое препядствие)
 	// 3 - золото (собирать)
 	// 4 - монстры
+	// 5 - orge
+	// 6 - skeleton
+	// 7 - ghost
+	// 8 - dragon
 
 	x = 0;
 	y = 0;
@@ -146,7 +150,7 @@ void Hero::turn_right()
 // поворот влево 
 void Hero::turn_left()
 {
-	func_ptr tmp_ptr();
+	func_ptr tmp_ptr;
 	tmp_ptr = step_f;
 
 	step_f = step_l;
@@ -155,72 +159,6 @@ void Hero::turn_left()
 	step_r = tmp_ptr;
 }
 
-// срубить дерево, стоящее на пути
-void Hero::cut_tree()
-{
-	if (step_f == &step_forward && field_array[y + 1][x] == 3)
-	{
-		field_array[y + 1][x] = 0;
-		user.gold++;
-	}
-	else if (step_f == &step_left && field_array[y][x - 1] == 3)
-	{
-		field_array[y][x - 1] = 0;
-		user.gold++;
-	}
-	else if (step_f == &step_right && field_array[y][x + 1] == 3)
-	{
-		field_array[y][x + 1] = 0;
-		user.gold++;
-	}
-	else if (step_f == &step_back && field_array[y - 1][x] == 3)
-	{
-		field_array[y - 1][x] = 0;
-		user.gold++;
-	}
-}
-
-void Hero::take_gold()
-{
-
-	if (step_f == &step_forward && field_array[y + 1][x] == 2)
-		field_array[y + 1][x] = 0;
-	else if (step_f == &step_left && field_array[y][x - 1] == 2)
-		field_array[y][x - 1] = 0;
-	else if (step_f == &step_right && field_array[y][x + 1] == 2)
-		field_array[y][x + 1] = 0;
-	else if (step_f == &step_back && field_array[y - 1][x] == 2)
-		field_array[y - 1][x] = 0;
-}
-
-// получить координату х героя
-int Hero::get_x()
-{
-	return x;
-}
-
-// получить координату y героя
-int Hero::get_y()
-{
-	return y;
-}
-
-// получить размер поля
-int Hero::get_size_field()
-{
-	return size_field;
-}
-
-int Hero::get_direction_gaze()
-{
-	return direction_gaze;
-}
-
-int Hero::contents_cell(int i, int j)
-{
-	return field_array[i][j];
-}
-ы
 // вспомогательная структура для отмотки ходов 
 struct hero_and_mark
 {
