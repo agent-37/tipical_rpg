@@ -12,7 +12,18 @@
 #include "inventory.h"
 #include "person.h" 
 #include "hero.h" 
-enum cell {	};
+enum cell 
+{	
+	stone, tree, gold, orge, skeleton, ghost, dragon
+};
+
+// 1 - камень (неубираемое препядствие)
+// 2 - дерево (убираемое препядствие)
+// 3 - золото (собирать)
+// 4 - монстр orge
+// 5 - монстр skeleton
+// 6 - монстр ghost
+// 7 - монстр dragon
 
 class Game_map
 {
@@ -21,6 +32,7 @@ private:
 	int **map_2; // второе поле
 	int size_map;
 	person user;
+	cell obstacle;
 
 public:
 	Game_map();
@@ -29,6 +41,12 @@ public:
 
 	//// проверка корректности хода
 	//void check_correct_move(Hero &hero);
+
+	// получить номер препядствия (enum)
+	cell get_obstacle();
+
+	// передать номер препядствия (enum)
+	void set_obstacle(cell obstacle);
 
 	// получить размер поля
 	int get_size_map();
@@ -50,5 +68,4 @@ public:
 };
 
 #endif // _GAME_MAP_H_
-
 
