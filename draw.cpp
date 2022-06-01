@@ -10,16 +10,16 @@
 #include "game_map.h"
 
 using namespace std;
-enum file_monsters { empty_cell = 0, unbreakable = 1, breakable = 2, heep_gold = 3, ogre = 4, skeleton = 5, ghost = 6, dragon = 7, traeder = 8 };
-// 0 - пусто
-// 1 - камень (неубираемое препядствие)
-// 2 - дерево (убираемое препядствие)
-// 3 - золото (собирать)
-// 4 - монстр orge
-// 5 - монстр skeleton
-// 6 - монстр ghost
-// 7 - монстр dragon
-// 8 - торговец
+enum file_monsters { empty_cell = 0, unbreakable = 1, breakable = 2, heep_gold=3, ogre = 4, skeleton = 5, ghost = 6, dragon = 7, traeder = 8 };
+	// 0 - пусто
+	// 1 - камень (неубираемое препядствие)
+	// 2 - дерево (убираемое препядствие)
+	// 3 - золото (собирать)
+	// 4 - монстр orge
+	// 5 - монстр skeleton
+	// 6 - монстр ghost
+	// 7 - монстр dragon
+	// 8 - торговец
 //функция определяет по направлению влгляда вспомогоательные переменные
 void determin_the_direction_construction(int view, int& x, int& y, int& l_x, int& l_y, int& r_x, int& r_y) {
 	switch (view) {
@@ -87,7 +87,7 @@ void draw_walk(Hero user, Game_map map) {
 
 	int view = user.get_direction_gaze();
 	//вспомогательные переменные для утановки клеток перед игроком
-	int opposite_x = 0, opposite_y = 0, left_x = 0, left_y = 0, right_x = 0, right_y = 0;
+	int opposite_x, opposite_y, left_x, left_y, right_x, right_y;
 	determin_the_direction_construction(view, opposite_x, opposite_y, left_x, left_y, right_x, right_y);
 	int  size_map = map.get_size_map();
 	//строим клетку (которая находится через 1 от игрока)
@@ -187,7 +187,7 @@ void draw_fight(Hero user, person monster, int mark) {
 	//высвечиваются полоски хп с макимумом на заднем фоне
 	int hero_hp = user.get_health(), monster_hp = monster.health;
 	int max_hero_hp = user.get_max_health(), max_monster_hp = monster.health;
-
+	
 	draw_picture(100, 50, "hero.bmp");
 
 	switch (mark) {
