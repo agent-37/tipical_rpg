@@ -17,6 +17,8 @@ using namespace std;
 class Hero
 {
 private:
+	// указатель на функцию класса
+	typedef bool (Hero::* func_ptr)(void);
 	int x, y;	// координаты положения героя
 	int direction_gaze; // направление взгляда
 						// 1 - вперёд
@@ -27,8 +29,6 @@ private:
 	int num_recovery_units_poison; // количество восполняемого HP
 	person user;
 	Inventory inventory_user;
-	// указатель на функцию класса
-	typedef bool (Hero::* func_ptr)(void);
 
 public:
 	Hero();
@@ -62,6 +62,12 @@ public:
 
 	// получить направление взгляда
 	int get_direction_gaze();
+
+	// передать координату х героя
+	void set_x(int x);
+
+	// передать координату y героя
+	void set_y(int y);
 
 	// получить координату х героя
 	int get_x();

@@ -20,25 +20,33 @@ private:
 	int** map; // поле
 	int **map_2; // второе поле
 	int size_map;
+	person user;
+
 public:
 	Game_map();
 	~Game_map();
 	void set_cell(int, int, int);
 
+	//// проверка корректности хода
+	//void check_correct_move(Hero &hero);
+
 	// получить размер поля
-	int get_size_map() { return size_map; }
+	int get_size_map();
 
-	// содержимое клетки
-	int get_cell(int x, int y) { return map[x][y]; }
+	// получить содержимое клетки
+	int get_cell(int x, int y);
 
-	person user;
-
-	// срубить дерево, стоящее на пути
+	//  пометить клетку, в которой срубили дерево
 	void cut_tree(Hero &hero);
 
-	// взять золото
+	// отметить посещённую клетку
+	void mark_visited_cell(int x, int y);
+
+	// занулить клетку после взятия золота
 	void take_gold(Hero &hero);
 
+	// занулить клетку после убийства monster
+	void murder_monster(Hero &hero, int num);
 };
 
 #endif // _GAME_MAP_H_
