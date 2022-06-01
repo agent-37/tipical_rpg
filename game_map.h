@@ -17,8 +17,13 @@ enum cell {	};
 class Game_map
 {
 private:
+<<<<<<< HEAD
 	int** map; // РїРѕР»Рµ
 	int **map_2; // РІС‚РѕСЂРѕРµ РїРѕР»Рµ
+=======
+	int** map; // поле
+	int **map_2; // второе поле  НАДО ПЕРЕИМЕНОВАТЬ НА ПОЛЕ ПОСЕЩЕНИЯ(ИЛИ ТИПА ТОГО)
+>>>>>>> f7d7600ecd6f56a7c9e75feec8e3f048e789909a
 	int size_map;
 	person user;
 
@@ -47,8 +52,11 @@ public:
 
 	// Р·Р°РЅСѓР»РёС‚СЊ РєР»РµС‚РєСѓ РїРѕСЃР»Рµ СѓР±РёР№СЃС‚РІР° monster
 	void murder_monster(Hero &hero, int num);
+	//проверка был ли в этой клетке герой
+	int visited(int x, int y);
 };
 
 #endif // _GAME_MAP_H_
 
 
+	

@@ -147,9 +147,12 @@ void Hero::turn_left()
 	step_r = tmp_ptr;
 }
 
-// вспомогательная структура для отмотки ходов 
-struct hero_and_mark
-{
-	Hero user;
-	int mark;
-};
+// получить  максимальное хп
+int Hero::get_max_health() {
+	return user.max_health;
+}
+
+// получить нынешнее здоровье
+int Hero::get_health() {
+	return user.health;
+}
