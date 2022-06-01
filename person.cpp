@@ -1,6 +1,8 @@
 #include "person.h"
 #include <string>
 #include <random>
+#include <stdlib.h>
+#include <time.h>
 using namespace std;
 //процедура задает характеристики кому-то
 void person::set_person(int _health, int _damage, int _armor, int _max_health, int _gold, int _hit_chance, string _file_name) {
@@ -27,6 +29,7 @@ int person::check_died() {
 
 //функция нанесения урона(с учетом промоха), НУЖНО ПРОВЕРИТЬ ЧТО РАБОТАЕТ rand()
 int person::deal_damage() {
+	srand(time(NULL));
 	int try_hit = rand() % 100;
 	if (try_hit >= hit_chance)
 		return damage;

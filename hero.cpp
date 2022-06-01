@@ -41,7 +41,7 @@ inline void Hero::healing_poison()
 	{
 		count_healing_poison--;
 	}
-	user.health = max(user.max_health, user.health +
+	health = max(max_health, health +
 		num_recovery_units_poison);
 }
 
@@ -56,12 +56,12 @@ void Hero::show_characteristics()
 	cout << "Надетые атифакты: " << endl;
 	//object.show_weared_artifacts(); // объект инвенторя, показ надетых артифактов
 	cout << "Направление взгляда: " << direction_gaze << endl;
-	cout << "Здоровье: " << user.health << endl;
-	cout << "Урон: " << user.damage << endl;
-	cout << "Уровень брони героя: " << user.armor << endl;
-	cout << "Максимальное здоровье: " << user.max_health << endl;
-	cout << "Золото: " << user.gold << endl;
-	cout << "Шанс попадания: " << user.hit_chance << endl;
+	cout << "Здоровье: " << health << endl;
+	cout << "Урон: " << damage << endl;
+	cout << "Уровень брони героя: " << armor << endl;
+	cout << "Максимальное здоровье: " << max_health << endl;
+	cout << "Золото: " << gold << endl;
+	cout << "Шанс попадания: " << hit_chance << endl;
 	//SetConsoleCP(866);
 }
 
@@ -149,10 +149,28 @@ void Hero::turn_left()
 
 // получить  максимальное хп
 int Hero::get_max_health() {
-	return user.max_health;
+	return max_health;
 }
 
 // получить нынешнее здоровье
 int Hero::get_health() {
-	return user.health;
+	return health;
 }
+//получить золото
+int Hero::get_gold() {
+	return gold;
+}
+// передать новую броню
+void Hero::set_armor(int x) {
+	armor = x;
+}
+
+// передать max_health
+void Hero::set_max_health(int x) {
+	max_health = x;
+}
+// получить  броню
+int Hero::get_armor() {
+	return armor;
+}
+

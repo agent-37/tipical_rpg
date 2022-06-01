@@ -23,14 +23,7 @@ public:
 	~skeleton() {}
 };
 
-// Класс паука
-class spider : public person {
-public:
-	spider() { set_person(500, 100, 50, 500, 150, 30, "spider.bmp"); }
-	// Эффект разложения - каждые 1.5 секунды герой получает урон от яда (всего 4 удара)
-	void decomposition(Hero&);
-	~spider() {}
-};
+
 
 // Класс призрака
 class ghost : public person {
@@ -50,9 +43,9 @@ public:
 	// Ослабление брони героя
 	friend void ogre::heavy_blow(Hero&);
 	// Эффект возгорания - каждые 1.5 секунды герой получает урон от огня (всего 4 удара)
-	friend void spider::decomposition(Hero&);
+	void decomposition(Hero&);
 	// Повышение урона дракона
-	void rage(Hero& _hero) { if (_hero.gold >= gold) damage += 200; }
+	void rage(Hero& _hero) { if (_hero.get_gold() >= gold) damage += 200; }
 	// Дракон взлетает - затруднение попадания в него
 	void flight() { hit_chance = 30; }
 	~dragon() {}

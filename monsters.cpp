@@ -26,14 +26,7 @@ void skeleton::cursed_arrows(Hero &_hero) {
 		_hero.max_health -= damage;
 }
 
-// Эффект разложения - каждые 1.5 секунды герой получает урон от яда (всего 4 удара)
-void spider::decomposition(Hero& _hero) {
-	_hero.take_damage(damage);
-	for (int count = 0; count < 3; count++) {
-		Sleep(1500);    //задержка в 1500 миллисекунд (1.5 секунды)
-		_hero.take_damage(damage);
-	}
-}
+
 
 // Возможность призрака пропустить удар
 bool ghost::invisibility() {
