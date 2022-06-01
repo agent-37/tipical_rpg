@@ -21,11 +21,14 @@ Hero::Hero()
 	// 6 - монстр ghost
 	// 7 - монстр dragon
 
-	x = 0;
-	y = 0;
+	/*x = 1;
+	y = 1;*/
+	x = 10;
+	y = 10;
 	direction_gaze = 0;
 	count_healing_poison = 0;
 	num_recovery_units_poison = 0;
+	set_person(1000, 100, 250, 1000, 50, 50, "hero.bmp");
 
 }
 
