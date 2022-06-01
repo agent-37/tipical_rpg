@@ -20,7 +20,7 @@ public:
 	~person() {}
 public:
 	//процедура задает характеристики кому-то
-	void set_person(int, int, int, int, int, int,string);
+	void set_person(int, int, int, int, int, int, string);
 
 	//функция получения урона
 	void take_damage(int);

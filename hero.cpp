@@ -13,11 +13,22 @@ using namespace std;
 
 Hero::Hero()
 {
-	x = 0;
-	y = 0;
+	// 1 - камень (неубираемое препядствие)
+	// 2 - дерево (убираемое препядствие)
+	// 3 - золото (собирать)
+	// 4 - монстр orge
+	// 5 - монстр skeleton
+	// 6 - монстр ghost
+	// 7 - монстр dragon
+
+	/*x = 1;
+	y = 1;*/
+	x = 10;
+	y = 10;
 	direction_gaze = 0;
 	count_healing_poison = 0;
 	num_recovery_units_poison = 0;
+	set_person(1000, 100, 250, 1000, 50, 50, "hero.bmp");
 
 }
 
@@ -144,6 +155,7 @@ void Hero::turn_left()
 	direction_gaze = (direction_gaze == 1) ? 4 : direction_gaze -= 1;
 }
 
+<<<<<<< HEAD
 // вспомогательная структура для отмотки ходов 
 struct hero_and_mark
 {
@@ -151,6 +163,8 @@ struct hero_and_mark
 	int mark;
 };
 
+=======
+>>>>>>> ae11e1c414822144c6a1fb677f014eeb50c379e4
 // получить  максимальное хп
 int Hero::get_max_health() {
 	return max_health;
@@ -178,4 +192,7 @@ int Hero::get_armor() {
 	return armor;
 }
 
+<<<<<<< HEAD
 
+=======
+>>>>>>> ae11e1c414822144c6a1fb677f014eeb50c379e4

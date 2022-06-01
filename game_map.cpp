@@ -17,14 +17,13 @@ Game_map::Game_map()
 {
 	fstream fin("input.txt", fstream::in | fstream::out | fstream::app); // позже это следует переместить в мейн
 	fin >> size_map;
-
 	// создание поля
-	map = new int *[size_map];
+	map = new int* [size_map];
 	for (int i = 0; i < size_map; i++)
 		map[i] = new int[size_map] {};
 
 	// создание второго поля
-	map_2 = new int *[size_map];
+	map_2 = new int* [size_map];
 	for (int i = 0; i < size_map; i++)
 		map_2[i] = new int[size_map] {};
 
@@ -96,18 +95,19 @@ int Game_map::get_size_map()
 // получение содержимого клетки
 int Game_map::get_cell(int x, int y)
 {
+
 	return map[x][y];
 }
 
 // занулить клетку после взятия золота
-void Game_map::take_gold(Hero &hero)
+void Game_map::take_gold(Hero& hero)
 {
 	if (map[hero.get_x()][hero.get_y()] == 3)
 		map[hero.get_x()][hero.get_y()] = 0;
 }
 
 // занулить клетку после убийства monster
-void Game_map::murder_monster(Hero &hero, int num)
+void Game_map::murder_monster(Hero& hero, int num)
 {
 	if (map[hero.get_x()][hero.get_y()] == 4 || map[hero.get_x()][hero.get_y()] == 5 ||
 		map[hero.get_x()][hero.get_y()] == 6 || map[hero.get_x()][hero.get_y()] == 7)
@@ -116,7 +116,7 @@ void Game_map::murder_monster(Hero &hero, int num)
 }
 
 //  пометить клетку, в которой срубили дерево
-void Game_map::cut_tree(Hero &hero)
+void Game_map::cut_tree(Hero& hero)
 {
 	if (hero.step_f == &Hero::step_forward && map[hero.get_y() + 1][hero.get_x()] == 2)
 		map[hero.get_y() + 1][hero.get_x()] = 0;
@@ -132,6 +132,11 @@ void Game_map::cut_tree(Hero &hero)
 void Game_map::mark_visited_cell(int x, int y)
 {
 	map_2[x][y] = 1;
+}
+bool Game_map::visited(int x, int y) {
+	if (map_2[x][y] == 1)
+		return true;
+	return false;
 }
 
 
