@@ -13,14 +13,6 @@ using namespace std;
 
 Hero::Hero()
 {
-	// 1 - камень (неубираемое препядствие)
-	// 2 - дерево (убираемое препядствие)
-	// 3 - золото (собирать)
-	// 4 - монстр orge
-	// 5 - монстр skeleton
-	// 6 - монстр ghost
-	// 7 - монстр dragon
-
 	x = 0;
 	y = 0;
 	direction_gaze = 0;
@@ -147,6 +139,14 @@ void Hero::turn_left()
 	step_r = tmp_ptr;
 }
 
+<<<<<<< HEAD
+// вспомогательная структура для отмотки ходов 
+struct hero_and_mark
+{
+	Hero user;
+	int mark;
+};
+=======
 // получить  максимальное хп
 int Hero::get_max_health() {
 	return max_health;
@@ -174,3 +174,4 @@ int Hero::get_armor() {
 	return armor;
 }
 
+>>>>>>> e9c99cbd0871a9038bfcb749881afebcdea01c60
