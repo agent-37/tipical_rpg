@@ -7,8 +7,7 @@
 #include <fstream>
 #include "inventory.h"
 #include "person.h" 
-#include "hero.h" 
-#include "game_map.h" 
+#include "hero.h"  
 
 using namespace std;
 
@@ -27,7 +26,7 @@ Hero::Hero()
 	y = 0;
 	direction_gaze = 0;
 	count_healing_poison = 0;
-	num_recovery_units_poison = 0;	
+	num_recovery_units_poison = 0;
 
 }
 
@@ -50,7 +49,7 @@ inline void Hero::healing_poison()
 // показ характеристик героя
 void Hero::show_characteristics()
 {
-	SetConsoleCP(1251);
+	/*SetConsoleCP(1251);*/
 	setlocale(LC_ALL, "rus");
 	cout << "Координаты героя: " << "x = " << x << ", y = " << y << ";" << endl;
 	cout << "Количество зелья: " << count_healing_poison << endl;
@@ -64,15 +63,15 @@ void Hero::show_characteristics()
 	cout << "Максимальное здоровье: " << user.max_health << endl;
 	cout << "Золото: " << user.gold << endl;
 	cout << "Шанс попадания: " << user.hit_chance << endl;
-	SetConsoleCP(866);
+	//SetConsoleCP(866);
 }
 
 // шаг вперёд
 bool Hero::step_forward()
 {
-	if (y + 1 >= field.get_size_map() && field.get_cell(x, y + 1) == 1 && field.get_cell(x, y + 1) == 2)
-		return 0;
-	else
+	/*if (y + 1 >= field.get_size_map() && field.get_cell(x, y + 1) == 1 && field.get_cell(x, y + 1) == 2)
+	return 0;
+	else*/
 	{
 		y += 1;
 		return 1;
@@ -82,9 +81,9 @@ bool Hero::step_forward()
 // шаг вправо 
 bool Hero::step_right()
 {
-	if (x + 1 >= field.get_size_map() && field.get_cell(x + 1, y) == 1 && field.get_cell(x + 1, y) == 2)
-		return 0;
-	else
+	/*if (x + 1 >= field.get_size_map() && field.get_cell(x + 1, y) == 1 && field.get_cell(x + 1, y) == 2)
+	return 0;
+	else*/
 	{
 		x += 1;
 		return 1;
@@ -94,9 +93,9 @@ bool Hero::step_right()
 // шаг назад
 bool Hero::step_back()
 {
-	if (y - 1 < 0 && field.get_cell(x, y - 1) == 1 && field.get_cell(x, y - 1) == 2)
-		return 0;
-	else
+	/*if (y - 1 < 0 && field.get_cell(x, y - 1) == 1 && field.get_cell(x, y - 1) == 2)
+	return 0;
+	else*/
 	{
 		y -= 1;
 		return 1;
@@ -106,9 +105,9 @@ bool Hero::step_back()
 // шаг влево
 bool Hero::step_left()
 {
-	if (x - 1 < 0 && field.get_cell(x - 1, y) == 1 && field.get_cell(x - 1, y) == 2)
-		return 0;
-	else
+	/*if (x - 1 < 0 && field.get_cell(x - 1, y) == 1 && field.get_cell(x - 1, y) == 2)
+	return 0;
+	else*/
 	{
 		x -= 1;
 		return 1;
@@ -163,26 +162,3 @@ struct hero_and_mark
 	int mark;
 };
 
-
-int main()
-{
-	// тест
-	Hero herot;
-	cout << to_string(1) << " Созданный объект" << endl;
-	herot.show_characteristics();
-
-	herot.call_step_r();
-	cout << to_string(2) << " Сделал шаг вправо" << endl;
-	herot.show_characteristics();
-
-	herot.turn_left();
-	cout << to_string(3) << " Поворот влево, но ничего не должно измениться" << endl;
-	herot.show_characteristics();
-
-	herot.call_step_r();
-	cout << to_string(4) << "Шаг вправо должен изменить другие координаты" << endl;
-	herot.show_characteristics();
-
-	system("pause");
-	return 0;
-}

@@ -1,3 +1,4 @@
+#pragma once
 #ifndef _GAME_MAP_H_
 #define _GAME_MAP_H_
 #define  MAX_SIZE_MAP 100
@@ -11,34 +12,33 @@
 #include "inventory.h"
 #include "person.h" 
 #include "hero.h" 
-enum cell  {	};
+enum cell {	};
 
-class game_map 
+class Game_map
 {
 private:
 	int** map; // поле
+	int **map_2; // второе поле
 	int size_map;
 public:
-	game_map();
-	~game_map();
-	void generation();
+	Game_map();
+	~Game_map();
 	void set_cell(int, int, int);
-	int get_size_map() { return 100; /*должен возвращать размер поля */}
-	int get_cell(int x, int y) { return map[x][y]; }
-
-	Hero hero;
-
-	// срубить дерево, стоящее на пути
-	void cut_tree();
-
-	// взять золото
-	void take_gold();
 
 	// получить размер поля
-	int get_size_map();
+	int get_size_map() { return size_map; }
 
 	// содержимое клетки
-	int get_cell(int i, int j);
+	int get_cell(int x, int y) { return map[x][y]; }
+
+	person user;
+
+	// срубить дерево, стоящее на пути
+	void cut_tree(Hero &hero);
+
+	// взять золото
+	void take_gold(Hero &hero);
+
 };
 
 #endif // _GAME_MAP_H_

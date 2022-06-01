@@ -78,47 +78,47 @@ void draw_walk(Hero user, game_map map) {
 	//вспомогательные переменные для утановки клеток перед игроком
 	int opposite_x, opposite_y, left_x, left_y, right_x, right_y;
 	determin_the_direction_construction(view, opposite_x, opposite_y, left_x, left_y, right_x, right_y);
-	int  size_map = map.get_size_field();
+	int  size_map = map.get_size_map();
 	//строим клетку (которая находится через 1 от игрока)
 	if ((x + 3 * opposite_x) >= 0 && (x + 3 * opposite_x) < size_map && (y + 3 * opposite_y) >= 0 && (y + 3 * opposite_y) < size_map) {
-		if (map.contents_cell(x + 2 * opposite_x + left_x, y + 2 * opposite_y + left_y) != 1
-			&& map.contents_cell(x + 2 * opposite_x + left_x, y + 2 * opposite_y + left_y) != 2)
+		if (map.get_cell(x + 2 * opposite_x + left_x, y + 2 * opposite_y + left_y) != 1
+			&& map.get_cell(x + 2 * opposite_x + left_x, y + 2 * opposite_y + left_y) != 2)
 			draw_picture(420, 322, "second_left_door.bmp");
-		if (map.contents_cell(x + 2 * opposite_x + right_x, y + 2 * opposite_y + right_y) != 1
-			&& map.contents_cell(x + 2 * opposite_x + right_x, y + 2 * opposite_y + right_y) != 2)
+		if (map.get_cell(x + 2 * opposite_x + right_x, y + 2 * opposite_y + right_y) != 1
+			&& map.get_cell(x + 2 * opposite_x + right_x, y + 2 * opposite_y + right_y) != 2)
 			draw_picture(800, 322, "second_right_door.bmp");
-		if (map.contents_cell(x + 3 * opposite_x, y + 3 * opposite_y) != 1 && map.contents_cell(x + 3 * opposite_x, y + 3 * opposite_y) != 2)
+		if (map.get_cell(x + 3 * opposite_x, y + 3 * opposite_y) != 1 && map.get_cell(x + 3 * opposite_x, y + 3 * opposite_y) != 2)
 			draw_picture(530, 408, "third_block_fog.bmp");
 		else
-			if (map.contents_cell(x + 3 * opposite_x, y + 3 * opposite_y) == 1)
+			if (map.get_cell(x + 3 * opposite_x, y + 3 * opposite_y) == 1)
 				draw_picture(530, 408, "third_block_break.bmp");
 			else
 				draw_picture(530, 408, "third_block_unbreak.bmp");
 	}
 	//строим клетку которая напротив игрока
 	if ((x + 2 * opposite_x) >= 0 && (x + 2 * opposite_x) < size_map && (y + 2 * opposite_y) >= 0 && (y + 2 * opposite_y) < size_map) {
-		if (map.contents_cell(x + opposite_x + left_x, y + opposite_y + left_y) != 1
-			&& map.contents_cell(x + opposite_x + left_x, y + opposite_y + left_y) != 2)
+		if (map.get_cell(x + opposite_x + left_x, y + opposite_y + left_y) != 1
+			&& map.get_cell(x + opposite_x + left_x, y + opposite_y + left_y) != 2)
 			draw_picture(150, 114, "first_left_door.bmp");
-		if (map.contents_cell(x + opposite_x + right_x, y + opposite_y + right_y) != 1
-			&& map.contents_cell(x + opposite_x + right_x, y + opposite_y + right_y) != 2)
+		if (map.get_cell(x + opposite_x + right_x, y + opposite_y + right_y) != 1
+			&& map.get_cell(x + opposite_x + right_x, y + opposite_y + right_y) != 2)
 			draw_picture(1000, 114, "first_right_door.bmp");
 
-		if (map.contents_cell(x + 2 * opposite_x, y + 2 * opposite_y) != 1 && map.contents_cell(x + 2 * opposite_x, y + 2 * opposite_y) != 2) {
+		if (map.get_cell(x + 2 * opposite_x, y + 2 * opposite_y) != 1 && map.get_cell(x + 2 * opposite_x, y + 2 * opposite_y) != 2) {
 			draw_picture(350, 268, "third_block_fog.bmp");//нужно прописать кто или что там стоит всех всех
 		}
 		else
-			if (map.contents_cell(x + 2 * opposite_x, y + 2 * opposite_y) == 1)
+			if (map.get_cell(x + 2 * opposite_x, y + 2 * opposite_y) == 1)
 				draw_picture(350, 268, "second_block_break.bmp");
 			else
 				draw_picture(350, 268, "second_block_unbreak.bmp");
 	}
 	//строим клетку в которой стоим
-	if (map.contents_cell(x + opposite_x, y + opposite_y) != 1 && map.contents_cell(x + opposite_x, y + opposite_y) != 2) {
+	if (map.get_cell(x + opposite_x, y + opposite_y) != 1 && map.get_cell(x + opposite_x, y + opposite_y) != 2) {
 		draw_picture(100, 76, "third_block_fog.bmp");//нужно прописать кто или что там стоит всех всех
 	}
 	else
-		if (map.contents_cell(x + opposite_x, y + opposite_y) == 1)
+		if (map.get_cell(x + opposite_x, y + opposite_y) == 1)
 			draw_picture(100, 76, "first_block_break.bmp");
 		else
 			draw_picture(100, 76, "first_block_unbreak.bmp");
@@ -131,7 +131,7 @@ void draw_mini_map(Hero user, game_map map, int y, int x) {
 			if (!map.visited(map_x, map_y))
 				glColor3ub(51, 51, 51);
 			else
-				switch (map.contents_cell(map_x, map_y)) {
+				switch (map.get_cell(map_x, map_y)) {
 				case empty_cell: {
 					glColor3ub(255, 255, 0);
 					break;

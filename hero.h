@@ -1,4 +1,5 @@
-﻿#ifndef _HERO_H_
+﻿#pragma once
+#ifndef _HERO_H_
 #define _HERO_H_
 
 #include <iostream> 
@@ -18,20 +19,19 @@ class Hero
 private:
 	int x, y;	// координаты положения героя
 	int direction_gaze; // направление взгляда
-	// 1 - вперёд
-	// 2 - вправо
-	// 3 - назад
-	// 2 - влево
+						// 1 - вперёд
+						// 2 - вправо
+						// 3 - назад
+						// 2 - влево
 	int count_healing_poison; // количество зелья
 	int num_recovery_units_poison; // количество восполняемого HP
 	person user;
 	Inventory inventory_user;
-	game_map field;
 	// указатель на функцию класса
 	typedef bool (Hero::* func_ptr)(void);
 
 public:
-	Hero();	
+	Hero();
 	~Hero();
 
 	// восполнение здоровья 
@@ -42,7 +42,7 @@ public:
 
 	// шаг вперёд
 	bool step_forward();
-	bool (Hero::* step_f)() { &Hero::step_forward };
+	bool (Hero::* step_f)() = &Hero::step_forward;
 	void call_step_f() { (this->*step_f)(); }
 
 	// шаг вправо 
