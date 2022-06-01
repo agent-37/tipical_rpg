@@ -14,7 +14,7 @@
 using namespace std;
 
 // герой
-class Hero
+class Hero: public person
 {
 private:
 	// указатель на функцию класса
@@ -27,7 +27,6 @@ private:
 						// 2 - влево
 	int count_healing_poison; // количество зелья
 	int num_recovery_units_poison; // количество восполняемого HP
-	person user;
 	Inventory inventory_user;
 
 public:
@@ -69,16 +68,29 @@ public:
 	// передать координату y героя
 	void set_y(int y);
 
+	// передать новую броню
+	void set_armor(int x);
+
+	// передать max_health
+	void set_max_health(int x);
+
 	// получить координату х героя
 	int get_x();
 
 	// получить координату y героя
 	int get_y();
+		
 	// получить  максимальное хп
 	int get_max_health();
 
 	// получить нынешнее здоровье
 	int get_health();
+
+	//получить золото
+	int get_gold();
+
+	// получить  броню
+	int get_armor();
 
 	// поворот вправо 
 	void turn_right();

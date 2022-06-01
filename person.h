@@ -18,7 +18,7 @@ public:
 		gold = 0;
 	}
 	~person() {}
-protected:
+public:
 	//процедура задает характеристики кому-то
 	void set_person(int, int, int, int, int, int,string);
 
