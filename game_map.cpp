@@ -124,6 +124,10 @@ void Game_map::mark_visited_cell(int x, int y)
 	map_2[x][y] = 1;
 }
 
+int Game_map::visited(int x, int y) {
+	return map_2[x][y];
+}
+
 // enum препятствия, монстры, 
 // комменты
 // геттеры посещен клетки, что находится в клетке (как в draw.cpp)

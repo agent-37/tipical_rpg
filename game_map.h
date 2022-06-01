@@ -18,7 +18,7 @@ class Game_map
 {
 private:
 	int** map; // поле
-	int **map_2; // второе поле
+	int **map_2; // второе поле  НАДО ПЕРЕИМЕНОВАТЬ НА ПОЛЕ ПОСЕЩЕНИЯ(ИЛИ ТИПА ТОГО)
 	int size_map;
 	person user;
 
@@ -47,8 +47,11 @@ public:
 
 	// занулить клетку после убийства monster
 	void murder_monster(Hero &hero, int num);
+	//проверка был ли в этой клетке герой
+	int visited(int x, int y);
 };
 
 #endif // _GAME_MAP_H_
 
 
+	
