@@ -2,10 +2,10 @@
 #define _FIGHT_H_
 #include "Hero.h"
 
-// Варианты удара героя
+// Р’Р°СЂРёР°РЅС‚С‹ СѓРґР°СЂР° РіРµСЂРѕСЏ
 void hero_punch_variants(Hero& _hero, person& _monster);
 
-// Бой с монстром
+// Р‘РѕР№ СЃ РјРѕРЅСЃС‚СЂРѕРј
 void fight(Hero& _hero, person& monster, int mark);
 
 #endif // _FIGHT_H_

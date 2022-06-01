@@ -6,17 +6,17 @@
 #include "monsters.h"
 using namespace std;
 
-// Варианты удара героя
+// Р’Р°СЂРёР°РЅС‚С‹ СѓРґР°СЂР° РіРµСЂРѕСЏ
 void hero_punch_variants(Hero& _hero, person& _monster) {
 	int num, temp;
-	cout << "Варианты ударов:" << '\n';
-	cout << "1. Слабый: герой ударит с меньшей силой, зато сможет восстановить здоровье за счет передышки." << '\n';
-	cout << "2. Нормальный" << '\n';
-	cout << "3. Сильный: герой ударит с большей силой, но броня ослабнет, т.к. не выдерижт нагрузки." << '\n';
-	cout << "Введите номер удара: ";
+	cout << "Р’Р°СЂРёР°РЅС‚С‹ СѓРґР°СЂРѕРІ:" << '\n';
+	cout << "1. РЎР»Р°Р±С‹Р№: РіРµСЂРѕР№ СѓРґР°СЂРёС‚ СЃ РјРµРЅСЊС€РµР№ СЃРёР»РѕР№, Р·Р°С‚Рѕ СЃРјРѕР¶РµС‚ РІРѕСЃСЃС‚Р°РЅРѕРІРёС‚СЊ Р·РґРѕСЂРѕРІСЊРµ Р·Р° СЃС‡РµС‚ РїРµСЂРµРґС‹С€РєРё." << '\n';
+	cout << "2. РќРѕСЂРјР°Р»СЊРЅС‹Р№" << '\n';
+	cout << "3. РЎРёР»СЊРЅС‹Р№: РіРµСЂРѕР№ СѓРґР°СЂРёС‚ СЃ Р±РѕР»СЊС€РµР№ СЃРёР»РѕР№, РЅРѕ Р±СЂРѕРЅСЏ РѕСЃР»Р°Р±РЅРµС‚, С‚.Рє. РЅРµ РІС‹РґРµСЂРёР¶С‚ РЅР°РіСЂСѓР·РєРё." << '\n';
+	cout << "Р’РІРµРґРёС‚Рµ РЅРѕРјРµСЂ СѓРґР°СЂР°: ";
 	cin >> num;
 	switch (num) {
-	case 1: // Сила героя (на время 1 удара) -100, здоровье +10
+	case 1: // РЎРёР»Р° РіРµСЂРѕСЏ (РЅР° РІСЂРµРјСЏ 1 СѓРґР°СЂР°) -100, Р·РґРѕСЂРѕРІСЊРµ +10
 		temp = _hero.damage;
 		_hero.damage -= 100;
 		_monster.take_damage(_hero.deal_damage());
@@ -29,7 +29,7 @@ void hero_punch_variants(Hero& _hero, person& _monster) {
 	case 2:
 		_monster.take_damage(_hero.deal_damage());
 		break;
-	case 3: // Сила героя (на время 1 удара) +100, броня -50
+	case 3: // РЎРёР»Р° РіРµСЂРѕСЏ (РЅР° РІСЂРµРјСЏ 1 СѓРґР°СЂР°) +100, Р±СЂРѕРЅСЏ -50
 		temp = _hero.damage;
 		_hero.damage += 100;
 		_monster.take_damage(_hero.deal_damage());
@@ -37,20 +37,20 @@ void hero_punch_variants(Hero& _hero, person& _monster) {
 		_hero.armor -= 50;
 		break;
 	default:
-		cout << "Такого удара нет. Выберите один из предоставленных вариантов, пожалуйста." << '\n';
+		cout << "РўР°РєРѕРіРѕ СѓРґР°СЂР° РЅРµС‚. Р’С‹Р±РµСЂРёС‚Рµ РѕРґРёРЅ РёР· РїСЂРµРґРѕСЃС‚Р°РІР»РµРЅРЅС‹С… РІР°СЂРёР°РЅС‚РѕРІ, РїРѕР¶Р°Р»СѓР№СЃС‚Р°." << '\n';
 		break;
 	}
 }
 
-// Бой с монстром
+// Р‘РѕР№ СЃ РјРѕРЅСЃС‚СЂРѕРј
 void fight(Hero& _hero, person& _monster, int mark) {
-	Hero temp_hero = _hero; // Запоминаем характеристики героя до начала боя
-	int hero_count = 0; // Кол-во ударов героя
+	Hero temp_hero = _hero; // Р—Р°РїРѕРјРёРЅР°РµРј С…Р°СЂР°РєС‚РµСЂРёСЃС‚РёРєРё РіРµСЂРѕСЏ РґРѕ РЅР°С‡Р°Р»Р° Р±РѕСЏ
+	int hero_count = 0; // РљРѕР»-РІРѕ СѓРґР°СЂРѕРІ РіРµСЂРѕСЏ
 	while (!_hero.check_died() && !_monster.check_died()) {
 		if (typeid(_monster) != typeid(ghost))
 			hero_punch_variants(_hero, _monster);
 		hero_count++;
-		// Если монстр - огр
+		// Р•СЃР»Рё РјРѕРЅСЃС‚СЂ - РѕРіСЂ
 		if (typeid(_monster) == typeid(ogre)) {
 			if (hero_count % 2 == 0)
 				//dynamic_cast<ogre*>(&_monster)->regeneration();
@@ -60,24 +60,24 @@ void fight(Hero& _hero, person& _monster, int mark) {
 			else
 				_hero.take_damage(_monster.deal_damage());
 		}
-		// Если монстр - скелет
+		// Р•СЃР»Рё РјРѕРЅСЃС‚СЂ - СЃРєРµР»РµС‚
 		else if (typeid(_monster) == typeid(skeleton)) {
 			if (hero_count % 4 == 0)
 				static_cast<skeleton*>(&_monster)->cursed_arrows(_hero);
 			else
 				_hero.take_damage(_monster.deal_damage());
 		}
-		// Если монстр - призрак
+		// Р•СЃР»Рё РјРѕРЅСЃС‚СЂ - РїСЂРёР·СЂР°Рє
 		else if (typeid(_monster) == typeid(ghost)) {
 			if (static_cast<ghost*>(&_monster)->invisibility())
-				cout << "Призрак стал невидимым, по нему невозможно ударить." << '\n';
+				cout << "РџСЂРёР·СЂР°Рє СЃС‚Р°Р» РЅРµРІРёРґРёРјС‹Рј, РїРѕ РЅРµРјСѓ РЅРµРІРѕР·РјРѕР¶РЅРѕ СѓРґР°СЂРёС‚СЊ." << '\n';
 			else
 				hero_punch_variants(_hero, _monster);
 			if (hero_count % 3 == 0)
 				static_cast<ghost*>(&_monster)->steal_gold(_hero);
 			_hero.take_damage(_monster.deal_damage());
 		}
-		// Если монстр - дракон
+		// Р•СЃР»Рё РјРѕРЅСЃС‚СЂ - РґСЂР°РєРѕРЅ
 		else if (typeid(_monster) == typeid(dragon)) {
 			static_cast<dragon*>(&_monster)->rage(_hero);
 			if (hero_count % 6 == 0)
@@ -87,12 +87,12 @@ void fight(Hero& _hero, person& _monster, int mark) {
 			_hero.take_damage(_monster.deal_damage());
 		}
 	}
-	if (_hero.check_died()) { // Герой умер
+	if (_hero.check_died()) { // Р“РµСЂРѕР№ СѓРјРµСЂ
 		int num;
-		cout << "Вас убили. Варианты дальнейших действий:" << '\n';
-		cout << "1. Покинуть бой" << '\n';
-		cout << "2. Попробовать еще раз" << '\n';
-		cout << "Введите номер варианта: ";
+		cout << "Р’Р°СЃ СѓР±РёР»Рё. Р’Р°СЂРёР°РЅС‚С‹ РґР°Р»СЊРЅРµР№С€РёС… РґРµР№СЃС‚РІРёР№:" << '\n';
+		cout << "1. РџРѕРєРёРЅСѓС‚СЊ Р±РѕР№" << '\n';
+		cout << "2. РџРѕРїСЂРѕР±РѕРІР°С‚СЊ РµС‰Рµ СЂР°Р·" << '\n';
+		cout << "Р’РІРµРґРёС‚Рµ РЅРѕРјРµСЂ РІР°СЂРёР°РЅС‚Р°: ";
 		cin >> num;
 		_hero = temp_hero;
 		if (num == 1)
@@ -100,10 +100,10 @@ void fight(Hero& _hero, person& _monster, int mark) {
 		else if (num == 2)
 			fight(_hero, _monster, mark);
 		else
-			cout << "Такого варианта нет. Выберите один из предложенного списка, пожалуйста." << '\n';
+			cout << "РўР°РєРѕРіРѕ РІР°СЂРёР°РЅС‚Р° РЅРµС‚. Р’С‹Р±РµСЂРёС‚Рµ РѕРґРёРЅ РёР· РїСЂРµРґР»РѕР¶РµРЅРЅРѕРіРѕ СЃРїРёСЃРєР°, РїРѕР¶Р°Р»СѓР№СЃС‚Р°." << '\n';
 	}
-	else { // Монстр умер
-		cout << "Поздравляем с победой! Всё золото монстра теперь ваше." << '\n';
+	else { // РњРѕРЅСЃС‚СЂ СѓРјРµСЂ
+		cout << "РџРѕР·РґСЂР°РІР»СЏРµРј СЃ РїРѕР±РµРґРѕР№! Р’СЃС‘ Р·РѕР»РѕС‚Рѕ РјРѕРЅСЃС‚СЂР° С‚РµРїРµСЂСЊ РІР°С€Рµ." << '\n';
 		_hero.gold += _monster.gold;
 		return;
 	}
