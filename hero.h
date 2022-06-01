@@ -19,7 +19,7 @@ enum dir_gaze
 };
 
 // герой
-class Hero : public person
+class Hero: public person
 {
 private:
 	// указатель на функцию класса
@@ -85,7 +85,7 @@ public:
 
 	// получить координату y героя
 	int get_y();
-
+		
 	// получить  максимальное хп
 	int get_max_health();
 
