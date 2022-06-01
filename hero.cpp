@@ -125,6 +125,9 @@ void Hero::turn_right()
 	step_r = step_b;
 	step_b = step_l;
 	step_l = tmp_ptr;
+
+	direction_gaze = (direction_gaze + 1) % 4;
+	
 }
 
 // поворот влево 
@@ -137,16 +140,17 @@ void Hero::turn_left()
 	step_l = step_b;
 	step_b = step_r;
 	step_r = tmp_ptr;
+
+	direction_gaze = (direction_gaze == 1) ? 4 : direction_gaze -= 1;
 }
 
-<<<<<<< HEAD
 // вспомогательная структура для отмотки ходов 
 struct hero_and_mark
 {
 	Hero user;
 	int mark;
 };
-=======
+
 // получить  максимальное хп
 int Hero::get_max_health() {
 	return max_health;
@@ -174,4 +178,4 @@ int Hero::get_armor() {
 	return armor;
 }
 
->>>>>>> e9c99cbd0871a9038bfcb749881afebcdea01c60
+

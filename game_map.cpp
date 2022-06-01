@@ -68,6 +68,16 @@ void Game_map::set_cell(int x, int y, int value)
 	map[x][y] = value;
 }
 
+cell Game_map::get_obstacle()
+{
+	return obstacle;
+}
+
+void Game_map::set_obstacle(cell obstacle)
+{
+	this->obstacle = obstacle;
+}
+
 //// проверка правильности хода
 //void Game_map::check_correct_move(Hero &hero)
 //{
