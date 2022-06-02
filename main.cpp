@@ -8,10 +8,12 @@
 #include "monsters.h"
 #include "person.h"
 #include "draw.h"
-
+#include "string_processing.h"
+#include "stack.h"
 using namespace std;
 /* подключаем библиотеку GLUT */
 #include "C:\Temp\glut-3.7.6-bin\glut.h"
+
 /* начальная ширина и высота окна */
 GLint Width = 1300, Height = 1000;
 /* размер куба */
@@ -30,10 +32,22 @@ void Display(void)
 
     Hero user;
     Game_map map;
+    stack <Hero_and_mark> stack_turn;
+    map.mark_visited_cell(user.get_x(), user.get_y());
     draw_walk(user, map);
-
-
+    draw_mini_map(user, map, 0, 804);
     glFinish();
+    while (!user.check_died()) {
+
+
+        string_processing(user, map, stack_turn);
+        //cout << user.get_direction_gaze()<<' '<<user.get_x()<<' '<<user.get_y() << endl;
+        draw_walk(user, map);
+        draw_mini_map(user, map, 0, 804);
+        glFinish();
+    }
+
+
 }
 
 /* Функция вызывается при изменении размеров окна */

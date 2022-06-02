@@ -78,7 +78,7 @@ void draw_picture(int x, int y, const char* file_name) {
 
 }
 
-void draw_walk(Hero user, Game_map map) {
+void draw_walk(Hero user, Game_map& map) {
 	draw_picture(0, 0, "back.bmp");
 
 	//определяем где герой на карте и направление взора
@@ -103,9 +103,9 @@ void draw_walk(Hero user, Game_map map) {
 			draw_picture(530, 408, "third_block_fog.bmp");
 		else
 			if (map.get_cell(x + 3 * opposite_x, y + 3 * opposite_y) == unbreakable)
-				draw_picture(530, 408, "third_block_break.bmp");
-			else
 				draw_picture(530, 408, "third_block_unbreak.bmp");
+			else
+				draw_picture(530, 408, "third_block_break.bmp");
 	}
 
 	//строим клетку которая напротив игрока
@@ -114,17 +114,18 @@ void draw_walk(Hero user, Game_map map) {
 			&& map.get_cell(x + opposite_x + left_x, y + opposite_y + left_y) != breakable)
 			draw_picture(150, 114, "first_left_door.bmp");
 		if (map.get_cell(x + opposite_x + right_x, y + opposite_y + right_y) != unbreakable
-			&& map.get_cell(x + opposite_x + right_x, y + opposite_y + right_y) != breakable)
+			&& map.get_cell(x + opposite_x + right_x, y + opposite_y + right_y) != breakable) {
 			draw_picture(1000, 114, "first_right_door.bmp");
+		}
 
 		if (map.get_cell(x + 2 * opposite_x, y + 2 * opposite_y) != unbreakable && map.get_cell(x + 2 * opposite_x, y + 2 * opposite_y) != breakable) {
 			draw_picture(350, 268, "third_block_fog.bmp");//нужно прописать кто или что там стоит всех всех
 		}
 		else
-			if (map.get_cell(x + 2 * opposite_x, y + 2 * opposite_y) == 1)
-				draw_picture(350, 268, "second_block_break.bmp");
-			else
+			if (map.get_cell(x + 2 * opposite_x, y + 2 * opposite_y) == unbreakable)
 				draw_picture(350, 268, "second_block_unbreak.bmp");
+			else
+				draw_picture(350, 268, "second_block_break.bmp");
 	}
 
 	//строим клетку в которой стоим
@@ -132,20 +133,21 @@ void draw_walk(Hero user, Game_map map) {
 		draw_picture(100, 76, "third_block_fog.bmp");//нужно прописать кто или что там стоит всех всех
 	}
 	else
-		if (map.get_cell(x + opposite_x, y + opposite_y) == 1)
-			draw_picture(100, 76, "first_block_break.bmp");
-		else
+		if (map.get_cell(x + opposite_x, y + opposite_y) == unbreakable)
 			draw_picture(100, 76, "first_block_unbreak.bmp");
+		else
+			draw_picture(100, 76, "first_block_break.bmp");
 }
 
-void draw_mini_map(Hero user, Game_map map, int y, int x) {
+void draw_mini_map(Hero user, Game_map& map, int x, int y) {
 	int map_x = user.get_x(), map_y = user.get_y();
 	for (int i = 0; i < 7; i++)
 		for (int j = 0; j < 7; j++) {
-			if (!map.visited(map_x, map_y))
+
+			if (!map.visited(map_x + i - 3, map_y + j - 3))
 				glColor3ub(51, 51, 51);
 			else
-				switch (map.get_cell(map_x, map_y)) {
+				switch (map.get_cell(map_x + i - 3, map_y + j - 3)) {
 				case empty_cell: {
 					glColor3ub(255, 255, 0);
 					break;
@@ -154,14 +156,16 @@ void draw_mini_map(Hero user, Game_map map, int y, int x) {
 					glColor3ub(51, 204, 51);
 					break;
 				}
+				default: {glColor3ub(0, 0, 0); }
 				}
 			glBegin(GL_QUADS);
-			glVertex2f(x + 7 * i, y + 7 * j);
-			glVertex2f(x + 7 * (i + 1), y + 7 * j);
-			glVertex2f(x + 7 * (i + 1), y + 7 * (j + 1));
-			glVertex2f(x + 7 * i, y + 7 * (j + 1));
+			glVertex2f(x + 28 * i, y + 28 * j);
+			glVertex2f(x + 28 * (i + 1), y + 28 * j);
+			glVertex2f(x + 28 * (i + 1), y + 28 * (j + 1));
+			glVertex2f(x + 28 * i, y + 28 * (j + 1));
 			glEnd();
 		}
+
 }
 
 //рисует полоску хп

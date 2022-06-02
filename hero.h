@@ -99,5 +99,17 @@ public:
 	void turn_left();
 
 };
-
+struct Hero_and_mark {
+	Hero user;
+	int mark;
+	bool visited;
+	Hero_and_mark() {}
+	~Hero_and_mark() {}
+public:
+	void set(Hero& _user, int _mark, int _visited) {
+		user = _user;
+		mark = _mark;
+		visited = _visited;
+	}
+};
 #endif // _HERO_H_

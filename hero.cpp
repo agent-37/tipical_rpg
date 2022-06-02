@@ -25,7 +25,7 @@ Hero::Hero()
 	y = 1;*/
 	x = 10;
 	y = 10;
-	direction_gaze = 0;
+	direction_gaze = 1;
 	count_healing_poison = 0;
 	num_recovery_units_poison = 0;
 	set_person(1000, 100, 250, 1000, 50, 50, "hero.bmp");
@@ -136,6 +136,9 @@ void Hero::turn_right()
 	step_r = step_b;
 	step_b = step_l;
 	step_l = tmp_ptr;
+	direction_gaze = (direction_gaze + 1) % 4;
+	if (direction_gaze == 0)
+		direction_gaze = 4;
 }
 
 // поворот влево 
@@ -148,6 +151,9 @@ void Hero::turn_left()
 	step_l = step_b;
 	step_b = step_r;
 	step_r = tmp_ptr;
+	direction_gaze = (direction_gaze + 3) % 4;
+	if (direction_gaze == 0)
+		direction_gaze = 4;
 }
 
 // получить  максимальное хп

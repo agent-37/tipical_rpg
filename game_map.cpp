@@ -85,7 +85,6 @@ int Game_map::get_size_map()
 // получение содержимого клетки
 int Game_map::get_cell(int x, int y)
 {
-
 	return map[x][y];
 }
 
