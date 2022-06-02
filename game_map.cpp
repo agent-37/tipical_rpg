@@ -67,6 +67,8 @@ void Game_map::set_cell(int x, int y, int value)
 	map[x][y] = value;
 }
 
+
+
 //// проверка правильности хода
 //void Game_map::check_correct_move(Hero &hero)
 //{
