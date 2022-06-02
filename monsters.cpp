@@ -6,13 +6,13 @@
 #include <time.h>
 using namespace std;
 
-// Ослабление брони героя
+// РћСЃР»Р°Р±Р»РµРЅРёРµ Р±СЂРѕРЅРё РіРµСЂРѕСЏ
 void help::heavy_blow(Hero& _hero) {
 	_hero.armor -= 50;
 	_hero.take_damage(deal_damage());
 }
 
-// Регенереция огра
+// Р РµРіРµРЅРµСЂРµС†РёСЏ РѕРіСЂР°
 void ogre::regeneration() {
 	int num_of_regeneration = 10;
 	if (health + num_of_regeneration <= max_health)
@@ -21,16 +21,16 @@ void ogre::regeneration() {
 		health = max_health;
 }
 
-// Проклятые стрелы понижают обычное и максимальное здоровье героя
+// РџСЂРѕРєР»СЏС‚С‹Рµ СЃС‚СЂРµР»С‹ РїРѕРЅРёР¶Р°СЋС‚ РѕР±С‹С‡РЅРѕРµ Рё РјР°РєСЃРёРјР°Р»СЊРЅРѕРµ Р·РґРѕСЂРѕРІСЊРµ РіРµСЂРѕСЏ
 void skeleton::cursed_arrows(Hero& _hero) {
 		_hero.take_damage(deal_damage());
 		if (!_hero.check_died())
 			_hero.max_health -= damage;
 }
 
-// Возможность призрака пропустить удар
+// Р’РѕР·РјРѕР¶РЅРѕСЃС‚СЊ РїСЂРёР·СЂР°РєР° РїСЂРѕРїСѓСЃС‚РёС‚СЊ СѓРґР°СЂ
 bool ghost::invisibility() {
-	// Рандомно выбираем 0 или 1 - шанс того, что призрак пропустит удар
+	// Р Р°РЅРґРѕРјРЅРѕ РІС‹Р±РёСЂР°РµРј 0 РёР»Рё 1 - С€Р°РЅСЃ С‚РѕРіРѕ, С‡С‚Рѕ РїСЂРёР·СЂР°Рє РїСЂРѕРїСѓСЃС‚РёС‚ СѓРґР°СЂ
 	srand(time(NULL));
 	int chance = rand() % 2;
 	if (chance == 1)
@@ -38,7 +38,7 @@ bool ghost::invisibility() {
 	return 0;
 }
 
-// Кража золота героя
+// РљСЂР°Р¶Р° Р·РѕР»РѕС‚Р° РіРµСЂРѕСЏ
 void ghost::steal_gold(Hero& _hero) {
 	int num_of_stealing = 50;
 	if (_hero.gold - num_of_stealing >= 0)
