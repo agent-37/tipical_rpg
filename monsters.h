@@ -3,50 +3,48 @@
 #include "person.h"
 #include "Hero.h"
 
-// РљР»Р°СЃСЃ РѕРіСЂР°
-class ogre : public person {
+class help : public person {
 public:
-	ogre() { set_person(1000, 300, 200, 1000, 150, 50, "ogre.bmp"); }
-	// Р РµРіРµРЅРµСЂРµС†РёСЏ РѕРіСЂР°
-	void regeneration();
-	// РћСЃР»Р°Р±Р»РµРЅРёРµ Р±СЂРѕРЅРё РіРµСЂРѕСЏ
-	void heavy_blow(Hero&);
-	~ogre() {}
+	// Ослабление брони героя
+	void heavy_blow(Hero& _hero);
 };
 
-// РљР»Р°СЃСЃ СЃРєРµР»РµС‚Р°
+// Класс огра
+class ogre : public help {
+public:
+	ogre() { set_person(1000, 300, 200, 1000, 150, 50, "ogre.bmp"); }
+	// Регенереция огра
+	void regeneration();
+	virtual ~ogre() {}
+};
+
+// Класс скелета
 class skeleton : public person {
 public:
 	skeleton() { set_person(500, 200, 50, 500, 150, 30, "skeleton.bmp"); }
-	// РџСЂРѕРєР»СЏС‚С‹Рµ СЃС‚СЂРµР»С‹ РїРѕРЅРёР¶Р°СЋС‚ РѕР±С‹С‡РЅРѕРµ Рё РјР°РєСЃРёРјР°Р»СЊРЅРѕРµ Р·РґРѕСЂРѕРІСЊРµ РіРµСЂРѕСЏ
-	void cursed_arrows(Hero&);
+	// Проклятые стрелы понижают обычное и максимальное здоровье героя
+	void cursed_arrows(Hero& _hero);
 	~skeleton() {}
 };
 
-
-
-// РљР»Р°СЃСЃ РїСЂРёР·СЂР°РєР°
+// Класс призрака
 class ghost : public person {
 public:
 	ghost() { set_person(500, 200, 50, 500, 150, 30, "ghost.bmp"); }
-	// Р’РѕР·РјРѕР¶РЅРѕСЃС‚СЊ РїСЂРёР·СЂР°РєР° РїСЂРѕРїСѓСЃС‚РёС‚СЊ СѓРґР°СЂ
+	// Возможность призрака пропустить удар
 	bool invisibility();
-	// РљСЂР°Р¶Р° Р·РѕР»РѕС‚Р° РіРµСЂРѕСЏ
-	void steal_gold(Hero&);
+	// Кража золота героя
+	void steal_gold(Hero& _hero);
 	~ghost() {}
 };
 
-// РљР»Р°СЃСЃ РґСЂР°РєРѕРЅР° (Р±РѕСЃСЃР°)
-class dragon : public person {
+// Класс дракона (босса)
+class dragon : public help {
 public:
 	dragon() { set_person(2000, 500, 500, 2000, 3000, 60, "dragon.bmp"); }
-	// РћСЃР»Р°Р±Р»РµРЅРёРµ Р±СЂРѕРЅРё РіРµСЂРѕСЏ
-	friend void ogre::heavy_blow(Hero&);
-	// Р­С„С„РµРєС‚ РІРѕР·РіРѕСЂР°РЅРёСЏ - РєР°Р¶РґС‹Рµ 1.5 СЃРµРєСѓРЅРґС‹ РіРµСЂРѕР№ РїРѕР»СѓС‡Р°РµС‚ СѓСЂРѕРЅ РѕС‚ РѕРіРЅСЏ (РІСЃРµРіРѕ 4 СѓРґР°СЂР°)
-	void decomposition(Hero&);
-	// РџРѕРІС‹С€РµРЅРёРµ СѓСЂРѕРЅР° РґСЂР°РєРѕРЅР°
-	void rage(Hero& _hero) { if (_hero.get_gold() >= gold) damage += 200; }
-	// Р”СЂР°РєРѕРЅ РІР·Р»РµС‚Р°РµС‚ - Р·Р°С‚СЂСѓРґРЅРµРЅРёРµ РїРѕРїР°РґР°РЅРёСЏ РІ РЅРµРіРѕ
+	// Повышение урона дракона
+	void rage(Hero& _hero) { if (_hero.gold >= gold) damage += 200; }
+	// Дракон взлетает - затруднение попадания в него
 	void flight() { hit_chance = 30; }
 	~dragon() {}
 };
