@@ -94,11 +94,21 @@ void draw_walk(Hero user, Game_map& map) {
 
 	if ((x + 3 * opposite_x) >= 0 && (x + 3 * opposite_x) < size_map && (y + 3 * opposite_y) >= 0 && (y + 3 * opposite_y) < size_map) {
 		if (map.get_cell(x + 2 * opposite_x + left_x, y + 2 * opposite_y + left_y) != unbreakable
-			&& map.get_cell(x + 2 * opposite_x + left_x, y + 2 * opposite_y + left_y) != breakable)
+			&& map.get_cell(x + 2 * opposite_x + left_x, y + 2 * opposite_y + left_y) != breakable
+			&& map.get_cell(x + 2 * opposite_x, y + 2 * opposite_y) != unbreakable
+			&& map.get_cell(x + 2 * opposite_x, y + 2 * opposite_y) != breakable
+			&& map.get_cell(x +  opposite_x, y +  opposite_y) != unbreakable
+			&& map.get_cell(x +  opposite_x, y +  opposite_y) != breakable)
 			draw_picture(420, 322, "second_left_door.bmp");
+
 		if (map.get_cell(x + 2 * opposite_x + right_x, y + 2 * opposite_y + right_y) != unbreakable
-			&& map.get_cell(x + 2 * opposite_x + right_x, y + 2 * opposite_y + right_y) != breakable)
+			&& map.get_cell(x + 2 * opposite_x + right_x, y + 2 * opposite_y + right_y) != breakable
+			&& map.get_cell(x + 2 * opposite_x, y + 2 * opposite_y) != unbreakable
+			&& map.get_cell(x + 2 * opposite_x, y + 2 * opposite_y) != breakable
+			&& map.get_cell(x + opposite_x, y + opposite_y) != unbreakable
+			&& map.get_cell(x + opposite_x, y + opposite_y) != breakable)
 			draw_picture(800, 322, "second_right_door.bmp");
+
 		if (map.get_cell(x + 3 * opposite_x, y + 3 * opposite_y) != unbreakable && map.get_cell(x + 3 * opposite_x, y + 3 * opposite_y) != breakable)
 			draw_picture(530, 408, "third_block_fog.bmp");
 		else
@@ -111,10 +121,14 @@ void draw_walk(Hero user, Game_map& map) {
 	//строим клетку которая напротив игрока
 	if ((x + 2 * opposite_x) >= 0 && (x + 2 * opposite_x) < size_map && (y + 2 * opposite_y) >= 0 && (y + 2 * opposite_y) < size_map) {
 		if (map.get_cell(x + opposite_x + left_x, y + opposite_y + left_y) != unbreakable
-			&& map.get_cell(x + opposite_x + left_x, y + opposite_y + left_y) != breakable)
+			&& map.get_cell(x + opposite_x + left_x, y + opposite_y + left_y) != breakable
+			&& map.get_cell(x + opposite_x, y + opposite_y) != unbreakable
+			&& map.get_cell(x + opposite_x, y + opposite_y) != breakable)
 			draw_picture(150, 114, "first_left_door.bmp");
 		if (map.get_cell(x + opposite_x + right_x, y + opposite_y + right_y) != unbreakable
-			&& map.get_cell(x + opposite_x + right_x, y + opposite_y + right_y) != breakable) {
+			&& map.get_cell(x + opposite_x + right_x, y + opposite_y + right_y) != breakable
+			&& map.get_cell(x + opposite_x, y + opposite_y) != unbreakable
+			&& map.get_cell(x + opposite_x, y + opposite_y) != breakable) {
 			draw_picture(1000, 114, "first_right_door.bmp");
 		}
 
