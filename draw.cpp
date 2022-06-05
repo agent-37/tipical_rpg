@@ -10,7 +10,7 @@
 #include "game_map.h"
 
 using namespace std;
-enum file_monsters { empty_cell = 0, unbreakable = 1, breakable = 2, heep_gold = 3, ogre = 4, skeleton = 5, ghost = 6, dragon = 7, traeder = 8 };
+enum file_monsters { empty_cell = 0, unbreakable = 1, breakable = 2, heep_gold = 3, ogre = 4, skeleton = 5, ghost = 6, dragon = 7, trader = 8 };
 // 0 - пусто
 // 1 - камень (неубираемое препядствие)
 // 2 - дерево (убираемое препядствие)
@@ -78,6 +78,23 @@ void draw_picture(int x, int y, const char* file_name) {
 
 }
 
+void draw_picture_hrom(int x, int y, const char* file_name) {
+	SetConsoleCP(1251);
+	SetConsoleOutputCP(1251);
+	bitmap picture(file_name);
+	int h = picture.height(), w = picture.width();
+	for (int i = 0; i < w; i++)
+		for (int j = 0; j < h; j++) {
+			bmp_rgb pixel = picture.get(j, i);
+			if ((int)pixel.red() != 255 || (int)pixel.green() != 255 || (int)pixel.blue() != 254) {
+				glColor3ub((int)pixel.red(), (int)pixel.green(), (int)pixel.blue());
+				glBegin(GL_POINTS);
+				glVertex2f(x + (i), y + (h - j));
+				glEnd();
+			}
+		}
+
+}
 void draw_walk(Hero user, Game_map& map) {
 	draw_picture(0, 0, "back.bmp");
 
@@ -91,22 +108,20 @@ void draw_walk(Hero user, Game_map& map) {
 	determin_the_direction_construction(view, opposite_x, opposite_y, left_x, left_y, right_x, right_y);
 	int  size_map = map.get_size_map();
 	//строим клетку (которая находится через 1 от игрока)
-
-	if ((x + 3 * opposite_x) >= 0 && (x + 3 * opposite_x) < size_map && (y + 3 * opposite_y) >= 0 && (y + 3 * opposite_y) < size_map) {
+	if ((x + 3 * opposite_x) >= 0 && (x + 3 * opposite_x) < size_map
+		&& (y + 3 * opposite_y) >= 0 && (y + 3 * opposite_y) < size_map
+		&& map.get_cell(x + 2 * opposite_x, y + 2 * opposite_y) != unbreakable
+		&& map.get_cell(x + 2 * opposite_x, y + 2 * opposite_y) != breakable
+		&& map.get_cell(x + opposite_x, y + opposite_y) != unbreakable
+		&& map.get_cell(x + opposite_x, y + opposite_y) != breakable)
+	{
 		if (map.get_cell(x + 2 * opposite_x + left_x, y + 2 * opposite_y + left_y) != unbreakable
 			&& map.get_cell(x + 2 * opposite_x + left_x, y + 2 * opposite_y + left_y) != breakable
-			&& map.get_cell(x + 2 * opposite_x, y + 2 * opposite_y) != unbreakable
-			&& map.get_cell(x + 2 * opposite_x, y + 2 * opposite_y) != breakable
-			&& map.get_cell(x +  opposite_x, y +  opposite_y) != unbreakable
-			&& map.get_cell(x +  opposite_x, y +  opposite_y) != breakable)
+			)
 			draw_picture(420, 322, "second_left_door.bmp");
 
 		if (map.get_cell(x + 2 * opposite_x + right_x, y + 2 * opposite_y + right_y) != unbreakable
-			&& map.get_cell(x + 2 * opposite_x + right_x, y + 2 * opposite_y + right_y) != breakable
-			&& map.get_cell(x + 2 * opposite_x, y + 2 * opposite_y) != unbreakable
-			&& map.get_cell(x + 2 * opposite_x, y + 2 * opposite_y) != breakable
-			&& map.get_cell(x + opposite_x, y + opposite_y) != unbreakable
-			&& map.get_cell(x + opposite_x, y + opposite_y) != breakable)
+			&& map.get_cell(x + 2 * opposite_x + right_x, y + 2 * opposite_y + right_y) != breakable)
 			draw_picture(800, 322, "second_right_door.bmp");
 
 		if (map.get_cell(x + 3 * opposite_x, y + 3 * opposite_y) != unbreakable && map.get_cell(x + 3 * opposite_x, y + 3 * opposite_y) != breakable)
@@ -119,21 +134,43 @@ void draw_walk(Hero user, Game_map& map) {
 	}
 
 	//строим клетку которая напротив игрока
-	if ((x + 2 * opposite_x) >= 0 && (x + 2 * opposite_x) < size_map && (y + 2 * opposite_y) >= 0 && (y + 2 * opposite_y) < size_map) {
+	if ((x + 2 * opposite_x) >= 0 && (x + 2 * opposite_x) < size_map
+		&& (y + 2 * opposite_y) >= 0 && (y + 2 * opposite_y) < size_map
+		&& map.get_cell(x + opposite_x, y + opposite_y) != unbreakable
+		&& map.get_cell(x + opposite_x, y + opposite_y) != breakable) {
 		if (map.get_cell(x + opposite_x + left_x, y + opposite_y + left_y) != unbreakable
-			&& map.get_cell(x + opposite_x + left_x, y + opposite_y + left_y) != breakable
-			&& map.get_cell(x + opposite_x, y + opposite_y) != unbreakable
-			&& map.get_cell(x + opposite_x, y + opposite_y) != breakable)
+			&& map.get_cell(x + opposite_x + left_x, y + opposite_y + left_y) != breakable)
 			draw_picture(150, 114, "first_left_door.bmp");
 		if (map.get_cell(x + opposite_x + right_x, y + opposite_y + right_y) != unbreakable
-			&& map.get_cell(x + opposite_x + right_x, y + opposite_y + right_y) != breakable
-			&& map.get_cell(x + opposite_x, y + opposite_y) != unbreakable
-			&& map.get_cell(x + opposite_x, y + opposite_y) != breakable) {
+			&& map.get_cell(x + opposite_x + right_x, y + opposite_y + right_y) != breakable)
 			draw_picture(1000, 114, "first_right_door.bmp");
-		}
 
 		if (map.get_cell(x + 2 * opposite_x, y + 2 * opposite_y) != unbreakable && map.get_cell(x + 2 * opposite_x, y + 2 * opposite_y) != breakable) {
-			draw_picture(350, 268, "third_block_fog.bmp");//нужно прописать кто или что там стоит всех всех
+			switch (map.get_cell(x + 2 * opposite_x, y + 2 * opposite_y))
+			{
+			case (ogre): {
+				draw_picture_hrom(470, 322, "ogre_mini.bmp");
+				break;
+			}
+			case (dragon): {
+				draw_picture_hrom(470, 322, "dragon_mini.bmp");
+				break;
+			}
+			case (skeleton): {
+				draw_picture_hrom(470, 322, "skeleton_mini.bmp");
+				break;
+			}
+			case (ghost): {
+				draw_picture_hrom(470, 322, "ghost_mini.bmp");
+				break;
+			}
+			case (trader): {
+				draw_picture_hrom(470, 322, "trader_mini.bmp");
+				break;
+			}
+
+
+			}
 		}
 		else
 			if (map.get_cell(x + 2 * opposite_x, y + 2 * opposite_y) == unbreakable)
@@ -144,7 +181,30 @@ void draw_walk(Hero user, Game_map& map) {
 
 	//строим клетку в которой стоим
 	if (map.get_cell(x + opposite_x, y + opposite_y) != unbreakable && map.get_cell(x + opposite_x, y + opposite_y) != breakable) {
-		draw_picture(100, 76, "third_block_fog.bmp");//нужно прописать кто или что там стоит всех всех
+
+		switch (map.get_cell(x + opposite_x, y + opposite_y))
+		{
+		case (ogre): {
+			draw_picture_hrom(650, 130, "ogre.bmp");
+			break;
+		}
+		case (dragon): {
+			draw_picture_hrom(650, 130, "dragon.bmp");
+			break;
+		}
+		case (ghost): {
+			draw_picture_hrom(650, 130, "ghost.bmp");
+			break;
+		}
+		case (skeleton): {
+			draw_picture_hrom(650, 130, "skeleton.bmp");
+			break;
+		}
+		case (trader): {
+			draw_picture_hrom(650, 130, "trader.bmp");
+			break;
+		}
+		}
 	}
 	else
 		if (map.get_cell(x + opposite_x, y + opposite_y) == unbreakable)
@@ -166,7 +226,7 @@ void draw_mini_map(Hero user, Game_map& map, int x, int y) {
 					glColor3ub(255, 255, 0);
 					break;
 				}
-				case traeder: {
+				case trader: {
 					glColor3ub(51, 204, 51);
 					break;
 				}
@@ -205,6 +265,7 @@ void draw_fight(Hero user, person monster, int mark) {
 	//высвечиваются полоски хп с макимумом на заднем фоне
 	int hero_hp = user.get_health(), monster_hp = monster.health;
 	int max_hero_hp = user.get_max_health(), max_monster_hp = monster.health;
+
 
 	draw_picture(100, 50, "hero.bmp");
 

@@ -5,6 +5,8 @@
 #include "person.h"
 //рисует просто картинку
 void draw_picture(int y, int x, char* file_name);
+//рисует просто картинку(без 1 цвета)
+void draw_picture_hrom(int y, int x, char* file_name);
 //рисует миникарту
 void draw_mini_map(Hero user, Game_map& map, int y, int x);
 //рисование боя

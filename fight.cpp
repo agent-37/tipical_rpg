@@ -43,7 +43,7 @@ void hero_punch_variants(Hero& _hero, person& _monster) {
 }
 
 // Бой с монстром
-void fight(Hero& _hero, person& _monster, int mark) {
+void fight(Hero& _hero, person& _monster) {
 	Hero temp_hero = _hero; // Запоминаем характеристики героя до начала боя
 	int hero_count = 0; // Кол-во ударов героя
 	while (!_hero.check_died() && !_monster.check_died()) {
@@ -98,7 +98,7 @@ void fight(Hero& _hero, person& _monster, int mark) {
 		if (num == 1)
 			return;
 		else if (num == 2)
-			fight(_hero, _monster, mark);
+			fight(_hero, _monster);
 		else
 			cout << "Такого варианта нет. Выберите один из предложенного списка, пожалуйста." << '\n';
 	}

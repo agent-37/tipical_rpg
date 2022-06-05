@@ -13,13 +13,8 @@
 #include "person.h" 
 using namespace std;
 
-enum dir_gaze
-{
-	forward, right, back, left, tmp_viev
-};
-
 // герой
-class Hero: public person
+class Hero : public person
 {
 private:
 	// указатель на функцию класса
@@ -33,7 +28,6 @@ private:
 	int count_healing_poison; // количество зелья
 	int num_recovery_units_poison; // количество восполняемого HP
 	Inventory inventory_user;
-	dir_gaze view;
 
 public:
 	Hero();
@@ -85,7 +79,7 @@ public:
 
 	// получить координату y героя
 	int get_y();
-		
+
 	// получить  максимальное хп
 	int get_max_health();
 
