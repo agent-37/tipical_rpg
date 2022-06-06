@@ -1,5 +1,4 @@
-﻿#pragma once
-#ifndef _HERO_H_
+﻿#ifndef _HERO_H_
 #define _HERO_H_
 
 #include <iostream> 
@@ -12,6 +11,11 @@
 #include "inventory.h"
 #include "person.h" 
 using namespace std;
+
+enum dir_gaze
+{
+	forward, right, back, left, tmp_viev
+};
 
 // герой
 class Hero : public person
@@ -28,6 +32,7 @@ private:
 	int count_healing_poison; // количество зелья
 	int num_recovery_units_poison; // количество восполняемого HP
 	Inventory inventory_user;
+	dir_gaze view;
 
 public:
 	Hero();
@@ -99,6 +104,7 @@ public:
 	void turn_left();
 
 };
+
 struct Hero_and_mark {
 	Hero user;
 	int mark;

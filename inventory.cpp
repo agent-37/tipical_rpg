@@ -1,4 +1,5 @@
 ﻿#include <iostream> 
+#include <iostream> 
 #include <algorithm> 
 #include <set> 
 #include <string> 
@@ -10,26 +11,21 @@
 #include "hero.h" 
 using namespace std;
 
-inline void Inventory::show_trader_artifacts()
-{
-	for (multiset <string> ::iterator it_trader_inventory = trader_inventory.begin(); it_trader_inventory != trader_inventory.end(); ++it_trader_inventory)
-		cout << *it_trader_inventory << endl;
-}
-
 // показ надтых артефактов
 inline void Inventory::show_weared_artifacts()
 {
-	for (multiset <string> ::iterator it_weared = weared_inventory.begin(); it_weared != weared_inventory.end(); ++it_weared)
-		cout << *it_weared << endl;
+	for (const auto& el : weared_inventory)
+		cout << el << endl;
 }
 
 // показ снятых артифактов
 inline void Inventory::show_not_weared_artifacts()
 {
-	for (multiset <string> ::iterator it_not_weared = weared_inventory.begin(); it_not_weared != weared_inventory.end(); ++it_not_weared)
-		cout << *it_not_weared << endl;
+	for (const auto& el : not_weared_inventory)
+		cout << el << endl;
 }
 
+// взять артифакт у торговца
 inline bool Inventory::take_artifact_trader(string str)
 {
 	if (trader_inventory.size() > 0 && trader_inventory.find(str) != trader_inventory.end())
@@ -70,4 +66,3 @@ inline bool Inventory::put_on_artifact(string str)
 
 /* хождение по полю (собирать монеты, артифакты; встреча с монстрами, с торговцами,
 их несколько; убрать препятствие, сам подумаю: есть неубирамые, есть убираемые) */
-

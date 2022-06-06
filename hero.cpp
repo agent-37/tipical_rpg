@@ -182,4 +182,3 @@ void Hero::set_max_health(int x) {
 int Hero::get_armor() {
 	return armor;
 }
-
