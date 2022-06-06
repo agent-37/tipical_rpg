@@ -9,6 +9,7 @@
 #include <fstream>
 #include <Windows.h>
 #include "person.h" 
+#include "trader.h" 
 // не стоит подключать сюдя #include "hero.h", так как возникает ошибка
 
 using namespace std;
@@ -17,9 +18,6 @@ using namespace std;
 class Inventory : public Trader
 {
 public:
-	// показатьартефакты торговца
-	void show_trader_artifacts();
-
 	// показать надтые артефакты
 	void show_weared_artifacts();
 

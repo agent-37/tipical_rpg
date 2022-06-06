@@ -21,7 +21,7 @@ public:
 	// показать инвернтарь торговца
 	void show_inventory_trader();
 
-private:
+protected:
 	// мультисет артифактов торговца
 	multiset <string> trader_inventory;
 
@@ -30,7 +30,6 @@ private:
 
 	// прибыль продавца
 	int revenue;
-
 };
 
 
