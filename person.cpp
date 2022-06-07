@@ -3,6 +3,7 @@
 #include <random>
 #include <stdlib.h>
 #include <time.h>
+#include <algorithm>
 using namespace std;
 //процедура задает характеристики кому-то
 void person::set_person(int _health, int _damage, int _armor, int _max_health, int _gold, int _hit_chance, string _file_name) {
@@ -17,7 +18,7 @@ void person::set_person(int _health, int _damage, int _armor, int _max_health, i
 
 //функция получения урона
 void person::take_damage(int damage) {
-	health -= damage;
+	health -= max(damage - armor, 0);
 }
 
 //проверка, что персонаж умер

@@ -11,65 +11,88 @@ void string_processing(Hero& user, Game_map& map, stack<Hero_and_mark>& stack_tu
 	switch (map.get_cell(user.get_x(), user.get_y())) {
 	case(_ogre): {
 		ogre ovbor;
-		fight(user, ovbor);
+		fight(user, ovbor, 4);
 		break;
 	}
 	case(_skeleton): {
 		skeleton ovbor;
-		fight(user, ovbor); break;
+		fight(user, ovbor, 5);
+		break;
 	}
 	case(_ghost): {
 		ghost ovbor;
-		fight(user, ovbor);
+		fight(user, ovbor, 6);
 		break;
 	}
 	case(_dragon): {
 		dragon ovbor;
-		fight(user, ovbor);
+		fight(user, ovbor, 7);
 		break;
 	}
 				 //	case(_traeder): {}
 
 	}
 	while (cin >> s) {
-		if (s == "step") {
-			while (cin >> s) {
-				if (s == "forward" || s == "left" || s == "right" || s == "back") {
-					Hero help = user;
-					if (s == "forward")
-						user.call_step_f();
-					if (s == "left")
-						user.call_step_l();
-					if (s == "right")
-						user.call_step_r();
-					if (s == "back")
-						user.call_step_b();
-					int x = user.get_x(), y = user.get_y();
-					if (map.get_cell(x, y) == unbreakable || map.get_cell(x, y) == breakable) {
-						user = help;
+		if (!user.check_died()) {
+			if (s == "step") {
+				while (cin >> s) {
+					if (s == "forward" || s == "left" || s == "right" || s == "back") {
+						Hero help = user;
+						if (s == "forward")
+							user.call_step_f();
+						if (s == "left")
+							user.call_step_l();
+						if (s == "right")
+							user.call_step_r();
+						if (s == "back")
+							user.call_step_b();
+						int x = user.get_x(), y = user.get_y();
+						if (map.get_cell(x, y) == unbreakable || map.get_cell(x, y) == breakable) {
+							user = help;
+							return;
+						}
+						Hero_and_mark stack_el;
+						stack_el.set(help, map.get_cell(help.get_x(), help.get_y()), map.visited(help.get_x(), help.get_y()));
+						stack_turn.push(stack_el);
+						map.mark_visited_cell(x, y);
 						return;
 					}
-					Hero_and_mark stack_el;
-					stack_el.set(help, map.get_cell(help.get_x(), help.get_y()), map.visited(help.get_x(), help.get_y()));
-					stack_turn.push(stack_el);
-					map.mark_visited_cell(x, y);
+				}
+			}
+			if (s == "turn") {
+				while (cin >> s) {
+					if (s == "right") {
+						user.turn_right();
+						return;
+					}
+					if (s == "left") {
+						user.turn_left();
+						return;
+					}
+				}
 
-					return;
+			}
+
+			if (s == "use") {
+				while (cin >> s) {
+					if (s == "potion") {
+						user.healing_poison();
+						return;
+					}
+				}
+			}
+			if (s == "show") {
+				while (cin >> s) {
+					if (s == "stats") {
+						user.show_characteristics();
+						return;
+					}
 				}
 			}
 		}
-		if (s == "turn") {
-			while (cin >> s) {
-				if (s == "right") {
-					user.turn_right();
-					return;
-				}
-				if (s == "left") {
-					user.turn_left();
-					return;
-				}
-			}
-
+		if (s == "remove") {
+			Hero_and_mark help;
+			stack_turn.front(help);
 		}
 	}
 

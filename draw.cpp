@@ -8,9 +8,10 @@
 #include "hero.h"
 #include "person.h"
 #include "game_map.h"
-
+#include "monsters.h"
 using namespace std;
-enum file_monsters { empty_cell = 0, unbreakable = 1, breakable = 2, heep_gold = 3, ogre = 4, skeleton = 5, ghost = 6, dragon = 7, trader = 8 };
+
+enum file_monsters { empty_cell = 0, unbreakable = 1, breakable = 2, heep_gold = 3, _ogre = 4, _skeleton = 5, _ghost = 6, _dragon = 7, _trader = 8 };
 // 0 - пусто
 // 1 - камень (неубираемое препядствие)
 // 2 - дерево (убираемое препядствие)
@@ -86,7 +87,7 @@ void draw_picture_hrom(int x, int y, const char* file_name) {
 	for (int i = 0; i < w; i++)
 		for (int j = 0; j < h; j++) {
 			bmp_rgb pixel = picture.get(j, i);
-			if ((int)pixel.red() != 255 || (int)pixel.green() != 255 || (int)pixel.blue() != 254) {
+			if ((int)pixel.red() != 0 || (int)pixel.green() != 0 || (int)pixel.blue() != 255) {
 				glColor3ub((int)pixel.red(), (int)pixel.green(), (int)pixel.blue());
 				glBegin(GL_POINTS);
 				glVertex2f(x + (i), y + (h - j));
@@ -118,11 +119,11 @@ void draw_walk(Hero user, Game_map& map) {
 		if (map.get_cell(x + 2 * opposite_x + left_x, y + 2 * opposite_y + left_y) != unbreakable
 			&& map.get_cell(x + 2 * opposite_x + left_x, y + 2 * opposite_y + left_y) != breakable
 			)
-			draw_picture(420, 322, "second_left_door.bmp");
+			draw_picture_hrom(420, 322, "second_left_door.bmp");
 
 		if (map.get_cell(x + 2 * opposite_x + right_x, y + 2 * opposite_y + right_y) != unbreakable
 			&& map.get_cell(x + 2 * opposite_x + right_x, y + 2 * opposite_y + right_y) != breakable)
-			draw_picture(800, 322, "second_right_door.bmp");
+			draw_picture_hrom(800, 322, "second_right_door.bmp");
 
 		if (map.get_cell(x + 3 * opposite_x, y + 3 * opposite_y) != unbreakable && map.get_cell(x + 3 * opposite_x, y + 3 * opposite_y) != breakable)
 			draw_picture(530, 408, "third_block_fog.bmp");
@@ -145,31 +146,30 @@ void draw_walk(Hero user, Game_map& map) {
 			&& map.get_cell(x + opposite_x + right_x, y + opposite_y + right_y) != breakable)
 			draw_picture(1000, 114, "first_right_door.bmp");
 
+
 		if (map.get_cell(x + 2 * opposite_x, y + 2 * opposite_y) != unbreakable && map.get_cell(x + 2 * opposite_x, y + 2 * opposite_y) != breakable) {
 			switch (map.get_cell(x + 2 * opposite_x, y + 2 * opposite_y))
 			{
-			case (ogre): {
+			case (_ogre): {
 				draw_picture_hrom(470, 322, "ogre_mini.bmp");
 				break;
 			}
-			case (dragon): {
+			case (_dragon): {
 				draw_picture_hrom(470, 322, "dragon_mini.bmp");
 				break;
 			}
-			case (skeleton): {
+			case (_skeleton): {
 				draw_picture_hrom(470, 322, "skeleton_mini.bmp");
 				break;
 			}
-			case (ghost): {
+			case (_ghost): {
 				draw_picture_hrom(470, 322, "ghost_mini.bmp");
 				break;
 			}
-			case (trader): {
+			case (_trader): {
 				draw_picture_hrom(470, 322, "trader_mini.bmp");
 				break;
 			}
-
-
 			}
 		}
 		else
@@ -184,23 +184,24 @@ void draw_walk(Hero user, Game_map& map) {
 
 		switch (map.get_cell(x + opposite_x, y + opposite_y))
 		{
-		case (ogre): {
+		case (_ogre): {
 			draw_picture_hrom(650, 130, "ogre.bmp");
 			break;
 		}
-		case (dragon): {
+		case (_dragon): {
 			draw_picture_hrom(650, 130, "dragon.bmp");
+
 			break;
 		}
-		case (ghost): {
+		case (_ghost): {
 			draw_picture_hrom(650, 130, "ghost.bmp");
 			break;
 		}
-		case (skeleton): {
+		case (_skeleton): {
 			draw_picture_hrom(650, 130, "skeleton.bmp");
 			break;
 		}
-		case (trader): {
+		case (_trader): {
 			draw_picture_hrom(650, 130, "trader.bmp");
 			break;
 		}
@@ -217,7 +218,6 @@ void draw_mini_map(Hero user, Game_map& map, int x, int y) {
 	int map_x = user.get_x(), map_y = user.get_y();
 	for (int i = 0; i < 7; i++)
 		for (int j = 0; j < 7; j++) {
-
 			if (!map.visited(map_x + i - 3, map_y + j - 3))
 				glColor3ub(51, 51, 51);
 			else
@@ -226,7 +226,7 @@ void draw_mini_map(Hero user, Game_map& map, int x, int y) {
 					glColor3ub(255, 255, 0);
 					break;
 				}
-				case trader: {
+				case _trader: {
 					glColor3ub(51, 204, 51);
 					break;
 				}
@@ -244,6 +244,7 @@ void draw_mini_map(Hero user, Game_map& map, int x, int y) {
 
 //рисует полоску хп
 void draw_hp(int x, int y, int health, int max_health) {
+	cout << health << ' ' << max_health << endl;
 	glColor3ub(255, 255, 255);
 	glBegin(GL_QUADS);
 	glVertex2f(x, y);
@@ -260,32 +261,34 @@ void draw_hp(int x, int y, int health, int max_health) {
 	glEnd();
 }
 
-void draw_fight(Hero user, person monster, int mark) {
+void draw_fight(Hero user, person& monster, int mark) {
 	draw_picture(0, 0, "back_fight.bmp");
+
 	//высвечиваются полоски хп с макимумом на заднем фоне
 	int hero_hp = user.get_health(), monster_hp = monster.health;
 	int max_hero_hp = user.get_max_health(), max_monster_hp = monster.health;
 
-
-	draw_picture(100, 50, "hero.bmp");
-
+	draw_picture_hrom(100, 50, "hero.bmp");
+	draw_hp(50, 50, user.get_health(), user.get_max_health());
+	draw_hp(1200, 50, monster.health, monster.max_health);
 	switch (mark) {
-	case(dragon): {
-		draw_picture(750, 50, "dragon.bmp");
+	case(_ogre): {
+		draw_picture_hrom(750, 50, "ogre_fight.bmp");
 		break;
 	}
-	case(skeleton): {
-		draw_picture(750, 50, "skeleton.bmp");
+	case(_dragon): {
+		draw_picture_hrom(750, 50, "dragon_fight.bmp");
 		break;
 	}
-	case(ghost): {
-		draw_picture(750, 50, "ghost.bmp");
+	case(_skeleton): {
+		draw_picture_hrom(750, 50, "skeleton_fight.bmp");
 		break;
 	}
-	case(ogre): {
-		draw_picture(750, 50, "ogre.bmp");
+	case(_ghost): {
+		draw_picture_hrom(750, 50, "ghost_fight.bmp");
 		break;
 	}
 	}
+	glFinish();
 
 }

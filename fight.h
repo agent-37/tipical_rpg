@@ -6,6 +6,6 @@
 void hero_punch_variants(Hero& _hero, person& _monster);
 
 // Бой с монстром
-void fight(Hero& _hero, person& monster);
+void fight(Hero& _hero, person& monster, int mark);
 
 #endif // _FIGHT_H_

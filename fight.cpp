@@ -4,7 +4,9 @@
 #include "person.h"
 #include "Hero.h"
 #include "monsters.h"
+#include "draw.h"
 using namespace std;
+enum file_monsters { empty_cell = 0, unbreakable = 1, breakable = 2, heep_gold = 3, _ogre = 4, _skeleton = 5, _ghost = 6, _dragon = 7, _trader = 8 };
 
 // Варианты удара героя
 void hero_punch_variants(Hero& _hero, person& _monster) {
@@ -43,68 +45,69 @@ void hero_punch_variants(Hero& _hero, person& _monster) {
 }
 
 // Бой с монстром
-void fight(Hero& _hero, person& _monster) {
+void fight(Hero& _hero, person& _monster, int mark) {
 	Hero temp_hero = _hero; // Запоминаем характеристики героя до начала боя
 	int hero_count = 0; // Кол-во ударов героя
+	draw_fight(_hero, _monster, mark);
 	while (!_hero.check_died() && !_monster.check_died()) {
-		if (typeid(_monster) != typeid(ghost))
+		if (mark != _ghost)
 			hero_punch_variants(_hero, _monster);
+		draw_fight(_hero, _monster, mark);
 		hero_count++;
 		// Если монстр - огр
-		if (typeid(_monster) == typeid(ogre)) {
-			if (hero_count % 2 == 0)
+		switch (mark) {
+		case(_ogre): {
+			if (hero_count % 2 == 0) {
 				//dynamic_cast<ogre*>(&_monster)->regeneration();
 				static_cast<ogre*>(&_monster)->regeneration();
-			if (hero_count % 5 == 0)
+				cout << "Огр регенерировал!" << endl;
+			}
+			if (hero_count % 5 == 0) {
 				static_cast<ogre*>(&_monster)->heavy_blow(_hero);
+				cout << "Особая атака огра! Броня героя понижена." << endl;
+			}
 			else
 				_hero.take_damage(_monster.deal_damage());
+			break;
 		}
-		// Если монстр - скелет
-		else if (typeid(_monster) == typeid(skeleton)) {
-			if (hero_count % 4 == 0)
+		case(_skeleton): {
+			if (hero_count % 4 == 0) {
 				static_cast<skeleton*>(&_monster)->cursed_arrows(_hero);
+				cout << "Скелет использовал проклятые стрелы. Вы чувствуете, что от вас уходят силы!" << endl;
+			}
 			else
 				_hero.take_damage(_monster.deal_damage());
+			break;
 		}
-		// Если монстр - призрак
-		else if (typeid(_monster) == typeid(ghost)) {
+		case(_ghost): {
 			if (static_cast<ghost*>(&_monster)->invisibility())
 				cout << "Призрак стал невидимым, по нему невозможно ударить." << '\n';
 			else
 				hero_punch_variants(_hero, _monster);
-			if (hero_count % 3 == 0)
+			if (hero_count % 3 == 0) {
 				static_cast<ghost*>(&_monster)->steal_gold(_hero);
+				cout << "Ваш кошелек стал значительно легче." << endl;
+
+			}
 			_hero.take_damage(_monster.deal_damage());
+			break;
 		}
-		// Если монстр - дракон
-		else if (typeid(_monster) == typeid(dragon)) {
-			static_cast<dragon*>(&_monster)->rage(_hero);
-			if (hero_count % 6 == 0)
+
+		case(_dragon): {static_cast<dragon*>(&_monster)->rage(_hero);
+			if (hero_count % 6 == 0) {
 				static_cast<dragon*>(&_monster)->heavy_blow(_hero);
-			if (hero_count % 10 == 0)
+				cout << "Особая атака дракона! Броня героя понижена." << endl;
+			}
+			if (hero_count % 10 == 0) {
 				static_cast<dragon*>(&_monster)->flight();
+				cout << "Дракон залез на потолок.(Как теперь его достать?)" << endl;
+			}
 			_hero.take_damage(_monster.deal_damage());
+			break;
+		}
 		}
 	}
-	if (_hero.check_died()) { // Герой умер
-		int num;
-		cout << "Вас убили. Варианты дальнейших действий:" << '\n';
-		cout << "1. Покинуть бой" << '\n';
-		cout << "2. Попробовать еще раз" << '\n';
-		cout << "Введите номер варианта: ";
-		cin >> num;
-		_hero = temp_hero;
-		if (num == 1)
-			return;
-		else if (num == 2)
-			fight(_hero, _monster);
-		else
-			cout << "Такого варианта нет. Выберите один из предложенного списка, пожалуйста." << '\n';
-	}
-	else { // Монстр умер
-		cout << "Поздравляем с победой! Всё золото монстра теперь ваше." << '\n';
-		_hero.gold += _monster.gold;
-		return;
-	}
+	_hero.max_health = temp_hero.max_health;
+	_hero.gold += _monster.gold;
+	_hero.armor = temp_hero.armor;
 }
