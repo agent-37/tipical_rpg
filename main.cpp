@@ -11,20 +11,18 @@
 #include "string_processing.h"
 #include "stack.h"
 using namespace std;
-/* подключаем библиотеку GLUT */
+
 #include "C:\Temp\glut-3.7.6-bin\glut.h"
 
-/* начальная ширина и высота окна */
+
 GLint Width = 1300, Height = 1000;
-/* размер куба */
+
 const int CubeSize = 200;
-/* эта функция управляет всем выводом на экран */
+
 void Display(void)
 {
-
     SetConsoleCP(1251);
     SetConsoleOutputCP(1251);
-
 
     glClearColor(0, 0, 0, 1);
     glClear(GL_COLOR_BUFFER_BIT);
@@ -32,41 +30,37 @@ void Display(void)
 
     Hero user;
     Game_map map;
-    stack <Hero_and_mark> stack_turn;
+    stack <Hero_and_map> stack_turn;
     map.mark_visited_cell(user.get_x(), user.get_y());
     draw_walk(user, map);
     draw_mini_map(user, map, 0, 804);
     glFinish();
     while (!user.check_died()) {
-
-
         string_processing(user, map, stack_turn);
-        //cout << user.get_direction_gaze()<<' '<<user.get_x()<<' '<<user.get_y() << endl;
         draw_walk(user, map);
         draw_mini_map(user, map, 0, 804);
         glFinish();
     }
-
-
 }
 
-/* Функция вызывается при изменении размеров окна */
+
 void Reshape(GLint w, GLint h)
 {
     Width = w;
     Height = h;
-    /* устанавливаем размеры области отображения */
+
     glViewport(0, 0, w, h);
 
-    /* ортографическая проекция */
+
     glMatrixMode(GL_PROJECTION);
     glLoadIdentity();
     glOrtho(0, w, 0, h, -1.0, 1.0);
 
     glMatrixMode(GL_MODELVIEW);
+
     glLoadIdentity();
 }
-/* Функция обрабатывает сообщения от клавиатуры */
+
 void Keyboard(unsigned char key, int x, int y)
 {
 #define ESCAPE '\033'
@@ -74,7 +68,7 @@ void Keyboard(unsigned char key, int x, int y)
     if (key == ESCAPE)
         exit(0);
 }
-/* Главный цикл приложения */
+
 int main(int argc, char* argv[])
 {
     glutInit(&argc, argv);
@@ -86,5 +80,7 @@ int main(int argc, char* argv[])
     glutReshapeFunc(Reshape);
     glutKeyboardFunc(Keyboard);
 
+
     glutMainLoop();
 }
+

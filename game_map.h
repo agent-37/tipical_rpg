@@ -48,6 +48,7 @@ public:
 	void murder_monster(Hero& hero, int num);
 
 	bool visited(int x, int y);
+	void set_visit(int x, int y, int t);
 };
 
 #endif // _GAME_MAP_H_

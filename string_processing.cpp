@@ -6,33 +6,38 @@
 #include "monsters.h"
 #include <string>
 enum file_monsters { empty_cell = 0, unbreakable = 1, breakable = 2, heep_gold = 3, _ogre = 4, _skeleton = 5, _ghost = 6, _dragon = 7, _traeder = 8 };
-void string_processing(Hero& user, Game_map& map, stack<Hero_and_mark>& stack_turn) {
+void string_processing(Hero& user, Game_map& map, stack<Hero_and_map>& stack_turn) {
 	string s;
 	switch (map.get_cell(user.get_x(), user.get_y())) {
 	case(_ogre): {
 		ogre ovbor;
 		fight(user, ovbor, 4);
+		map.murder_monster(user, 4);
 		break;
 	}
 	case(_skeleton): {
 		skeleton ovbor;
 		fight(user, ovbor, 5);
+		map.murder_monster(user, 5);
 		break;
 	}
 	case(_ghost): {
 		ghost ovbor;
 		fight(user, ovbor, 6);
+		map.murder_monster(user, 6);
 		break;
 	}
 	case(_dragon): {
 		dragon ovbor;
 		fight(user, ovbor, 7);
+		map.murder_monster(user, 7);
 		break;
 	}
 				 //	case(_traeder): {}
 
 	}
 	while (cin >> s) {
+
 		if (!user.check_died()) {
 			if (s == "step") {
 				while (cin >> s) {
@@ -51,8 +56,16 @@ void string_processing(Hero& user, Game_map& map, stack<Hero_and_mark>& stack_tu
 							user = help;
 							return;
 						}
-						Hero_and_mark stack_el;
-						stack_el.set(help, map.get_cell(help.get_x(), help.get_y()), map.visited(help.get_x(), help.get_y()));
+						Hero_and_map stack_el;
+						int help_el[5];
+						help_el[0] = map.get_cell(help.get_x(), help.get_y());
+						help_el[1] = map.get_cell(help.get_x() + 1, help.get_y());
+						help_el[2] = map.get_cell(help.get_x(), help.get_y() + 1);
+						help_el[3] = map.get_cell(help.get_x() - 1, help.get_y());
+						help_el[4] = map.get_cell(help.get_x(), help.get_y() - 1);
+
+						stack_el.set(help, help_el, map.visited(user.get_x(), user.get_y()));
+
 						stack_turn.push(stack_el);
 						map.mark_visited_cell(x, y);
 						return;
@@ -70,9 +83,7 @@ void string_processing(Hero& user, Game_map& map, stack<Hero_and_mark>& stack_tu
 						return;
 					}
 				}
-
 			}
-
 			if (s == "use") {
 				while (cin >> s) {
 					if (s == "potion") {
@@ -89,10 +100,24 @@ void string_processing(Hero& user, Game_map& map, stack<Hero_and_mark>& stack_tu
 					}
 				}
 			}
+			if (s == "break") {
+				map.cut_tree(user);
+				return;
+			}
 		}
-		if (s == "remove") {
-			Hero_and_mark help;
+		if (s == "remove" && stack_turn.size() != 0) {
+
+			Hero_and_map help, g1;
 			stack_turn.front(help);
+			stack_turn.pop(g1);
+			map.set_cell(help.user.get_x(), help.user.get_y(), help.mark[0]);
+			map.set_cell(help.user.get_x() + 1, help.user.get_y(), help.mark[1]);
+			map.set_cell(help.user.get_x(), help.user.get_y() + 1, help.mark[2]);
+			map.set_cell(help.user.get_x() - 1, help.user.get_y(), help.mark[3]);
+			map.set_cell(help.user.get_x(), help.user.get_y() - 1, help.mark[4]);
+			map.set_visit(user.get_x(), user.get_y(), help.visited);
+			user = help.user;
+			return;
 		}
 	}
 

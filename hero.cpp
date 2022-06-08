@@ -27,7 +27,7 @@ Hero::Hero()
 	y = 10;
 	direction_gaze = 1;
 	count_healing_poison = 0;
-	num_recovery_units_poison = 0;
+	num_recovery_units_poison = 100;
 	set_person(1000, 100, 250, 1000, 50, 50, "hero.bmp");
 
 }
@@ -38,14 +38,14 @@ Hero::~Hero()
 }
 
 // восполнение здоровья
-inline void Hero::healing_poison()
+void Hero::healing_poison()
 {
 	if (count_healing_poison > 0)
 	{
 		count_healing_poison--;
+		health = max(max_health, health + num_recovery_units_poison);
 	}
-	health = max(max_health, health +
-		num_recovery_units_poison);
+
 }
 
 // показ характеристик героя
@@ -181,4 +181,44 @@ void Hero::set_max_health(int x) {
 // получить  броню
 int Hero::get_armor() {
 	return armor;
+}
+
+Hero& Hero::operator = (Hero _user) {
+	Hero help;
+	x = _user.get_x();
+	y = _user.get_y();
+	direction_gaze = _user.get_direction_gaze();
+	count_healing_poison = _user.get_count_healing_poison();
+	num_recovery_units_poison = _user.get_num_recovery_units_poison();
+	inventory_user = _user.get_inventory_user();
+	health = _user.health;
+	damage = _user.damage;
+	armor = _user.armor;
+	max_health = _user.max_health;
+	gold = _user.gold;
+	hit_chance = _user.hit_chance;
+	file_name = _user.file_name;
+	return *this;
+}
+void Hero::set_inventory_user(Inventory _inventory_user) {
+	inventory_user = _inventory_user;
+}
+int  Hero::get_count_healing_poison() {
+	return count_healing_poison;
+}
+void  Hero::set_direction_gaze(int _direction_gaze) {
+	direction_gaze = _direction_gaze;
+}
+void  Hero::set_count_healing_poison(int _count_healing_poison) {
+	count_healing_poison = _count_healing_poison;
+}
+void  Hero::set_num_recovery_units_poison(int _num_recovery_units_poison) {
+	num_recovery_units_poison = _num_recovery_units_poison;
+}
+
+int  Hero::get_num_recovery_units_poison() {
+	return num_recovery_units_poison;
+}
+Inventory Hero::get_inventory_user() {
+	return inventory_user;
 }

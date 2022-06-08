@@ -1,4 +1,5 @@
-﻿#ifndef _HERO_H_
+﻿#pragma once
+#ifndef _HERO_H_
 #define _HERO_H_
 
 #include <iostream> 
@@ -11,11 +12,6 @@
 #include "inventory.h"
 #include "person.h" 
 using namespace std;
-
-enum dir_gaze
-{
-	forward, right, back, left, tmp_viev
-};
 
 // герой
 class Hero : public person
@@ -32,7 +28,6 @@ private:
 	int count_healing_poison; // количество зелья
 	int num_recovery_units_poison; // количество восполняемого HP
 	Inventory inventory_user;
-	dir_gaze view;
 
 public:
 	Hero();
@@ -103,19 +98,36 @@ public:
 	// поворот влево 
 	void turn_left();
 
+	int  get_count_healing_poison();
+	int  get_num_recovery_units_poison();
+	Inventory get_inventory_user();
+	Hero& operator = (Hero _user);
+	void set_direction_gaze(int _direction_gaze);
+	void set_count_healing_poison(int _count_healing_poison);
+	void set_num_recovery_units_poison(int _num_recovery_units_poison);
+	void set_inventory_user(Inventory _inventory_user);
 };
 
-struct Hero_and_mark {
-	Hero user;
-	int mark;
-	bool visited;
-	Hero_and_mark() {}
-	~Hero_and_mark() {}
+struct Hero_and_map {
 public:
-	void set(Hero& _user, int _mark, int _visited) {
+	Hero user;
+	int mark[5];
+	bool visited;
+	Hero_and_map() {}
+	~Hero_and_map() {}
+public:
+	void set(Hero& _user, int _mark[5], int _visited) {
 		user = _user;
-		mark = _mark;
+		for (int i = 0; i < 5; i++)
+			mark[i] = _mark[i];
 		visited = _visited;
+	}
+	Hero_and_map& operator =(Hero_and_map _help) {
+		user = _help.user;
+		for (int i = 0; i < 5; i++)
+			mark[i] = _help.mark[i];
+		visited = _help.visited;
+		return *this;
 	}
 };
 #endif // _HERO_H_

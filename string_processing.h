@@ -3,5 +3,5 @@
 #include "hero.h"
 #include "game_map.h"
 #include "stack.h"
-void string_processing(Hero& user, Game_map& map, stack<Hero_and_mark>& stack_turn);
+void string_processing(Hero& user, Game_map& map, stack<Hero_and_map>& stack_turn);
 #endif // _STRING_PROCESSING_H_

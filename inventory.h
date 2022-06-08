@@ -33,9 +33,9 @@ public:
 	// надеть артифакт
 	bool put_on_artifact(string str);
 
-	//торговец trader;
+	Inventory& operator = (Inventory _help);
 
-private:
+public:
 	// мультисет надетых артифактов
 	multiset <string> weared_inventory;
 
@@ -47,6 +47,7 @@ private:
 
 	// итератор на мультисет снятых артифактов (для добавления и удаления в ходе игры)
 	multiset <string> ::iterator it_not_weared;
+
 
 };
 #endif // _INVENTORY_H_

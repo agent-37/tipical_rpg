@@ -64,7 +64,8 @@ Game_map::~Game_map()
 // изменение состояни клетки
 void Game_map::set_cell(int x, int y, int value)
 {
-	map[x][y] = value;
+	if (x >= 0 && x <= size_map && y >= 0 && y <= size_map)
+		map[x][y] = value;
 }
 
 //// проверка правильности хода
@@ -85,7 +86,10 @@ int Game_map::get_size_map()
 // получение содержимого клетки
 int Game_map::get_cell(int x, int y)
 {
-	return map[x][y];
+	if (x >= 0 && x <= size_map && y >= 0 && y <= size_map)
+		return map[x][y];
+	else
+		return -1;
 }
 
 // занулить клетку после взятия золота
@@ -107,14 +111,24 @@ void Game_map::murder_monster(Hero& hero, int num)
 //  пометить клетку, в которой срубили дерево
 void Game_map::cut_tree(Hero& hero)
 {
-	if (hero.step_f == &Hero::step_forward && map[hero.get_y() + 1][hero.get_x()] == 2)
-		map[hero.get_y() + 1][hero.get_x()] = 0;
-	else if (hero.step_f == &Hero::step_left && map[hero.get_y()][hero.get_x() - 1] == 2)
-		map[hero.get_y()][hero.get_x() - 1] = 0;
-	else if (hero.step_f == &Hero::step_right && map[hero.get_y()][hero.get_x() + 1] == 2)
-		map[hero.get_y()][hero.get_x() + 1] = 0;
-	else if (hero.step_f == &Hero::step_back && map[hero.get_y() - 1][hero.get_x()] == 2)
-		map[hero.get_y() - 1][hero.get_x()] = 0;
+	switch (hero.get_direction_gaze()) {
+	case(1): {if (map[hero.get_x()][hero.get_y() + 1] == 2)
+		map[hero.get_x()][hero.get_y() + 1] = 0;
+		break;
+	}
+	case(2): {if (map[hero.get_x() + 1][hero.get_y()] == 2)
+		map[hero.get_x() + 1][hero.get_y()] = 0;
+		break;
+	}
+	case(3): {if (map[hero.get_x()][hero.get_y() - 1] == 2)
+		map[hero.get_x()][hero.get_y() - 1] = 0;
+		break;
+	}
+	case(4): {if (map[hero.get_x() - 1][hero.get_y()] == 2)
+		map[hero.get_x() - 1][hero.get_y()] = 0;
+		break;
+	}
+	}
 }
 
 // пометка посещённой клетки
@@ -126,6 +140,9 @@ bool Game_map::visited(int x, int y) {
 	if (map_2[x][y] == 1)
 		return true;
 	return false;
+}
+void Game_map::set_visit(int x, int y, int t) {
+	map_2[x][y] = t;
 }
 
 
