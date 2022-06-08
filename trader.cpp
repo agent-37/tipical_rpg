@@ -1,4 +1,4 @@
-#include <iostream> 
+п»ї#include <iostream> 
 #include <algorithm> 
 #include <set> 
 #include <string> 
@@ -26,7 +26,7 @@ Trader::~Trader()
 {
 }
 
-// продать инвентарь герою
+// РїСЂРѕРґР°С‚СЊ РёРЅРІРµРЅС‚Р°СЂСЊ РіРµСЂРѕСЋ
 bool Trader::trade_inventory(string inventory)
 {
 	if (trader_inventory.find(inventory) != trader_inventory.end())
@@ -54,7 +54,7 @@ bool Trader::put_inventory_on_warehouse(string str)
 	return false;
 }
 
-// показать инвернтарь торговца
+// РїРѕРєР°Р·Р°С‚СЊ РёРЅРІРµСЂРЅС‚Р°СЂСЊ С‚РѕСЂРіРѕРІС†Р°
 void Trader::show_inventory_trader()
 {
 	for (const auto& el : trader_inventory)
