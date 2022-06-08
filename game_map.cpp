@@ -15,7 +15,7 @@ using namespace std;
 // конструктор
 Game_map::Game_map()
 {
-	fstream fin("input.txt", fstream::in | fstream::out | fstream::app); // позже это следует переместить в мейн
+	fstream fin(name_file, fstream::in | fstream::out | fstream::app); // позже это следует переместить в мейн
 	fin >> size_map;
 	// создание поля
 	map = new int* [size_map];
