@@ -1,5 +1,6 @@
 #include <iostream>
 #include <typeinfo>
+#include <string>
 #include <algorithm>
 #include "fight.h"
 #include "person.h"
@@ -11,37 +12,38 @@ enum file_monsters { empty_cell = 0, unbreakable = 1, breakable = 2, heep_gold =
 
 // Варианты удара героя
 void hero_punch_variants(Hero& _hero, person& _monster) {
-	int num, temp;
+	int  temp;
+	string num;
 	cout << "Варианты ударов:" << '\n';
 	cout << "1. Слабый: герой ударит с меньшей силой, зато сможет восстановить здоровье за счет передышки." << '\n';
 	cout << "2. Нормальный" << '\n';
 	cout << "3. Сильный: герой ударит с большей силой, но броня ослабнет, т.к. не выдерижт нагрузки." << '\n';
 	cout << "Введите номер удара: ";
-	cin >> num;
-	switch (num) {
-	case 1: {// Сила героя (на время 1 удара) -100, здоровье +10
-		_monster.take_damage(max(_hero.deal_damage() - 100, 0));
-		cout << "Использовать зелье здоровья?(Да - 1, Нет - 2)";
-		int ans;
-		cin >> ans;
-		if (ans == 1)
-			if (_hero.healing_poison() == 0)
-				cout << "Зелья кончились" << endl;
-		break; }
-	case 2: {
-		_monster.take_damage(_hero.deal_damage());
-		break;
+	while (cin >> num) {
+		if (num == "1") {// Сила героя (на время 1 удара) -100
+			_monster.take_damage(max(_hero.deal_damage() - 100, 0));
+			cout << "Использовать зелье здоровья?(Да - 1, Нет - 2)";
+			int ans;
+			cin >> ans;
+			if (ans == 1)
+				if (_hero.healing_poison() == 0)
+					cout << "Зелья кончились" << endl;
+			break;
+		}
+		else  if (num == "2") {
+			_monster.take_damage(_hero.deal_damage());
+			break;
+		}
+		else if (num == "3") {
+			// Сила героя (на время 1 удара) +100, броня -20
+			_monster.take_damage(_hero.deal_damage() + 100);
+			_hero.armor -= 20;
+			break;
+		}
+		else 
+			cout << "Такого удара нет. Выберите один из предоставленных вариантов, пожалуйста." << '\n';
 	}
-	case 3: {// Сила героя (на время 1 удара) +100, броня -50
-		_monster.take_damage(_hero.deal_damage() + 100);
-		_hero.armor -= 20;
-		break;
-	}
-	default: {
-		cout << "Такого удара нет. Выберите один из предоставленных вариантов, пожалуйста." << '\n';
-		break;
-	}
-	}
+
 }
 
 // Бой с монстром
@@ -54,8 +56,9 @@ void fight(Hero& _hero, person& _monster, int mark) {
 			hero_punch_variants(_hero, _monster);
 		draw_fight(_hero, _monster, mark);
 		hero_count++;
-		// Если монстр - огр
+
 		switch (mark) {
+			// Если монстр - огр
 		case(_ogre): {
 			if (hero_count % 2 == 0) {
 				//dynamic_cast<ogre*>(&_monster)->regeneration();
@@ -70,6 +73,7 @@ void fight(Hero& _hero, person& _monster, int mark) {
 				_hero.take_damage(_monster.deal_damage());
 			break;
 		}
+				   // Если монстр - скелет
 		case(_skeleton): {
 			if (hero_count % 4 == 0) {
 				static_cast<skeleton*>(&_monster)->cursed_arrows(_hero);
@@ -79,6 +83,7 @@ void fight(Hero& _hero, person& _monster, int mark) {
 				_hero.take_damage(_monster.deal_damage());
 			break;
 		}
+					   // Если монстр - призрак
 		case(_ghost): {
 			if (static_cast<ghost*>(&_monster)->invisibility())
 				cout << "Призрак стал невидимым, по нему невозможно ударить." << '\n';
@@ -92,7 +97,7 @@ void fight(Hero& _hero, person& _monster, int mark) {
 			_hero.take_damage(_monster.deal_damage());
 			break;
 		}
-
+					// Если монстр - Дракон
 		case(_dragon): {static_cast<dragon*>(&_monster)->rage(_hero);
 			if (hero_count % 6 == 0) {
 				static_cast<dragon*>(&_monster)->heavy_blow(_hero);

@@ -17,7 +17,7 @@ class Game_map
 {
 private:
 	int** map; // поле
-	int** map_2; // второе поле
+	int** map_visit; // второе поле с пометкой был или не был там герой
 	int size_map;
 	person user;
 
@@ -25,9 +25,6 @@ public:
 	Game_map();
 	~Game_map();
 	void set_cell(int, int, int);
-
-	//// проверка корректности хода
-	//void check_correct_move(Hero &hero);
 
 	// получить размер поля
 	int get_size_map();
@@ -46,8 +43,9 @@ public:
 
 	// занулить клетку после убийства monster
 	void murder_monster(Hero& hero, int num);
-
+	//проверка на то что клетка посещена
 	bool visited(int x, int y);
+	//передать клетку посетили или нет
 	void set_visit(int x, int y, int t);
 };
 

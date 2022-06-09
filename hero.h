@@ -21,11 +21,11 @@ private:
 	typedef bool (Hero::* func_ptr)(void);
 	int x, y;	// координаты положения героя
 	int direction_gaze; // направление взгляда
-						// 1 - вперёд
+						// 1 - вверх
 						// 2 - вправо
-						// 3 - назад
-						// 2 - влево
-	int count_healing_poison; // количество зелья
+						// 3 - вниз
+						// 4 - влево
+	int count_healing_poison; // количество зельий
 	int num_recovery_units_poison; // количество восполняемого HP
 	Inventory inventory_user;
 
@@ -74,6 +74,21 @@ public:
 	// передать max_health
 	void set_max_health(int x);
 
+	//передать направление взляда
+	void set_direction_gaze(int _direction_gaze);
+
+	//передать количество зелий здоровья
+	void set_count_healing_poison(int _count_healing_poison);
+
+	//передать количество хп на которое восполняет зелье здоровья
+	void set_num_recovery_units_poison(int _num_recovery_units_poison);
+
+	//передать инвентарь
+	void set_inventory_user(Inventory _inventory_user);
+
+	//передать золото
+	void set_gold(int _gold);
+
 	// получить координату х героя
 	int get_x();
 
@@ -92,27 +107,42 @@ public:
 	// получить  броню
 	int get_armor();
 
+	//получить количество зелий здоровья
+	int  get_count_healing_poison();
+
+	//получить количество хп на которое восполняет зелье здоровья
+	int  get_num_recovery_units_poison();
+
+	//получить инвентарь
+	Inventory get_inventory_user();
+
 	// поворот вправо 
 	void turn_right();
 
 	// поворот влево 
 	void turn_left();
 
-	int  get_count_healing_poison();
-	int  get_num_recovery_units_poison();
-	Inventory get_inventory_user();
+	//переопределение оператора =
 	Hero& operator = (Hero _user);
-	void set_direction_gaze(int _direction_gaze);
-	void set_count_healing_poison(int _count_healing_poison);
-	void set_num_recovery_units_poison(int _num_recovery_units_poison);
-	void set_inventory_user(Inventory _inventory_user);
+
+	//добавить артифакт в рюкзак
 	void add_artifact(string art);
-	void set_gold(int _gold);
-	void show_un_wear_art();
-	void show_wear_art();
-	int un_wear_art(string art);
-	int wear_art(string art);
+
+	//добавить зелье здоровья
 	void add_potion();
+
+	//показать все артефакты в рюкзаке
+	void show_un_wear_art();
+
+	//показать все надетые артефакты
+	void show_wear_art();
+
+	//снять артефакт
+	int un_wear_art(string art);
+
+	//надеть артефакт	
+	int wear_art(string art);
+
 };
 
 struct Hero_and_map {

@@ -14,10 +14,12 @@
 #include <time.h>
 using namespace std;
 
+enum art { buy_art = 1, cant_buy = 2, not_find = 0 };
+
+//читаем из файла все артифакты(название и цену)
 Trader::Trader()
 {
 	fstream fin(name_file, fstream::in | fstream::out | fstream::app);
-
 	for (int i = 0; i < 15; i++)
 	{
 		string el;
@@ -33,17 +35,15 @@ Trader::~Trader()
 {
 }
 
-// продать инвентарь герою
-enum art { buy_art = 1, cant_buy = 2, not_find = 0 };
-int Trader::trade_inventory(string inventory, Hero& user)
+// продать артефакт герою
+int Trader::trade_inventory(string art, Hero& user)
 {
-	if (trader_inventory.find(inventory) != trader_inventory.end())
+	if (trader_inventory.find(art) != trader_inventory.end())
 	{
-		if (user.get_gold() >= artifact[inventory]) {
-			trader_inventory.erase(inventory);
-			user.add_artifact(inventory);
-			user.set_gold(user.get_gold() - artifact[inventory]);
-			revenue++;
+		if (user.get_gold() >= artifact[art]) {
+			trader_inventory.erase(art);
+			user.add_artifact(art);
+			user.set_gold(user.get_gold() - artifact[art]);
 			return buy_art;
 		}
 		return cant_buy;
@@ -51,6 +51,7 @@ int Trader::trade_inventory(string inventory, Hero& user)
 	return not_find;
 }
 
+//заполнение лавки торговца
 void Trader::fill_inventory_trader()
 {
 	srand(time(NULL));
@@ -64,10 +65,6 @@ void Trader::fill_inventory_trader()
 	}
 }
 
-bool Trader::put_inventory_on_warehouse(string str)
-{
-	return false;
-}
 
 // показать инвернтарь торговца
 void Trader::show_inventory_trader()

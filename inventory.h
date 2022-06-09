@@ -18,18 +18,6 @@ using namespace std;
 class Inventory
 {
 public:
-	// показать надтые артефакты
-	void show_weared_artifacts();
-
-	// показать снятые артефакты
-	void show_not_weared_artifacts();
-
-	// снять артифакт
-	bool take_off_artifact(string str);
-
-	// надеть артифакт
-	bool put_on_artifact(string str);
-
 	Inventory& operator = (Inventory _help);
 
 public:

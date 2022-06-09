@@ -23,9 +23,9 @@ Game_map::Game_map()
 		map[i] = new int[size_map] {};
 
 	// создание второго поля
-	map_2 = new int* [size_map];
+	map_visit = new int* [size_map];
 	for (int i = 0; i < size_map; i++)
-		map_2[i] = new int[size_map] {};
+		map_visit[i] = new int[size_map] {};
 
 	// чтение поля из файла
 	for (int i = 0; i < size_map; i++)
@@ -54,11 +54,11 @@ Game_map::~Game_map()
 
 	for (int i = 0; i < size_map; i++)
 	{
-		delete[] map_2[i];
-		map_2[i] = nullptr;
+		delete[] map_visit[i];
+		map_visit[i] = nullptr;
 	}
-	delete[] map_2;
-	map_2 = nullptr;
+	delete[] map_visit;
+	map_visit = nullptr;
 }
 
 // изменение состояни клетки
@@ -67,15 +67,6 @@ void Game_map::set_cell(int x, int y, int value)
 	if (x >= 0 && x <= size_map && y >= 0 && y <= size_map)
 		map[x][y] = value;
 }
-
-//// проверка правильности хода
-//void Game_map::check_correct_move(Hero &hero)
-//{
-//	// 1 - камень (неубираемое препядствие)
-//	// 2 - дерево (убираемое препядствие)
-//	if ( (map[hero.get_x()][hero.get_y()] == 1) || (map[hero.get_x()][hero.get_y()] == 2))
-//		// вернуть
-//}
 
 // получение размера поля
 int Game_map::get_size_map()
@@ -134,20 +125,15 @@ void Game_map::cut_tree(Hero& hero)
 // пометка посещённой клетки
 void Game_map::mark_visited_cell(int x, int y)
 {
-	map_2[x][y] = 1;
+	map_visit[x][y] = 1;
 }
+//проверка на то что клетка посещена
 bool Game_map::visited(int x, int y) {
-	if (map_2[x][y] == 1)
+	if (map_visit[x][y] == 1)
 		return true;
 	return false;
 }
+//передать клетку посетили или нет
 void Game_map::set_visit(int x, int y, int t) {
-	map_2[x][y] = t;
+	map_visit[x][y] = t;
 }
-
-
-// enum препятствия, монстры, 
-// комменты
-// геттеры посещен клетки, что находится в клетке (как в draw.cpp)
-// возврат, если попал в несуществующую клетку
-// возможность изменить клетку 

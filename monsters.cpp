@@ -24,8 +24,10 @@ void ogre::regeneration() {
 // Проклятые стрелы понижают обычное и максимальное здоровье героя
 void skeleton::cursed_arrows(Hero& _hero) {
 	_hero.take_damage(deal_damage());
-	if (!_hero.check_died())
+	if (!_hero.check_died()) {
 		_hero.max_health -= damage / 10;
+		health = max(health, max_health);
+	}
 }
 
 // Возможность призрака пропустить удар

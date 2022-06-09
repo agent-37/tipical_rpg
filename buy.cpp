@@ -1,7 +1,7 @@
 
 #include "buy.h"
 #include "trader.h"	
-
+//процедура покупки у торговца
 void buy(Hero& user) {
 	cout << "ѕриветству€ю теб€ путник.  упи мои товары, если хочешь." << endl;
 	Trader tr;

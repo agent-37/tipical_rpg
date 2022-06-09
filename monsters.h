@@ -43,7 +43,7 @@ class dragon : public help {
 public:
 	dragon() { set_person(2000, 300, 150, 2000, 750, 60, "dragon.bmp"); }
 	// Повышение урона дракона
-	void rage(Hero& _hero) { if (_hero.gold >= gold) damage += 200; }
+	void rage(Hero& _hero) { if (_hero.gold >= gold) damage += 100; }
 	// Дракон взлетает - затруднение попадания в него
 	void flight() { hit_chance = 30; }
 	~dragon() {}

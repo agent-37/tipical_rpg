@@ -76,9 +76,8 @@ void draw_picture(int x, int y, const char* file_name) {
 			glVertex2f(x + (i), y + (h - j));
 			glEnd();
 		}
-
 }
-
+//функция рисует изображение без 1 цвета(как хромакей)
 void draw_picture_hrom(int x, int y, const char* file_name) {
 	SetConsoleCP(1251);
 	SetConsoleOutputCP(1251);
@@ -96,6 +95,7 @@ void draw_picture_hrom(int x, int y, const char* file_name) {
 		}
 
 }
+//процедура рисование картинки ходьбы
 void draw_walk(Hero user, Game_map& map) {
 	draw_picture(0, 0, "back.bmp");
 
@@ -212,8 +212,9 @@ void draw_walk(Hero user, Game_map& map) {
 			draw_picture(100, 76, "first_block_unbreak.bmp");
 		else
 			draw_picture(100, 76, "first_block_break.bmp");
+	glFinish();
 }
-
+//процедура рисует мини карту
 void draw_mini_map(Hero user, Game_map& map, int x, int y) {
 	int map_x = user.get_x(), map_y = user.get_y();
 	for (int i = 0; i < 7; i++)
@@ -239,7 +240,7 @@ void draw_mini_map(Hero user, Game_map& map, int x, int y) {
 			glVertex2f(x + 28 * i, y + 28 * (j + 1));
 			glEnd();
 		}
-
+	glFinish();
 }
 
 //рисует полоску хп
@@ -256,11 +257,12 @@ void draw_hp(int x, int y, int health, int max_health) {
 	glBegin(GL_QUADS);
 	glVertex2f(x, y);
 	glVertex2f(x + 50, y);
-	glVertex2f(x + 50, y + 800 * health / max_health);
-	glVertex2f(x, y + 800 * health / max_health);
+	glVertex2f(x + 50, y + max(800 * health / max_health, 0));
+	glVertex2f(x, y + max(800 * health / max_health, 0));
 	glEnd();
+	glFinish();
 }
-
+//рисует картинку для фазы боя
 void draw_fight(Hero user, person& monster, int mark) {
 	draw_picture(0, 0, "back_fight.bmp");
 
@@ -290,5 +292,4 @@ void draw_fight(Hero user, person& monster, int mark) {
 	}
 	}
 	glFinish();
-
 }

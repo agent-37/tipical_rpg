@@ -26,7 +26,7 @@ Hero::Hero()
 	direction_gaze = 1;
 	count_healing_poison = 0;
 	num_recovery_units_poison = 100;
-	set_person(1000, 100, 100, 1000, 50, 50, "hero.bmp");
+	set_person(1000, 100, 100, 1000, 50000, 50, "hero.bmp");
 
 }
 
@@ -51,7 +51,6 @@ int Hero::healing_poison()
 // показ характеристик героя
 void Hero::show_characteristics()
 {
-	/*SetConsoleCP(1251);*/
 	setlocale(LC_ALL, "rus");
 	cout << "Координаты героя: " << "x = " << x << ", y = " << y << ";" << endl;
 	cout << "Количество зелья: " << count_healing_poison << endl;
@@ -63,7 +62,6 @@ void Hero::show_characteristics()
 	cout << "Максимальное здоровье: " << max_health << endl;
 	cout << "Золото: " << gold << endl;
 	cout << "Шанс попадания: " << min(max(0, hit_chance), 100) << endl;
-	//SetConsoleCP(866);
 }
 
 // шаг вперёд
@@ -176,11 +174,13 @@ void Hero::set_armor(int x) {
 void Hero::set_max_health(int x) {
 	max_health = x;
 }
+
 // получить  броню
 int Hero::get_armor() {
 	return max(armor, 0);
 }
 
+//переопределение оператора =
 Hero& Hero::operator = (Hero _user) {
 	Hero help;
 	x = _user.get_x();
@@ -198,35 +198,53 @@ Hero& Hero::operator = (Hero _user) {
 	file_name = _user.file_name;
 	return *this;
 }
+
+//передать инвентарь
 void Hero::set_inventory_user(Inventory _inventory_user) {
 	inventory_user = _inventory_user;
 }
+
+//получить количество зелий здоровья
 int  Hero::get_count_healing_poison() {
 	return count_healing_poison;
 }
+
+//передать направление взляда
 void  Hero::set_direction_gaze(int _direction_gaze) {
 	direction_gaze = _direction_gaze;
 }
+
+//передать количество зелий здоровья
 void  Hero::set_count_healing_poison(int _count_healing_poison) {
 	count_healing_poison = _count_healing_poison;
 }
+
+//передать количество хп на которое восполняет зелье здоровья
 void  Hero::set_num_recovery_units_poison(int _num_recovery_units_poison) {
 	num_recovery_units_poison = _num_recovery_units_poison;
 }
 
+//получить количество хп на которое восполняет зелье здоровья
 int  Hero::get_num_recovery_units_poison() {
 	return num_recovery_units_poison;
 }
+
+//получить инвентарь
 Inventory Hero::get_inventory_user() {
 	return inventory_user;
 }
+
+//добавить артифакт в рюкзак
 void Hero::add_artifact(string art) {
 	inventory_user.not_weared_inventory.insert(art);
 }
+
+//передать золото
 void Hero::set_gold(int _gold) {
 	gold = _gold;
 }
 
+//показать все артефакты в рюкзаке
 void Hero::show_un_wear_art()
 {
 	inventory_user.it_not_weared = inventory_user.not_weared_inventory.begin();
@@ -236,6 +254,8 @@ void Hero::show_un_wear_art()
 	}
 
 }
+
+//показать все надетые артефакты
 void Hero::show_wear_art() {
 
 	inventory_user.it_weared = inventory_user.weared_inventory.begin();
@@ -245,12 +265,13 @@ void Hero::show_wear_art() {
 	}
 }
 
+//добавить зелье здоровья
 void Hero::add_potion()
 {
 	count_healing_poison++;
 }
 
-
+//снять артефакт
 int Hero::un_wear_art(string art) {
 	if (inventory_user.weared_inventory.find(art) == inventory_user.weared_inventory.end())
 		return 0;
@@ -315,6 +336,8 @@ int Hero::un_wear_art(string art) {
 	inventory_user.not_weared_inventory.insert(art);
 	return 1;
 }
+
+//надеть артефакт	
 int Hero::wear_art(string art) {
 	if (inventory_user.not_weared_inventory.find(art) == inventory_user.not_weared_inventory.end())
 		return 0;
