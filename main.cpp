@@ -57,7 +57,6 @@ void Reshape(GLint w, GLint h)
     glOrtho(0, w, 0, h, -1.0, 1.0);
 
     glMatrixMode(GL_MODELVIEW);
-
     glLoadIdentity();
 }
 
@@ -74,7 +73,7 @@ int main(int argc, char* argv[])
     glutInit(&argc, argv);
     glutInitDisplayMode(GLUT_RGB);
     glutInitWindowSize(Width, Height);
-    glutCreateWindow("Red square example");
+    glutCreateWindow("Tipical rpg");
 
     glutDisplayFunc(Display);
     glutReshapeFunc(Reshape);

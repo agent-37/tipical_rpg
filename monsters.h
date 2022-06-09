@@ -12,7 +12,7 @@ public:
 // Класс огра
 class ogre : public help {
 public:
-	ogre() { set_person(1000, 300, 200, 1000, 150, 50, "ogre.bmp"); }
+	ogre() { set_person(700, 250, 100, 700, 70, 50, "ogre.bmp"); }
 	// Регенереция огра
 	void regeneration();
 	virtual ~ogre() {}
@@ -21,7 +21,7 @@ public:
 // Класс скелета
 class skeleton : public person {
 public:
-	skeleton() { set_person(500, 200, 50, 500, 150, 30, "skeleton.bmp"); }
+	skeleton() { set_person(500, 175, 50, 500, 50, 30, "skeleton.bmp"); }
 	// Проклятые стрелы понижают обычное и максимальное здоровье героя
 	void cursed_arrows(Hero& _hero);
 	~skeleton() {}
@@ -30,7 +30,7 @@ public:
 // Класс призрака
 class ghost : public person {
 public:
-	ghost() { set_person(500, 200, 50, 500, 150, 30, "ghost.bmp"); }
+	ghost() { set_person(500, 175, 50, 500, 60, 30, "ghost.bmp"); }
 	// Возможность призрака пропустить удар
 	bool invisibility();
 	// Кража золота героя
@@ -41,7 +41,7 @@ public:
 // Класс дракона (босса)
 class dragon : public help {
 public:
-	dragon() { set_person(2000, 500, 500, 2000, 3000, 60, "dragon.bmp"); }
+	dragon() { set_person(2000, 300, 150, 2000, 750, 60, "dragon.bmp"); }
 	// Повышение урона дракона
 	void rage(Hero& _hero) { if (_hero.gold >= gold) damage += 200; }
 	// Дракон взлетает - затруднение попадания в него

@@ -6,17 +6,24 @@
 #include <fstream>
 #include <Windows.h>
 #include "trader.h"
+#include "hero.h"
+#include "inventory.h"
+#include <windows.h>
+#include <stdlib.h>
+#include <iostream>
+#include <time.h>
 using namespace std;
 
 Trader::Trader()
 {
-	fstream fin(name_file, fstream::in | fstream::out | fstream::app); 
+	fstream fin(name_file, fstream::in | fstream::out | fstream::app);
 
-	for (int i = 0; i < 20; i++)
+	for (int i = 0; i < 15; i++)
 	{
 		string el;
-		fin >> el;
-		warehouse_inventory.emplace(el);
+		int cost, chance;
+		fin >> el >> cost;
+		artifact.insert(make_pair(el, cost));
 	}
 
 	fin.close();
@@ -27,26 +34,34 @@ Trader::~Trader()
 }
 
 // продать инвентарь герою
-bool Trader::trade_inventory(string inventory)
+enum art { buy_art = 1, cant_buy = 2, not_find = 0 };
+int Trader::trade_inventory(string inventory, Hero& user)
 {
 	if (trader_inventory.find(inventory) != trader_inventory.end())
 	{
-		trader_inventory.erase(inventory);
-		revenue++;
-		return 1;
+		if (user.get_gold() >= artifact[inventory]) {
+			trader_inventory.erase(inventory);
+			user.add_artifact(inventory);
+			user.set_gold(user.get_gold() - artifact[inventory]);
+			revenue++;
+			return buy_art;
+		}
+		return cant_buy;
 	}
-	return 0;
+	return not_find;
 }
 
-bool Trader::take_inventory_from_warehouse(string inventory)
+void Trader::fill_inventory_trader()
 {
-	if (trader_inventory.size() > 0 && trader_inventory.find(str) != trader_inventory.end())
-	{
-		not_weared_inventory.insert(str);
-		trader_inventory.erase(str);
-		return 1;
+	srand(time(NULL));
+	while (trader_inventory.size() != 5) {
+		int chance = rand() % 15;
+		map<string, int> ::iterator it_help;
+		it_help = artifact.begin();
+		for (int i = 0; i < chance; i++)
+			it_help++;
+		trader_inventory.insert(it_help->first);
 	}
-	return 0;
 }
 
 bool Trader::put_inventory_on_warehouse(string str)
@@ -59,8 +74,6 @@ void Trader::show_inventory_trader()
 {
 	for (const auto& el : trader_inventory)
 	{
-		cout << el << endl;
+		cout << el << ' ' << artifact[el] << endl;
 	}
 }
-
-

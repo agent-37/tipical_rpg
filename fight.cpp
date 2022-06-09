@@ -1,5 +1,6 @@
 #include <iostream>
 #include <typeinfo>
+#include <algorithm>
 #include "fight.h"
 #include "person.h"
 #include "Hero.h"
@@ -18,29 +19,28 @@ void hero_punch_variants(Hero& _hero, person& _monster) {
 	cout << "Введите номер удара: ";
 	cin >> num;
 	switch (num) {
-	case 1: // Сила героя (на время 1 удара) -100, здоровье +10
-		temp = _hero.damage;
-		_hero.damage -= 100;
+	case 1: {// Сила героя (на время 1 удара) -100, здоровье +10
+		_monster.take_damage(max(_hero.deal_damage() - 100, 0));
+		cout << "Использовать зелье здоровья?(Да - 1, Нет - 2)";
+		int ans;
+		cin >> ans;
+		if (ans == 1)
+			if (_hero.healing_poison() == 0)
+				cout << "Зелья кончились" << endl;
+		break; }
+	case 2: {
 		_monster.take_damage(_hero.deal_damage());
-		_hero.damage = temp;
-		if (_hero.health + 10 <= _hero.max_health)
-			_hero.health += 10;
-		else
-			_hero.health = _hero.max_health;
 		break;
-	case 2:
-		_monster.take_damage(_hero.deal_damage());
+	}
+	case 3: {// Сила героя (на время 1 удара) +100, броня -50
+		_monster.take_damage(_hero.deal_damage() + 100);
+		_hero.armor -= 20;
 		break;
-	case 3: // Сила героя (на время 1 удара) +100, броня -50
-		temp = _hero.damage;
-		_hero.damage += 100;
-		_monster.take_damage(_hero.deal_damage());
-		_hero.damage = temp;
-		_hero.armor -= 50;
-		break;
-	default:
+	}
+	default: {
 		cout << "Такого удара нет. Выберите один из предоставленных вариантов, пожалуйста." << '\n';
 		break;
+	}
 	}
 }
 
@@ -106,6 +106,7 @@ void fight(Hero& _hero, person& _monster, int mark) {
 			break;
 		}
 		}
+		draw_fight(_hero, _monster, mark);
 	}
 	_hero.max_health = temp_hero.max_health;
 	_hero.gold += _monster.gold;

@@ -7,6 +7,8 @@
 #include <iterator> 
 #include <fstream>
 #include <Windows.h>
+#include <map>
+#include "hero.h"
 #define name_file "artifacts.txt"
 using namespace std;
 
@@ -17,29 +19,27 @@ public:
 	~Trader();
 
 	// продать инвентарь герою
-	bool trade_inventory(string inventory);
+	int trade_inventory(string inventory, Hero& user);
 
-	// взять инвентарь со склада
-	bool take_inventory_from_warehouse(string str);
+
+	void fill_inventory_trader();
 
 	// положить инвентарь на склад	
 	bool put_inventory_on_warehouse(string str);
 
 	// показать инвернтарь торговца
 	void show_inventory_trader();
-
-protected:
+	//купить у торговца
+	//bool take_artifact_trader(string str,Inventory& inv);
+public:
 	// мультисет артифактов торговца
-	multiset <pair<string, int>> trader_inventory;
+	set <string> trader_inventory;
 
-	// мультисет артефактов склада
-	multiset <string> warehouse_inventory;
-
+	map<string, int> artifact;
 	// итератор на мультисет артифактов торговца (для добавления и удаления в ходе игры)
-	multiset <pair<string, int>> ::iterator it_trader_inventory;
+	set <string> ::iterator it_trader_inventory;
 
-	// итератор на мультисет артефактов склада
-	multiset <string> it_warehouse_inventory;
+
 
 	// прибыль продавца
 	int revenue;

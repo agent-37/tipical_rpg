@@ -21,14 +21,12 @@ Hero::Hero()
 	// 6 - монстр ghost
 	// 7 - монстр dragon
 
-	/*x = 1;
-	y = 1;*/
 	x = 10;
 	y = 10;
 	direction_gaze = 1;
 	count_healing_poison = 0;
 	num_recovery_units_poison = 100;
-	set_person(1000, 100, 250, 1000, 50, 50, "hero.bmp");
+	set_person(1000, 100, 100, 1000, 50, 50, "hero.bmp");
 
 }
 
@@ -38,13 +36,15 @@ Hero::~Hero()
 }
 
 // восполнение здоровья
-void Hero::healing_poison()
+int Hero::healing_poison()
 {
 	if (count_healing_poison > 0)
 	{
 		count_healing_poison--;
 		health = max(max_health, health + num_recovery_units_poison);
+		return 1;
 	}
+	return 0;
 
 }
 
@@ -56,15 +56,13 @@ void Hero::show_characteristics()
 	cout << "Координаты героя: " << "x = " << x << ", y = " << y << ";" << endl;
 	cout << "Количество зелья: " << count_healing_poison << endl;
 	cout << "Количество восполянемого HP: " << num_recovery_units_poison << endl;
-	cout << "Надетые атифакты: " << endl;
-	//object.show_weared_artifacts(); // объект инвенторя, показ надетых артифактов
 	cout << "Направление взгляда: " << direction_gaze << endl;
 	cout << "Здоровье: " << health << endl;
-	cout << "Урон: " << damage << endl;
-	cout << "Уровень брони героя: " << armor << endl;
+	cout << "Урон: " << max(0, damage) << endl;
+	cout << "Уровень брони героя: " << max(0, armor) << endl;
 	cout << "Максимальное здоровье: " << max_health << endl;
 	cout << "Золото: " << gold << endl;
-	cout << "Шанс попадания: " << hit_chance << endl;
+	cout << "Шанс попадания: " << min(max(0, hit_chance), 100) << endl;
 	//SetConsoleCP(866);
 }
 
@@ -180,7 +178,7 @@ void Hero::set_max_health(int x) {
 }
 // получить  броню
 int Hero::get_armor() {
-	return armor;
+	return max(armor, 0);
 }
 
 Hero& Hero::operator = (Hero _user) {
@@ -221,4 +219,162 @@ int  Hero::get_num_recovery_units_poison() {
 }
 Inventory Hero::get_inventory_user() {
 	return inventory_user;
+}
+void Hero::add_artifact(string art) {
+	inventory_user.not_weared_inventory.insert(art);
+}
+void Hero::set_gold(int _gold) {
+	gold = _gold;
+}
+
+void Hero::show_un_wear_art()
+{
+	inventory_user.it_not_weared = inventory_user.not_weared_inventory.begin();
+	while (inventory_user.it_not_weared != inventory_user.not_weared_inventory.end()) {
+		cout << *inventory_user.it_not_weared << endl;
+		inventory_user.it_not_weared++;
+	}
+
+}
+void Hero::show_wear_art() {
+
+	inventory_user.it_weared = inventory_user.weared_inventory.begin();
+	while (inventory_user.it_weared != inventory_user.weared_inventory.end()) {
+		cout << *inventory_user.it_weared << endl;
+		inventory_user.it_weared++;
+	}
+}
+
+void Hero::add_potion()
+{
+	count_healing_poison++;
+}
+
+
+int Hero::un_wear_art(string art) {
+	if (inventory_user.weared_inventory.find(art) == inventory_user.weared_inventory.end())
+		return 0;
+	if (art == "ring_of_power")
+		damage -= 5;
+	else if (art == "amulet_of_health") {
+		max_health -= 50;
+		health = max(health, max_health);
+	}
+	else if (art == "pendant_of_dispassion") {
+		max_health += 40;
+		damage -= 30;
+	}
+	else if (art == "cursed_ring") {
+		max_health += 40;
+		damage -= 30;
+		armor += 15;
+	}
+	else if (art == "victory_necklace") {
+		damage -= 10;
+		max_health -= 50;
+		health = max(health, max_health);
+	}
+	else if (art == "armadillo_pendant")
+		armor -= 20;
+	else if (art == "clover_of_fortune")
+		hit_chance -= 5;
+	else if (art == "ring_of_sinners") {
+		max_health += 60;
+		damage -= 30;
+		hit_chance -= 5;
+		armor += 35;
+	}
+	else if (art == "lightning_rune")
+		damage -= 15;
+	else if (art == "necklace_of_dragonteeth") {
+		armor -= 30;
+		max_health -= 50;
+		health = max(health, max_health);
+	}
+	else if (art == "flame_rune")
+		damage -= 20;
+	else if (art == "speed_ring") {
+		damage -= 10;
+		armor += 20;
+	}
+	else if (art == "pendant_of_skill") {
+		damage -= 20;
+		max_health -= 50;
+		health = max(health, max_health);
+		armor -= 10;
+	}
+	else if (art == "regeneration_ring")
+		num_recovery_units_poison -= 50;
+	else if (art == "sar-issa_ring") {
+		damage -= 70;
+		max_health -= 150;
+		health = max(health, max_health);
+		hit_chance -= 5;
+	}
+	inventory_user.weared_inventory.erase(inventory_user.weared_inventory.find(art));
+	inventory_user.not_weared_inventory.insert(art);
+	return 1;
+}
+int Hero::wear_art(string art) {
+	if (inventory_user.not_weared_inventory.find(art) == inventory_user.not_weared_inventory.end())
+		return 0;
+	if (art == "ring_of_power")
+		damage += 5;
+	else if (art == "amulet_of_health")
+		max_health += 50;
+	else if (art == "pendant_of_dispassion") {
+		max_health -= 40;
+		health = max(health, max_health);
+		damage += 30;
+	}
+	else if (art == "cursed_ring") {
+		max_health -= 40;
+		health = max(health, max_health);
+		damage += 30;
+		armor -= 15;
+	}
+	else if (art == "victory_necklace") {
+		damage += 10;
+		max_health += 50;
+	}
+	else if (art == "armadillo_pendant")
+		armor += 20;
+	else if (art == "clover_of_fortune")
+		hit_chance += 5;
+	else if (art == "ring_of_sinners") {
+		max_health -= 60;
+		health = max(health, max_health);
+		damage += 30;
+		hit_chance += 5;
+		armor -= 35;
+	}
+	else if (art == "lightning_rune")
+		damage += 15;
+	else if (art == "necklace_of_dragonteeth") {
+		armor += 30;
+		max_health += 50;
+	}
+	else if (art == "flame_rune")
+		damage += 20;
+	else if (art == "speed_ring") {
+		damage += 10;
+		armor -= 20;
+	}
+	else if (art == "pendant_of_skill") {
+		damage += 20;
+		max_health += 50;
+		armor += 10;
+	}
+	else if (art == "regeneration_ring")
+		num_recovery_units_poison += 50;
+	else if (art == "sar-issa_ring") {
+		damage += 70;
+		max_health += 150;
+		hit_chance += 5;
+	}
+	inventory_user.not_weared_inventory.erase(inventory_user.not_weared_inventory.find(art));
+	inventory_user.weared_inventory.insert(art);
+
+	return 1;
+
 }

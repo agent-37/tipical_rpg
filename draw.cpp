@@ -244,7 +244,7 @@ void draw_mini_map(Hero user, Game_map& map, int x, int y) {
 
 //рисует полоску хп
 void draw_hp(int x, int y, int health, int max_health) {
-	cout << health << ' ' << max_health << endl;
+
 	glColor3ub(255, 255, 255);
 	glBegin(GL_QUADS);
 	glVertex2f(x, y);

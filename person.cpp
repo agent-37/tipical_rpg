@@ -18,7 +18,7 @@ void person::set_person(int _health, int _damage, int _armor, int _max_health, i
 
 //функция получения урона
 void person::take_damage(int damage) {
-	health -= max(damage - armor, 0);
+	health -= max(damage - max(armor, 0), 0);
 }
 
 //проверка, что персонаж умер
@@ -32,7 +32,7 @@ int person::check_died() {
 int person::deal_damage() {
 	srand(time(NULL));
 	int try_hit = rand() % 100;
-	if (try_hit >= hit_chance)
-		return damage;
+	if (try_hit <= max(hit_chance, 0))
+		return max(damage, 0);
 	return 0;
 }

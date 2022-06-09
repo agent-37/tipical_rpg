@@ -1,0 +1,15 @@
+ring_of_power 10 
+amulet_of_health 10
+pendant_of_dispassion 10 
+cursed_ring 15 
+victory_necklace 15 
+armadillo_pendant 20 
+clover_of_fortune 50
+ring_of_sinners 75
+lightning_rune 75
+necklace_of_dragonteeth 100 
+flame_rune 100
+speed_ring 150
+pendant_of_skill 150
+regeneration_ring 200
+sar-issa_ring 300 

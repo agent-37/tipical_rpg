@@ -9,13 +9,13 @@
 #include <fstream>
 #include <Windows.h>
 #include "person.h" 
-#include "trader.h" 
+
 // не стоит подключать сюдя #include "hero.h", так как возникает ошибка
 
 using namespace std;
 
 // инвентарь
-class Inventory : public Trader
+class Inventory
 {
 public:
 	// показать надтые артефакты
@@ -23,9 +23,6 @@ public:
 
 	// показать снятые артефакты
 	void show_not_weared_artifacts();
-
-	// приобрести артефакт у торговца
-	bool take_artifact_trader(string str);
 
 	// снять артифакт
 	bool take_off_artifact(string str);

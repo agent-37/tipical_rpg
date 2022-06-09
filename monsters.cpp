@@ -25,7 +25,7 @@ void ogre::regeneration() {
 void skeleton::cursed_arrows(Hero& _hero) {
 	_hero.take_damage(deal_damage());
 	if (!_hero.check_died())
-		_hero.max_health -= damage;
+		_hero.max_health -= damage / 10;
 }
 
 // Возможность призрака пропустить удар
@@ -40,9 +40,9 @@ bool ghost::invisibility() {
 
 // Кража золота героя
 void ghost::steal_gold(Hero& _hero) {
-	int num_of_stealing = 50;
+	int num_of_stealing = 5;
 	if (_hero.gold - num_of_stealing >= 0)
-		_hero.gold += num_of_stealing;
+		_hero.gold -= num_of_stealing;
 	else
 		_hero.gold = 0;
 }

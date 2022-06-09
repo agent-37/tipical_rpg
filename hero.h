@@ -34,7 +34,7 @@ public:
 	~Hero();
 
 	// восполнение здоровья 
-	void healing_poison();
+	int healing_poison();
 
 	// показ характеристик героя
 	void show_characteristics();
@@ -106,6 +106,13 @@ public:
 	void set_count_healing_poison(int _count_healing_poison);
 	void set_num_recovery_units_poison(int _num_recovery_units_poison);
 	void set_inventory_user(Inventory _inventory_user);
+	void add_artifact(string art);
+	void set_gold(int _gold);
+	void show_un_wear_art();
+	void show_wear_art();
+	int un_wear_art(string art);
+	int wear_art(string art);
+	void add_potion();
 };
 
 struct Hero_and_map {
