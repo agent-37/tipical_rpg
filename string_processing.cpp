@@ -11,7 +11,7 @@
 
 enum file_monsters { empty_cell = 0, unbreakable = 1, breakable = 2, heep_gold = 3, _ogre = 4, _skeleton = 5, _ghost = 6, _dragon = 7, _traeder = 8 };
 
-//запоминание хода(нужно запоминать и соседние так, как можем их разрушить)
+//Р·Р°РїРѕРјРёРЅР°РЅРёРµ С…РѕРґР°(РЅСѓР¶РЅРѕ Р·Р°РїРѕРјРёРЅР°С‚СЊ Рё СЃРѕСЃРµРґРЅРёРµ С‚Р°Рє, РєР°Рє РјРѕР¶РµРј РёС… СЂР°Р·СЂСѓС€РёС‚СЊ)
 void push_stack_turn(Game_map& map, stack<Hero_and_map>& stack_turn, Hero& help, Hero& user) {
 	Hero_and_map stack_el;
 	int help_el[5];
@@ -24,9 +24,9 @@ void push_stack_turn(Game_map& map, stack<Hero_and_map>& stack_turn, Hero& help,
 	stack_turn.push(stack_el);
 }
 
-//процедура обрабатывающая строку и делающая соответсв ход игрока
+//РїСЂРѕС†РµРґСѓСЂР° РѕР±СЂР°Р±Р°С‚С‹РІР°СЋС‰Р°СЏ СЃС‚СЂРѕРєСѓ Рё РґРµР»Р°СЋС‰Р°СЏ СЃРѕРѕС‚РІРµС‚СЃРІ С…РѕРґ РёРіСЂРѕРєР°
 void string_processing(Hero& user, Game_map& map, stack<Hero_and_map>& stack_turn) {
-	//если в клетке есть кто-то то включаем либо бой, либо фазу покупки
+	//РµСЃР»Рё РІ РєР»РµС‚РєРµ РµСЃС‚СЊ РєС‚Рѕ-С‚Рѕ С‚Рѕ РІРєР»СЋС‡Р°РµРј Р»РёР±Рѕ Р±РѕР№, Р»РёР±Рѕ С„Р°Р·Сѓ РїРѕРєСѓРїРєРё
 	switch (map.get_cell(user.get_x(), user.get_y())) {
 	case(_ogre): {
 		ogre ovbor;
@@ -65,14 +65,14 @@ void string_processing(Hero& user, Game_map& map, stack<Hero_and_map>& stack_tur
 		break;
 	}
 	}
-	//после обработки клетки могли персонаж мог умереть, поэтому говорим об этом пользователю
+	//РїРѕСЃР»Рµ РѕР±СЂР°Р±РѕС‚РєРё РєР»РµС‚РєРё РјРѕРіР»Рё РїРµСЂСЃРѕРЅР°Р¶ РјРѕРі СѓРјРµСЂРµС‚СЊ, РїРѕСЌС‚РѕРјСѓ РіРѕРІРѕСЂРёРј РѕР± СЌС‚РѕРј РїРѕР»СЊР·РѕРІР°С‚РµР»СЋ
 	if (user.check_died())
-		cout << "Вы умерли. Для того, чтобы отмотать ход используйте remove";
+		cout << "Р’С‹ СѓРјРµСЂР»Рё. Р”Р»СЏ С‚РѕРіРѕ, С‡С‚РѕР±С‹ РѕС‚РјРѕС‚Р°С‚СЊ С…РѕРґ РёСЃРїРѕР»СЊР·СѓР№С‚Рµ remove";
 	string s;
 	while (cin >> s) {
-		//если умер то ограничиваем возможности(чтобы не было ходячего трупа)
+		//РµСЃР»Рё СѓРјРµСЂ С‚Рѕ РѕРіСЂР°РЅРёС‡РёРІР°РµРј РІРѕР·РјРѕР¶РЅРѕСЃС‚Рё(С‡С‚РѕР±С‹ РЅРµ Р±С‹Р»Рѕ С…РѕРґСЏС‡РµРіРѕ С‚СЂСѓРїР°)
 		if (!user.check_died()) {
-			//ходьба
+			//С…РѕРґСЊР±Р°
 			if (s == "step") {
 				while (cin >> s) {
 					if (s == "forward" || s == "left" || s == "right" || s == "back") {
@@ -90,14 +90,14 @@ void string_processing(Hero& user, Game_map& map, stack<Hero_and_map>& stack_tur
 							user = help;
 							return;
 						}
-						//запоминание хода
+						//Р·Р°РїРѕРјРёРЅР°РЅРёРµ С…РѕРґР°
 						push_stack_turn(map, stack_turn, help, user);
 						map.mark_visited_cell(x, y);
 						return;
 					}
 				}
 			}
-			//повороты
+			//РїРѕРІРѕСЂРѕС‚С‹
 			if (s == "turn") {
 				while (cin >> s) {
 					if (s == "right") {
@@ -116,12 +116,12 @@ void string_processing(Hero& user, Game_map& map, stack<Hero_and_map>& stack_tur
 					}
 				}
 			}
-			//использование зелий здоровья
+			//РёСЃРїРѕР»СЊР·РѕРІР°РЅРёРµ Р·РµР»РёР№ Р·РґРѕСЂРѕРІСЊСЏ
 			if (s == "use") {
 				while (cin >> s) {
 					if (s == "potion") {
 						if (user.healing_poison() == 0)
-							cout << "Зелья кончились" << endl;
+							cout << "Р—РµР»СЊСЏ РєРѕРЅС‡РёР»РёСЃСЊ" << endl;
 						draw_walk(user, map);
 						draw_mini_map(user, map, 0, 804);
 
@@ -129,7 +129,7 @@ void string_processing(Hero& user, Game_map& map, stack<Hero_and_map>& stack_tur
 					}
 				}
 			}
-			//показ характеристик, что надето и что в рюкзаке
+			//РїРѕРєР°Р· С…Р°СЂР°РєС‚РµСЂРёСЃС‚РёРє, С‡С‚Рѕ РЅР°РґРµС‚Рѕ Рё С‡С‚Рѕ РІ СЂСЋРєР·Р°РєРµ
 			if (s == "show") {
 				while (cin >> s) {
 					if (s == "stats") {
@@ -155,7 +155,7 @@ void string_processing(Hero& user, Game_map& map, stack<Hero_and_map>& stack_tur
 					}
 				}
 			}
-			//уничтожить стену перед собой, если можем
+			//СѓРЅРёС‡С‚РѕР¶РёС‚СЊ СЃС‚РµРЅСѓ РїРµСЂРµРґ СЃРѕР±РѕР№, РµСЃР»Рё РјРѕР¶РµРј
 			if (s == "break") {
 				map.cut_tree(user);
 				draw_walk(user, map);
@@ -163,20 +163,20 @@ void string_processing(Hero& user, Game_map& map, stack<Hero_and_map>& stack_tur
 
 				break;
 			}
-			//надеть на себя артефакт
+			//РЅР°РґРµС‚СЊ РЅР° СЃРµР±СЏ Р°СЂС‚РµС„Р°РєС‚
 			if (s == "wear") {
 				cin >> s;
 				if (!user.wear_art(s))
-					cout << "У вас нет такого артифакта.";
+					cout << "РЈ РІР°СЃ РЅРµС‚ С‚Р°РєРѕРіРѕ Р°СЂС‚РёС„Р°РєС‚Р°.";
 			}
-			//снятие с себя артефакта
+			//СЃРЅСЏС‚РёРµ СЃ СЃРµР±СЏ Р°СЂС‚РµС„Р°РєС‚Р°
 			if (s == "unwear") {
 				cin >> s;
 				if (!user.un_wear_art(s))
-					cout << "У вас нет такого артифакта.";
+					cout << "РЈ РІР°СЃ РЅРµС‚ С‚Р°РєРѕРіРѕ Р°СЂС‚РёС„Р°РєС‚Р°.";
 			}
 		}
-		//отматывает на ход назад
+		//РѕС‚РјР°С‚С‹РІР°РµС‚ РЅР° С…РѕРґ РЅР°Р·Р°Рґ
 		if (s == "remove" && stack_turn.size() != 0) {
 			Hero_and_map help, g1;
 			stack_turn.front(help);

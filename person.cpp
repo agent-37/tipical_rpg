@@ -5,7 +5,7 @@
 #include <time.h>
 #include <algorithm>
 using namespace std;
-//процедура задает характеристики кому-то
+//РїСЂРѕС†РµРґСѓСЂР° Р·Р°РґР°РµС‚ С…Р°СЂР°РєС‚РµСЂРёСЃС‚РёРєРё РєРѕРјСѓ-С‚Рѕ
 void person::set_person(int _health, int _damage, int _armor, int _max_health, int _gold, int _hit_chance, string _file_name) {
 	health = _health;
 	damage = _damage;
@@ -16,19 +16,19 @@ void person::set_person(int _health, int _damage, int _armor, int _max_health, i
 	file_name = _file_name;
 }
 
-//функция получения урона
+//С„СѓРЅРєС†РёСЏ РїРѕР»СѓС‡РµРЅРёСЏ СѓСЂРѕРЅР°
 void person::take_damage(int damage) {
 	health -= max(damage - max(armor, 0), 0);
 }
 
-//проверка, что персонаж умер
+//РїСЂРѕРІРµСЂРєР°, С‡С‚Рѕ РїРµСЂСЃРѕРЅР°Р¶ СѓРјРµСЂ
 int person::check_died() {
 	if (health <= 0)
 		return 1;
 	return 0;
 }
 
-//функция нанесения урона(с учетом промоха), НУЖНО ПРОВЕРИТЬ ЧТО РАБОТАЕТ rand()
+//С„СѓРЅРєС†РёСЏ РЅР°РЅРµСЃРµРЅРёСЏ СѓСЂРѕРЅР°(СЃ СѓС‡РµС‚РѕРј РїСЂРѕРјРѕС…Р°), РќРЈР–РќРћ РџР РћР’Р•Р РРўР¬ Р§РўРћ Р РђР‘РћРўРђР•Рў rand()
 int person::deal_damage() {
 	srand(time(NULL));
 	int try_hit = rand() % 100;

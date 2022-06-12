@@ -1,7 +1,7 @@
 #ifndef _BUY_H_
 #define _BUY_H_
 #include "Hero.h"
-//процедура покупки у торговца
+//РїСЂРѕС†РµРґСѓСЂР° РїРѕРєСѓРїРєРё Сѓ С‚РѕСЂРіРѕРІС†Р°
 void buy(Hero& user);
 
 #endif // _BUY_H_

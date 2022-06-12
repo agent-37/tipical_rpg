@@ -3,15 +3,15 @@
 #include "game_map.h"
 #include "hero.h"
 #include "person.h"
-//рисует просто картинку
+//СЂРёСЃСѓРµС‚ РїСЂРѕСЃС‚Рѕ РєР°СЂС‚РёРЅРєСѓ
 void draw_picture(int y, int x, char* file_name);
-//рисует просто картинку(без 1 цвета)
+//СЂРёСЃСѓРµС‚ РїСЂРѕСЃС‚Рѕ РєР°СЂС‚РёРЅРєСѓ(Р±РµР· 1 С†РІРµС‚Р°)
 void draw_picture_hrom(int y, int x, char* file_name);
-//рисует миникарту
+//СЂРёСЃСѓРµС‚ РјРёРЅРёРєР°СЂС‚Сѓ
 void draw_mini_map(Hero user, Game_map& map, int y, int x);
-//рисование боя
+//СЂРёСЃРѕРІР°РЅРёРµ Р±РѕСЏ
 void draw_fight(Hero user, person& monster, int mark);
-//рисование хождения по карте
+//СЂРёСЃРѕРІР°РЅРёРµ С…РѕР¶РґРµРЅРёСЏ РїРѕ РєР°СЂС‚Рµ
 void draw_walk(Hero user, Game_map& map);
 
 

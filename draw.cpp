@@ -12,16 +12,16 @@
 using namespace std;
 
 enum file_monsters { empty_cell = 0, unbreakable = 1, breakable = 2, heep_gold = 3, _ogre = 4, _skeleton = 5, _ghost = 6, _dragon = 7, _trader = 8 };
-// 0 - ïóñòî
-// 1 - êàìåíü (íåóáèðàåìîå ïðåïÿäñòâèå)
-// 2 - äåðåâî (óáèðàåìîå ïðåïÿäñòâèå)
-// 3 - çîëîòî (ñîáèðàòü)
-// 4 - ìîíñòð orge
-// 5 - ìîíñòð skeleton
-// 6 - ìîíñòð ghost
-// 7 - ìîíñòð dragon
-// 8 - òîðãîâåö
-//ôóíêöèÿ îïðåäåëÿåò ïî íàïðàâëåíèþ âëãëÿäà âñïîìîãîàòåëüíûå ïåðåìåííûå
+// 0 - Ð¿ÑƒÑÑ‚Ð¾
+// 1 - ÐºÐ°Ð¼ÐµÐ½ÑŒ (Ð½ÐµÑƒÐ±Ð¸Ñ€Ð°ÐµÐ¼Ð¾Ðµ Ð¿Ñ€ÐµÐ¿ÑÐ´ÑÑ‚Ð²Ð¸Ðµ)
+// 2 - Ð´ÐµÑ€ÐµÐ²Ð¾ (ÑƒÐ±Ð¸Ñ€Ð°ÐµÐ¼Ð¾Ðµ Ð¿Ñ€ÐµÐ¿ÑÐ´ÑÑ‚Ð²Ð¸Ðµ)
+// 3 - Ð·Ð¾Ð»Ð¾Ñ‚Ð¾ (ÑÐ¾Ð±Ð¸Ñ€Ð°Ñ‚ÑŒ)
+// 4 - Ð¼Ð¾Ð½ÑÑ‚Ñ€ orge
+// 5 - Ð¼Ð¾Ð½ÑÑ‚Ñ€ skeleton
+// 6 - Ð¼Ð¾Ð½ÑÑ‚Ñ€ ghost
+// 7 - Ð¼Ð¾Ð½ÑÑ‚Ñ€ dragon
+// 8 - Ñ‚Ð¾Ñ€Ð³Ð¾Ð²ÐµÑ†
+//Ñ„ÑƒÐ½ÐºÑ†Ð¸Ñ Ð¾Ð¿Ñ€ÐµÐ´ÐµÐ»ÑÐµÑ‚ Ð¿Ð¾ Ð½Ð°Ð¿Ñ€Ð°Ð²Ð»ÐµÐ½Ð¸ÑŽ Ð²Ð»Ð³Ð»ÑÐ´Ð° Ð²ÑÐ¿Ð¾Ð¼Ð¾Ð³Ð¾Ð°Ñ‚ÐµÐ»ÑŒÐ½Ñ‹Ðµ Ð¿ÐµÑ€ÐµÐ¼ÐµÐ½Ð½Ñ‹Ðµ
 void determin_the_direction_construction(int view, int& x, int& y, int& l_x, int& l_y, int& r_x, int& r_y) {
 	switch (view) {
 	case 1: {
@@ -62,7 +62,7 @@ void determin_the_direction_construction(int view, int& x, int& y, int& l_x, int
 	}
 	}
 }
-//ôóíêöèÿ ðèñóåò êàðòèíêó (x,y ëåâûé íèæíèé óãîë êàðòèíêè)
+//Ñ„ÑƒÐ½ÐºÑ†Ð¸Ñ Ñ€Ð¸ÑÑƒÐµÑ‚ ÐºÐ°Ñ€Ñ‚Ð¸Ð½ÐºÑƒ (x,y Ð»ÐµÐ²Ñ‹Ð¹ Ð½Ð¸Ð¶Ð½Ð¸Ð¹ ÑƒÐ³Ð¾Ð» ÐºÐ°Ñ€Ñ‚Ð¸Ð½ÐºÐ¸)
 void draw_picture(int x, int y, const char* file_name) {
 	SetConsoleCP(1251);
 	SetConsoleOutputCP(1251);
@@ -77,7 +77,7 @@ void draw_picture(int x, int y, const char* file_name) {
 			glEnd();
 		}
 }
-//ôóíêöèÿ ðèñóåò èçîáðàæåíèå áåç 1 öâåòà(êàê õðîìàêåé)
+//Ñ„ÑƒÐ½ÐºÑ†Ð¸Ñ Ñ€Ð¸ÑÑƒÐµÑ‚ Ð¸Ð·Ð¾Ð±Ñ€Ð°Ð¶ÐµÐ½Ð¸Ðµ Ð±ÐµÐ· 1 Ñ†Ð²ÐµÑ‚Ð°(ÐºÐ°Ðº Ñ…Ñ€Ð¾Ð¼Ð°ÐºÐµÐ¹)
 void draw_picture_hrom(int x, int y, const char* file_name) {
 	SetConsoleCP(1251);
 	SetConsoleOutputCP(1251);
@@ -95,20 +95,20 @@ void draw_picture_hrom(int x, int y, const char* file_name) {
 		}
 
 }
-//ïðîöåäóðà ðèñîâàíèå êàðòèíêè õîäüáû
+//Ð¿Ñ€Ð¾Ñ†ÐµÐ´ÑƒÑ€Ð° Ñ€Ð¸ÑÐ¾Ð²Ð°Ð½Ð¸Ðµ ÐºÐ°Ñ€Ñ‚Ð¸Ð½ÐºÐ¸ Ñ…Ð¾Ð´ÑŒÐ±Ñ‹
 void draw_walk(Hero user, Game_map& map) {
 	draw_picture(0, 0, "back.bmp");
 
-	//îïðåäåëÿåì ãäå ãåðîé íà êàðòå è íàïðàâëåíèå âçîðà
+	//Ð¾Ð¿Ñ€ÐµÐ´ÐµÐ»ÑÐµÐ¼ Ð³Ð´Ðµ Ð³ÐµÑ€Ð¾Ð¹ Ð½Ð° ÐºÐ°Ñ€Ñ‚Ðµ Ð¸ Ð½Ð°Ð¿Ñ€Ð°Ð²Ð»ÐµÐ½Ð¸Ðµ Ð²Ð·Ð¾Ñ€Ð°
 	int x = user.get_x();
 	int y = user.get_y();
 
 	int view = user.get_direction_gaze();
-	//âñïîìîãàòåëüíûå ïåðåìåííûå äëÿ óòàíîâêè êëåòîê ïåðåä èãðîêîì
+	//Ð²ÑÐ¿Ð¾Ð¼Ð¾Ð³Ð°Ñ‚ÐµÐ»ÑŒÐ½Ñ‹Ðµ Ð¿ÐµÑ€ÐµÐ¼ÐµÐ½Ð½Ñ‹Ðµ Ð´Ð»Ñ ÑƒÑ‚Ð°Ð½Ð¾Ð²ÐºÐ¸ ÐºÐ»ÐµÑ‚Ð¾Ðº Ð¿ÐµÑ€ÐµÐ´ Ð¸Ð³Ñ€Ð¾ÐºÐ¾Ð¼
 	int opposite_x = 0, opposite_y = 0, left_x = 0, left_y = 0, right_x = 0, right_y = 0;
 	determin_the_direction_construction(view, opposite_x, opposite_y, left_x, left_y, right_x, right_y);
 	int  size_map = map.get_size_map();
-	//ñòðîèì êëåòêó (êîòîðàÿ íàõîäèòñÿ ÷åðåç 1 îò èãðîêà)
+	//ÑÑ‚Ñ€Ð¾Ð¸Ð¼ ÐºÐ»ÐµÑ‚ÐºÑƒ (ÐºÐ¾Ñ‚Ð¾Ñ€Ð°Ñ Ð½Ð°Ñ…Ð¾Ð´Ð¸Ñ‚ÑÑ Ñ‡ÐµÑ€ÐµÐ· 1 Ð¾Ñ‚ Ð¸Ð³Ñ€Ð¾ÐºÐ°)
 	if ((x + 3 * opposite_x) >= 0 && (x + 3 * opposite_x) < size_map
 		&& (y + 3 * opposite_y) >= 0 && (y + 3 * opposite_y) < size_map
 		&& map.get_cell(x + 2 * opposite_x, y + 2 * opposite_y) != unbreakable
@@ -134,7 +134,7 @@ void draw_walk(Hero user, Game_map& map) {
 				draw_picture(530, 408, "third_block_break.bmp");
 	}
 
-	//ñòðîèì êëåòêó êîòîðàÿ íàïðîòèâ èãðîêà
+	//ÑÑ‚Ñ€Ð¾Ð¸Ð¼ ÐºÐ»ÐµÑ‚ÐºÑƒ ÐºÐ¾Ñ‚Ð¾Ñ€Ð°Ñ Ð½Ð°Ð¿Ñ€Ð¾Ñ‚Ð¸Ð² Ð¸Ð³Ñ€Ð¾ÐºÐ°
 	if ((x + 2 * opposite_x) >= 0 && (x + 2 * opposite_x) < size_map
 		&& (y + 2 * opposite_y) >= 0 && (y + 2 * opposite_y) < size_map
 		&& map.get_cell(x + opposite_x, y + opposite_y) != unbreakable
@@ -179,7 +179,7 @@ void draw_walk(Hero user, Game_map& map) {
 				draw_picture(350, 268, "second_block_break.bmp");
 	}
 
-	//ñòðîèì êëåòêó â êîòîðîé ñòîèì
+	//ÑÑ‚Ñ€Ð¾Ð¸Ð¼ ÐºÐ»ÐµÑ‚ÐºÑƒ Ð² ÐºÐ¾Ñ‚Ð¾Ñ€Ð¾Ð¹ ÑÑ‚Ð¾Ð¸Ð¼
 	if (map.get_cell(x + opposite_x, y + opposite_y) != unbreakable && map.get_cell(x + opposite_x, y + opposite_y) != breakable) {
 
 		switch (map.get_cell(x + opposite_x, y + opposite_y))
@@ -214,7 +214,7 @@ void draw_walk(Hero user, Game_map& map) {
 			draw_picture(100, 76, "first_block_break.bmp");
 	glFinish();
 }
-//ïðîöåäóðà ðèñóåò ìèíè êàðòó
+//Ð¿Ñ€Ð¾Ñ†ÐµÐ´ÑƒÑ€Ð° Ñ€Ð¸ÑÑƒÐµÑ‚ Ð¼Ð¸Ð½Ð¸ ÐºÐ°Ñ€Ñ‚Ñƒ
 void draw_mini_map(Hero user, Game_map& map, int x, int y) {
 	int map_x = user.get_x(), map_y = user.get_y();
 	for (int i = 0; i < 7; i++)
@@ -243,7 +243,7 @@ void draw_mini_map(Hero user, Game_map& map, int x, int y) {
 	glFinish();
 }
 
-//ðèñóåò ïîëîñêó õï
+//Ñ€Ð¸ÑÑƒÐµÑ‚ Ð¿Ð¾Ð»Ð¾ÑÐºÑƒ Ñ…Ð¿
 void draw_hp(int x, int y, int health, int max_health) {
 
 	glColor3ub(255, 255, 255);
@@ -262,11 +262,11 @@ void draw_hp(int x, int y, int health, int max_health) {
 	glEnd();
 	glFinish();
 }
-//ðèñóåò êàðòèíêó äëÿ ôàçû áîÿ
+//Ñ€Ð¸ÑÑƒÐµÑ‚ ÐºÐ°Ñ€Ñ‚Ð¸Ð½ÐºÑƒ Ð´Ð»Ñ Ñ„Ð°Ð·Ñ‹ Ð±Ð¾Ñ
 void draw_fight(Hero user, person& monster, int mark) {
 	draw_picture(0, 0, "back_fight.bmp");
 
-	//âûñâå÷èâàþòñÿ ïîëîñêè õï ñ ìàêèìóìîì íà çàäíåì ôîíå
+	//Ð²Ñ‹ÑÐ²ÐµÑ‡Ð¸Ð²Ð°ÑŽÑ‚ÑÑ Ð¿Ð¾Ð»Ð¾ÑÐºÐ¸ Ñ…Ð¿ Ñ Ð¼Ð°ÐºÐ¸Ð¼ÑƒÐ¼Ð¾Ð¼ Ð½Ð° Ð·Ð°Ð´Ð½ÐµÐ¼ Ñ„Ð¾Ð½Ðµ
 	int hero_hp = user.get_health(), monster_hp = monster.health;
 	int max_hero_hp = user.get_max_health(), max_monster_hp = monster.health;
 

@@ -1,9 +1,9 @@
 
 #include "buy.h"
 #include "trader.h"	
-//процедура покупки у торговца
+//РїСЂРѕС†РµРґСѓСЂР° РїРѕРєСѓРїРєРё Сѓ С‚РѕСЂРіРѕРІС†Р°
 void buy(Hero& user) {
-	cout << "Приветствуяю тебя путник. Купи мои товары, если хочешь." << endl;
+	cout << "РџСЂРёРІРµС‚СЃС‚РІСѓСЏСЋ С‚РµР±СЏ РїСѓС‚РЅРёРє. РљСѓРїРё РјРѕРё С‚РѕРІР°СЂС‹, РµСЃР»Рё С…РѕС‡РµС€СЊ." << endl;
 	Trader tr;
 	tr.fill_inventory_trader();
 
@@ -13,28 +13,28 @@ void buy(Hero& user) {
 	while (cin >> s) {
 
 		if (s == "buy") {
-			cout << "Что-бы ты хотел купить?" << endl;
+			cout << "Р§С‚Рѕ-Р±С‹ С‚С‹ С…РѕС‚РµР» РєСѓРїРёС‚СЊ?" << endl;
 			while (cin >> s) {
 				if (s == "healing_potion") {
 					if (user.get_gold() >= 5)
 					{
-						cout << "Держи склянку" << endl;
+						cout << "Р”РµСЂР¶Рё СЃРєР»СЏРЅРєСѓ" << endl;
 						user.set_gold(user.get_gold() - 5);
 						user.add_potion();
 					}
 					else {
-						cout << "Тебе это не по карману" << endl;
+						cout << "РўРµР±Рµ СЌС‚Рѕ РЅРµ РїРѕ РєР°СЂРјР°РЅСѓ" << endl;
 					}
 					break;
 				}
 				else
 					if (tr.trade_inventory(s, user) == 0)
-						cout << "У меня нет такого товара" << endl;
+						cout << "РЈ РјРµРЅСЏ РЅРµС‚ С‚Р°РєРѕРіРѕ С‚РѕРІР°СЂР°" << endl;
 					else {
 						if (tr.trade_inventory(s, user) == 1) {}
-						cout << "Хороший выбор" << endl;
+						cout << "РҐРѕСЂРѕС€РёР№ РІС‹Р±РѕСЂ" << endl;
 						if (tr.trade_inventory(s, user) == 2)
-							cout << "Тебе это не по карману" << endl;
+							cout << "РўРµР±Рµ СЌС‚Рѕ РЅРµ РїРѕ РєР°СЂРјР°РЅСѓ" << endl;
 						break;
 					}
 
@@ -47,6 +47,6 @@ void buy(Hero& user) {
 			break;
 		}
 	}
-	cout << "Удачи тебе путник" << endl;
+	cout << "РЈРґР°С‡Рё С‚РµР±Рµ РїСѓС‚РЅРёРє" << endl;
 
 }
